@@ -15,7 +15,7 @@ export default function GuestLayout() {
   return (
     <main className="max-w-4xl m-auto flex flex-col md:flex-row items-center md:justify-center md:gap-5 md:h-[900px] md:mt-20">
         <img 
-            src="../img/logo-dark.webp" 
+            src="../img/logo-2.png" 
             alt="imagen logotipo"
             className="w-[400px] md:w-[400px] md:h-auto md:"
         />

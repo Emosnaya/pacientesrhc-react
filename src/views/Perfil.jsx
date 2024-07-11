@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import { useAuth } from '../hooks/useAuth'
 import { Link, useParams } from 'react-router-dom'
 import clienteAxios from '../axios-client'
+import Swal from 'sweetalert2'
 
 export default function Perfil() {
   const token = localStorage.getItem('AUTH_TOKEN')
@@ -25,6 +26,15 @@ export default function Perfil() {
 
 const onSubmit = (e) => {
   e.preventDefault()
+  Swal.fire({
+    title: "¿Quieres Actualizar?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Actualizar",
+    cancelButtonText: "Cancelar"
+  }).then((result) => {
     try {
         clienteAxios.put(`/api/users/${usuario.id}`, usuario,{
             headers:{
@@ -36,17 +46,17 @@ const onSubmit = (e) => {
               // Redireccionar a una página específica
               window.location.href = '/dashboard';
           }, 3000);
-          
+          Swal.fire({
+            title: "Actualizado!",
+            text: "El Usuario fue actualizado",
+            icon: "success",
+            timer: 1500
+          });
         })
     } catch (error) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-            footer: '<a href="#">Why do I have this issue?</a>'
-          });
+        setErrores(Object.values(error.response.data.errors) )
     }
-
+    });
 }
 
   return (

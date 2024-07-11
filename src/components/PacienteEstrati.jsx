@@ -5,6 +5,20 @@ import Swal from "sweetalert2";
 
 export default function PacienteEstrati() {
     const token = localStorage.getItem('AUTH_TOKEN')
+    const [respuesta, setRespuesta] = useState('');
+    const [inputBloqueado, setInputBloqueado] = useState('');
+  
+    const handleRespuestaChange = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setRespuesta(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueado(true);
+      } else {
+        setInputBloqueado(false);
+      }
+    };
 
     const nombreRef = useRef();
     const apellidoPatRef = useRef();
@@ -15,18 +29,16 @@ export default function PacienteEstrati() {
     const estadoCivilRef = useRef();
     const profesionRef = useRef();
     const domicilioRef = useRef();
+    const diagnosticoRef = useRef();
+    const medicamentosRef = useRef();
 
     const tallaRef = useRef();
     const pesoRef = useRef();
     const cinturaRef = useRef();
 
-
-
-
     const rhc_1_fechaREF= useRef();
     const peRef= useRef();
     const estratiRef= useRef();
-    const diagnosticoRef= useRef();
     const cIsquemiaRef= useRef();
     const imRef= useRef();
 
@@ -111,7 +123,8 @@ export default function PacienteEstrati() {
     const comentariosRef= useRef();
     const impiRef = useRef();
     const registroRef = useRef();
-    const cseRef = useRef();
+    const isquemiaIrmRef = useRef();
+    const ecoRef = useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -128,13 +141,14 @@ export default function PacienteEstrati() {
             talla: tallaRef.current.value,
             peso: pesoRef.current.value,
             cintura: cinturaRef.current.value,
-            registro: registroRef.current.value
+            registro: registroRef.current.value,
+            medicamentos : medicamentosRef.current.value,
+            diagnostico : diagnosticoRef.current.value
         }
         const datos = {
             rhc_1_fecha: rhc_1_fechaREF.current.value,
             pe: peRef.current.value,
             estrati: estratiRef.current.value,
-            diagnostico: diagnosticoRef.current.value,
             cIsquemia: cIsquemiaRef.current.value,
             im: imRef.current.value,
             ima: imaRef.current.value,
@@ -216,7 +230,8 @@ export default function PacienteEstrati() {
             fcDiana: fcDianaRef.current.value,
             dpDiana: dpDianaRef.current.value,
             comentarios: comentariosRef.current.value,
-            cse: cseRef.current.value
+            isquemiaIrm : isquemiaIrmRef.current.value,
+            eco :ecoRef.current.value
 
         }
         try {
@@ -246,8 +261,7 @@ export default function PacienteEstrati() {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Why do I have this issue?</a>'
+                text: "Ocurrio un error!"
               });
         }
     }
@@ -486,6 +500,38 @@ export default function PacienteEstrati() {
                                     
                                 />
                             </div>
+                        <div className="mb-4">
+                            <label
+                                htmlFor="diagnostico"
+                                className="text-slate-800"
+                            >
+                                Diagnóstico:
+                            </label>
+                            <input
+                                type="text"
+                                id="diagnostico"
+                                className="mt-2 w-full p-3 bg-gray-50"
+                                name="diagnostico"
+                                ref={diagnosticoRef}
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label
+                                htmlFor="medicamentos"
+                                className="text-slate-800"
+                            >
+                                Medicamentos:
+                            </label>
+                            <input
+                                type="text"
+                                id="medicamentos"
+                                className="mt-2 w-full p-3 bg-gray-50"
+                                name="medicamentos"
+                                ref={medicamentosRef}
+                                required
+                            />
+                        </div>
                         </div>
 
                         <h1 className="text-4xl font-bold">Estratificación</h1>
@@ -543,47 +589,14 @@ export default function PacienteEstrati() {
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Diagnostico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    ref={diagnosticoRef}
-                                    required
-                                    
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="CSE"
-                                    className="text-slate-800"
-                                >
-                                    CSE:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="CSE"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="CSE"
-                                    ref={cseRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
                                     htmlFor="c_isquemia"
                                     className="text-slate-800"
                                 >
                                     C. Isquémica:
                                 </label>
-                                <select id="c_isquemia" name="c_isquemia" className='mt-2 w-full p-3' ref={cIsquemiaRef}required >
-                                    <option value="true">Si</option>
+                                <select id="c_isquemia" name="c_isquemia" className='mt-2 w-full p-3' ref={cIsquemiaRef} required onChange={handleRespuestaChange}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -593,9 +606,10 @@ export default function PacienteEstrati() {
                                 >
                                     IM:
                                 </label>
-                                <select id="im" name="im" className='mt-2 w-full p-3' ref={imRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="im" name="im" className='mt-2 w-full p-3' ref={imRef}  disabled={inputBloqueado} defaultValue="false">
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
+                                    
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -605,9 +619,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMA:
                                 </label>
-                                <select id="ima" name="ima" className='mt-2 w-full p-3' ref={imaRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="ima" name="ima" className='mt-2 w-full p-3' ref={imaRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -617,9 +631,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMAS:
                                 </label>
-                                <select id="imas" name="imas" className='mt-2 w-full p-3' ref={imasRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imas" name="imas" className='mt-2 w-full p-3' ref={imasRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -629,9 +643,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMAA:
                                 </label>
-                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imaaRef}required >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imaaRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -641,9 +655,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMAL:
                                 </label>
-                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imalRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imalRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -653,9 +667,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMAE:
                                 </label>
-                                <select id="imae" name="imae" className='mt-2 w-full p-3' ref={imaeRef}required >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imae" name="imae" className='mt-2 w-full p-3' ref={imaeRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -665,9 +679,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMInf:
                                 </label>
-                                <select id="im_inf" name="im_inf" className='mt-2 w-full p-3' ref={imInfRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="im_inf" name="im_inf" className='mt-2 w-full p-3' ref={imInfRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -677,9 +691,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMPI:
                                 </label>
-                                <select id="impi" name="impi" className='mt-2 w-full p-3' ref={impiRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="impi" name="impi" className='mt-2 w-full p-3' ref={impiRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -689,9 +703,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMPI+VD:
                                 </label>
-                                <select id="impi_vd" name="impi_vd" className='mt-2 w-full p-3' ref={impiVdRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="impi_vd" name="impi_vd" className='mt-2 w-full p-3' ref={impiVdRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -701,9 +715,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMLat:
                                 </label>
-                                <select id="imlat" name="imlat" className='mt-2 w-full p-3' ref={imLatRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imlat" name="imlat" className='mt-2 w-full p-3' ref={imLatRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -713,9 +727,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMSESST:
                                 </label>
-                                <select id="imsesst" name="imsesst" className='mt-2 w-full p-3' ref={imSesstRef}required >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imsesst" name="imsesst" className='mt-2 w-full p-3' ref={imSesstRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -725,9 +739,9 @@ export default function PacienteEstrati() {
                                 >
                                     IMComplicado:
                                 </label>
-                                <select id="imcomplicado" name="imcomplicado" className='mt-2 w-full p-3' ref={imComplicadoRef}required >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imcomplicado" name="imcomplicado" className='mt-2 w-full p-3' ref={imComplicadoRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1104,9 +1118,35 @@ export default function PacienteEstrati() {
                                     htmlFor="isquemia"
                                     className="text-slate-800"
                                 >
-                                    Insquemia MN:
+                                    Isquemia MN:
                                 </label>
                                 <select id="isquemia" name="isquemia" className='mt-2 w-full p-3' ref={isquemiaRef} required>
+                                    <option value="bajo">Bajo</option>
+                                    <option value="medio">Medio</option>
+                                    <option value="alto">Alto</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="isquemia_irm"
+                                    className="text-slate-800"
+                                >
+                                    Isquemia IRM:
+                                </label>
+                                <select id="isquemia_irm" name="isquemia_irm" className='mt-2 w-full p-3' ref={isquemiaIrmRef} required>
+                                    <option value="bajo">Bajo</option>
+                                    <option value="medio">Medio</option>
+                                    <option value="alto">Alto</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="eco_estres"
+                                    className="text-slate-800"
+                                >
+                                    ECO:
+                                </label>
+                                <select id="eco_estres" name="eco_estres" className='mt-2 w-full p-3' ref={ecoRef} required>
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>

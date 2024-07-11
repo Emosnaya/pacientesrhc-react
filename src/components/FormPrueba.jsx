@@ -10,6 +10,21 @@ export default function FormPrueba() {
   const [paciente, setPaciente] = useState({})
   const [id, setId] = useState({})
 
+  const [respuesta, setRespuesta] = useState('');
+  const [inputBloqueado, setInputBloqueado] = useState('');
+
+  const handleRespuestaChange = (e) => {
+    const valorRespuesta = e.target.value.toLowerCase().trim();
+    setRespuesta(valorRespuesta);
+
+    // Lógica para bloquear el segundo input
+    if (valorRespuesta === 'false') {
+      setInputBloqueado(true);
+    } else {
+      setInputBloqueado(false);
+    }
+  };
+
   const fetcher = () => clienteAxios('/api/pacientes',
   {
     headers: {
@@ -29,8 +44,6 @@ export default function FormPrueba() {
 
 
   const numPruebaRef = useRef();
-
-    const diagnosticoRef = useRef();
     const iccRef = useRef();
     const feviRef = useRef();
     const metodoRef = useRef();
@@ -38,7 +51,6 @@ export default function FormPrueba() {
     const nyaRef = useRef();
 
     const ccsRef = useRef();
-    const medicamentosRef = useRef();
     const betabloqueadorRef = useRef();
     const iecassRef = useRef();
     const nitratosRef = useRef();
@@ -51,9 +63,7 @@ export default function FormPrueba() {
     const aldactoneRef = useRef();
     const antiagreganteRef = useRef();
     const otrosRef = useRef();
-    const prevalenciaRef = useRef();
     const confusorRef = useRef();
-    const sensibilidadRef = useRef();
     const especificidadRef = useRef();
     const pruebaIngresoRef = useRef();
 
@@ -138,14 +148,12 @@ export default function FormPrueba() {
 
         const datos = {
             numPrueba: numPruebaRef.current.value,
-            diagnostico: diagnosticoRef.current.value,
             icc: iccRef.current.value,
             fevi: feviRef.current.value,
             metodo: metodoRef.current.value,
             disfuncion: disfuncionRef.current.value,
             nya: nyaRef.current.value,
             ccs: ccsRef.current.value,
-            medicamentos: medicamentosRef.current.value,
             betabloqueador: betabloqueadorRef.current.value,
             iecass: iecassRef.current.value,
             nitratos: nitratosRef.current.value,
@@ -158,9 +166,7 @@ export default function FormPrueba() {
             aldactone: aldactoneRef.current.value,
             antiagregante: antiagreganteRef.current.value,
             otros: otrosRef.current.value,
-            prevalencia: prevalenciaRef.current.value,
             confusor: confusorRef.current.value,
-            sensibilidad: sensibilidadRef.current.value,
             especificidad: especificidadRef.current.value,
             pruebaIngreso: pruebaIngresoRef.current.value,
 
@@ -265,8 +271,7 @@ export default function FormPrueba() {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Why do I have this issue?</a>'
+                text: "Something went wrong!"
               });
         }
     }
@@ -325,22 +330,6 @@ export default function FormPrueba() {
                                     name="num_prueba"
                                     ref={numPruebaRef}
                                     required
-                                    
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Daignóstico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    ref={diagnosticoRef}
                                     
                                 />
                             </div>
@@ -430,22 +419,6 @@ export default function FormPrueba() {
                                     ref={ccsRef}
                                     required
                                     
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="medicamentos"
-                                    className="text-slate-800"
-                                >
-                                    Medicamentos:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="medicamentos"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="medicamentos"
-                                    ref={medicamentosRef}
-                                    required
                                 />
                             </div>
                             <div className="mb-4">
@@ -580,23 +553,7 @@ export default function FormPrueba() {
                                     <option value="false">No</option>
                                 </select>
                             </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="prevalencia"
-                                    className="text-slate-800"
-                                >
-                                    Prevalencia:
-                                </label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    id="prevalencia"
-                                    className="mt-2 w-full p-3 bg-gray-50 "
-                                    name="prevalencia"
-                                    ref={prevalenciaRef}
-                                    required
-                                />
-                            </div>
+                            
                             <div className="mb-4">
                                 <label
                                     htmlFor="confusor"
@@ -604,32 +561,10 @@ export default function FormPrueba() {
                                 >
                                     Confusor:
                                 </label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    id="confusor"
-                                    className="mt-2 w-full p-3 bg-gray-50 "
-                                    name="confusor"
-                                    ref={confusorRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="sensibilidad"
-                                    className="text-slate-800"
-                                >
-                                    Sensibilidad:
-                                </label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    id="sensibilidad"
-                                    className="mt-2 w-full p-3 bg-gray-50 "
-                                    name="sensibilidad"
-                                    ref={sensibilidadRef}
-                                    required
-                                />
+                                <select id="confusor" name="confusor" className='mt-2 w-full p-3' ref={confusorRef} required>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -755,7 +690,7 @@ export default function FormPrueba() {
                                 >
                                     Medicion de Gases:
                                 </label>
-                                <select id="medicion_gases" name="medicion_gases" className='mt-2 w-full p-3' ref={medicionGasesRef} required>
+                                <select id="medicion_gases" name="medicion_gases" className='mt-2 w-full p-3' ref={medicionGasesRef} required onChange={handleRespuestaChange}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -1607,7 +1542,8 @@ export default function FormPrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vo2_max_gases"
                                     ref={vo2MaxGasesRef}
-                                    required
+                                    disabled={inputBloqueado}
+                                
                                 />
                             </div>
                             <div className="mb-4">
@@ -1624,7 +1560,7 @@ export default function FormPrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vo2_pico_gases"
                                     ref={vo2picoGasesRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1641,7 +1577,7 @@ export default function FormPrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vo2_borg_12_gases"
                                     ref={vo2BorgGasesRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1658,7 +1594,8 @@ export default function FormPrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="r_qmax"
                                     ref={rQmaxRef}
-                                    required
+                                    disabled={inputBloqueado}
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1675,7 +1612,8 @@ export default function FormPrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="umbral_aer"
                                     ref={umbralAerRef}
-                                    required
+                                    disabled={inputBloqueado}
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1692,7 +1630,8 @@ export default function FormPrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="po2_teor"
                                     ref={poTeoricoRef}
-                                    required
+                                    disabled={inputBloqueado}
+                                    
                                 />
                             </div>
                             <div className="mb-4 col-start-1 lg:col-end-5">

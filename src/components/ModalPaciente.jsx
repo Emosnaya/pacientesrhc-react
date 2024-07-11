@@ -25,6 +25,9 @@ export default function ModalPaciente() {
     const tallaRef = useRef();
     const pesoRef = useRef();
     const cinturaRef = useRef();
+    const diagnosticoRef = useRef();
+    const medicamentosRef = useRef();
+    const envioRef = useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -42,7 +45,11 @@ export default function ModalPaciente() {
             talla: tallaRef.current.value,
             peso: pesoRef.current.value,
             cintura: cinturaRef.current.value,
-            registro: registroRef.current.value
+            registro: registroRef.current.value,
+            diagnostico : diagnosticoRef.current.value,
+            medicamentos: medicamentosRef.current.value,
+            envio : envioRef.current.value
+
         }
         try {
             clienteAxios.post('/api/pacientes',datos,
@@ -71,7 +78,6 @@ export default function ModalPaciente() {
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Why do I have this issue?</a>'
               });
         }
     }
@@ -194,8 +200,8 @@ export default function ModalPaciente() {
                         Género:
                     </label>
                     <select id="genero" name="genero" className='mt-2 w-full p-3' ref={generoRef}>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
+                        <option value="masculino">Hombre</option>
+                        <option value="femenino">Mujer</option>
                         <option value="otro">Otro</option>
                     </select>
                 </div>
@@ -296,7 +302,53 @@ export default function ModalPaciente() {
                         required
                     />
                 </div>
-                
+                <div className="mb-4">
+                    <label 
+                    htmlFor="diagnostico"
+                    className="text-slate-800"
+                    >
+                        Diagnóstico:
+                    </label>
+                    <input 
+                        type="text"
+                        id="diagnostico"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="diagnostico"
+                        ref={diagnosticoRef}
+                        required
+                    />
+                </div><div className="mb-4">
+                    <label 
+                    htmlFor="medicamentos"
+                    className="text-slate-800"
+                    >
+                        Medicamentos:
+                    </label>
+                    <input 
+                        type="text"
+                        id="medicamentos"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="medicamentos"
+                        ref={medicamentosRef}
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                            <label
+                                htmlFor="envio"
+                                className="text-slate-800"
+                            >
+                                Envió:
+                            </label>
+                            <input
+                                type="text"
+                                id="envio"
+                                className="mt-2 w-full p-3 bg-gray-50"
+                                name="envio"
+                                ref={envioRef}
+                                required
+                            />
+                </div>
                 
                 <input 
                     type="submit" 
