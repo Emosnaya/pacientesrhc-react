@@ -325,22 +325,6 @@ export default function EstratiImp() {
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Diagnostico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    value={expediente.diagnostico}
-                                    disabled
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
                                     htmlFor="c_isquemia"
                                     className="text-slate-800"
                                 >

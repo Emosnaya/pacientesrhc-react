@@ -13,6 +13,8 @@ import ExpEstartificacion from "./views/ExpEstartificacion";
 import Perfil from "./views/Perfil";
 import Imprimiresfuerzo from "./views/Imprimiresfuerzo";
 import EstratiImp from "./views/EstratiImp";
+import ExpClinico from "./views/ExpClinico";
+import ImpClinico from "./views/ImpClinico";
 
 const router = createBrowserRouter([
 
@@ -58,6 +60,16 @@ const router = createBrowserRouter([
             {
                 path: '/estrati/imprimir/:id',
                 element: <EstratiImp/>
+
+            },
+            {
+                path: '/clinico/:id',
+                element: <ExpClinico/>
+
+            },
+            {
+                path: '/clinico/imprimir/:id',
+                element: <ImpClinico/>
 
             },
             {

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Estratificacion from './Estratificacion';
 import PruebaE from './PruebaE';
+import Clinico from './Clinico';
 
 export default function ModalExpediente() {
 
@@ -18,6 +19,8 @@ export default function ModalExpediente() {
     componenteExpediente = <Estratificacion />;
   } else if (expediente === 'prueba') {
     componenteExpediente = <PruebaE />;
+  }else if (expediente ===  'clinico'){
+    componenteExpediente = <Clinico/>
   }
   return (
     <>
@@ -28,6 +31,7 @@ export default function ModalExpediente() {
           <option value=""></option>
           <option value="prueba">Prueba de Esfuerzo</option>
           <option value="estratifiacion">Estratificación</option>
+          <option value="clinico">Expediente Clinico</option>
         </select>
       </div>
     )

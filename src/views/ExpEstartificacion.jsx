@@ -39,7 +39,7 @@ export default function ExpEstartificacion() {
                     setTimeout(function() {
                         // Redireccionar a una página específica
                         window.location.href = '/expedientes';
-                    }, 3000);
+                    }, 2000);
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -105,22 +105,6 @@ export default function ExpEstartificacion() {
                                     name="estratificacion"
                                     value={expediente.estrati_fecha}
                                     onChange={ev => setExpediente({...expediente,estrati_fecha: ev.target.value})}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Diagnostico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    value={expediente.diagnostico}
-                                    onChange={ev => setExpediente({...expediente,diagnostico: ev.target.value})}
                                 />
                             </div>
                             <div className="mb-4">

@@ -4,6 +4,7 @@ import { usevalue, useState } from 'react'
 import clienteAxios from '../axios-client';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Expediente() {
     const token = localStorage.getItem('AUTH_TOKEN')
@@ -35,6 +36,7 @@ export default function Expediente() {
                         Authorization: `Bearer ${token}`
                     }
                 }).then(function (response) {
+                    // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
                         window.location.href = '/expedientes';
@@ -45,7 +47,7 @@ export default function Expediente() {
                         title: "Actualizado Correctamente",
                         showConfirmButton: false,
                         timer: 1500
-                      });
+                      }); 
                   })
             } catch (error) {
                 setErrores(Object.values(error.response.data.errors) )
@@ -88,22 +90,6 @@ export default function Expediente() {
                                     name="num_prueba"
                                     value={expediente.numPrueba}
                                     onChange={ev => setExpediente({...expediente,numPrueba: ev.target.value})}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Daignóstico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    value={expediente.diagnostico}
-                                    onChange={ev => setExpediente({...expediente,diagnostico: ev.target.value})}
                                 />
                             </div>
                             <div className="mb-4">
@@ -189,22 +175,6 @@ export default function Expediente() {
                                     name="ccs"
                                     value={expediente.ccs}
                                     onChange={ev => setExpediente({...expediente,ccs: ev.target.value})}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="medicamentos"
-                                    className="text-slate-800"
-                                >
-                                    Medicamentos:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="medicamentos"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="medicamentos"
-                                    value={expediente.medicamentos}
-                                    onChange={ev => setExpediente({...expediente,medicamentos: ev.target.value})}
                                 />
                             </div>
                             <div className="mb-4">

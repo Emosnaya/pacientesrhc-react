@@ -23,6 +23,7 @@ export default function Expedientes() {
   const token = localStorage.getItem('AUTH_TOKEN')
   const [esfuerzo, setEsfuerzo] = useState([])
   const [estratificacion, setEstratificacion] = useState([])
+  const [clinicos, setClinicos] = useState([])
   const [search, setSearch] = useState("")
 
 
@@ -46,9 +47,23 @@ export default function Expedientes() {
     setEstratificacion(response.data.data)
   })
 
-  const expedientes = esfuerzo.concat(estratificacion);
+  const expedientesMed = esfuerzo.concat(estratificacion);
 
   const {dataest, errorest, isLoadingest} = useSWR('/api/estratificacion', fetcherestrati)
+
+  const fetcherclinico = () => clienteAxios('/api/clinico',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(function (response) {
+      setClinicos(response.data.data)
+    })
+  
+    const expedientes = expedientesMed.concat(clinicos);
+  
+    const {dataecli, errorcli, isLoadingcli} = useSWR('/api/clinico', fetcherclinico)
+
 
   let results = []
   const searcher = (e) => {
@@ -93,7 +108,8 @@ export default function Expedientes() {
       if (result.isConfirmed) {
         const esfuerzo = `/api/esfuerzo/${expediente.id}`;
         const estrati = `/api/estratificacion/${expediente.id}`;
-        const url = expediente.tipo_exp === 1?esfuerzo: estrati;
+        const clinico = `/api/clinico/${expediente.id}`;
+        const url = expediente.tipo_exp === 1 ? esfuerzo : expediente.tipo_exp === 2 ? estrati : clinico;
     try {
       clienteAxios.delete(url,
     {
@@ -166,13 +182,11 @@ export default function Expedientes() {
                   {records.map((expediente) => (
                       <tr key={expediente.id} className="text-center md:text-xl ">
                           <td className="border-b-2 border-gray-200 py-4">{(expediente.numPrueba)?expediente.numPrueba:expediente.id}</td>
-                          <td className="border-b-2 border-gray-200">{(expediente.tipo_exp === 1)?'Prueba de esfuerzo':'Estratificación'}</td>
+                          <td className="border-b-2 border-gray-200">{(() => {if (expediente.tipo_exp === 1) {return 'Prueba de esfuerzo';} else if(expediente.tipo_exp === 2) {return 'Estratificación';}else {return'Expediente Clínico'}})()}</td>
                           <td className="border-b-2 border-gray-200">{(expediente.fecha)?expediente.fecha:expediente.estrati_fecha}</td>
                           <td className="flex items-center justify-between border-b-2 border-gray-200 py-5">
-                            {(expediente.tipo_exp ===1)? <Link to={'/prueba/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>
-                            :<Link to={'/estrati/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>}
-                            {(expediente.tipo_exp ===1)? <Link to={'/prueba/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>
-                            :<Link to={'/estrati/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>}
+                          {(() => {if (expediente.tipo_exp === 1) {return <Link to={'/prueba/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;} else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;}else {return <Link to={'/clinico/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>}})()}
+                          {(() => {if (expediente.tipo_exp === 1) {return <Link to={'/prueba/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>;} else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>;}else {return <Link to={'/clinico/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>}})()}
                             <a onClick={ev => onDelete(expediente)} > <FaRegTrashCan className="action-icon delete hover:text-red-700" /> </a>
                           </td>
                       </tr>

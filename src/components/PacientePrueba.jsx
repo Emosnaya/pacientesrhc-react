@@ -5,6 +5,20 @@ import Swal from "sweetalert2";
 
 export default function PacientePrueba() {
     const token = localStorage.getItem('AUTH_TOKEN')
+    const [respuesta, setRespuesta] = useState('');
+  const [inputBloqueado, setInputBloqueado] = useState('');
+
+  const handleRespuestaChange = (e) => {
+    const valorRespuesta = e.target.value.toLowerCase().trim();
+    setRespuesta(valorRespuesta);
+
+    // Lógica para bloquear el segundo input
+    if (valorRespuesta === 'false') {
+      setInputBloqueado(true);
+    } else {
+      setInputBloqueado(false);
+    }
+  };
 
     const nombreRef = useRef();
     const apellidoPatRef = useRef();
@@ -15,6 +29,8 @@ export default function PacientePrueba() {
     const estadoCivilRef = useRef();
     const profesionRef = useRef();
     const domicilioRef = useRef();
+    const diagnosticoRef = useRef();
+    const medicamentosRef = useRef();
 
     const tallaRef = useRef();
     const pesoRef = useRef();
@@ -22,7 +38,6 @@ export default function PacientePrueba() {
 
     const fechaRef = useRef();
     const numPruebaRef = useRef();
-    const diagnosticoRef = useRef();
     const iccRef = useRef();
     const feviRef = useRef();
     const metodoRef = useRef();
@@ -30,7 +45,6 @@ export default function PacientePrueba() {
     const nyaRef = useRef();
 
     const ccsRef = useRef();
-    const medicamentosRef = useRef();
     const betabloqueadorRef = useRef();
     const iecassRef = useRef();
     const nitratosRef = useRef();
@@ -43,9 +57,7 @@ export default function PacientePrueba() {
     const aldactoneRef = useRef();
     const antiagreganteRef = useRef();
     const otrosRef = useRef();
-    const prevalenciaRef = useRef();
     const confusorRef = useRef();
-    const sensibilidadRef = useRef();
     const especificidadRef = useRef();
     const pruebaIngresoRef = useRef();
 
@@ -141,19 +153,19 @@ export default function PacientePrueba() {
             talla: tallaRef.current.value,
             peso: pesoRef.current.value,
             cintura: cinturaRef.current.value,
-            registro: registroRef.current.value
+            registro: registroRef.current.value,
+            medicamentos : medicamentosRef.current.value,
+            diagnostico : diagnosticoRef.current.value
         }
 
         const datos = {
             numPrueba: numPruebaRef.current.value,
-            diagnostico: diagnosticoRef.current.value,
             icc: iccRef.current.value,
             fevi: feviRef.current.value,
             metodo: metodoRef.current.value,
             disfuncion: disfuncionRef.current.value,
             nya: nyaRef.current.value,
             ccs: ccsRef.current.value,
-            medicamentos: medicamentosRef.current.value,
             betabloqueador: betabloqueadorRef.current.value,
             iecass: iecassRef.current.value,
             nitratos: nitratosRef.current.value,
@@ -166,9 +178,7 @@ export default function PacientePrueba() {
             aldactone: aldactoneRef.current.value,
             antiagregante: antiagreganteRef.current.value,
             otros: otrosRef.current.value,
-            prevalencia: prevalenciaRef.current.value,
             confusor: confusorRef.current.value,
-            sensibilidad: sensibilidadRef.current.value,
             especificidad: especificidadRef.current.value,
             pruebaIngreso: pruebaIngresoRef.current.value,
 
@@ -402,8 +412,8 @@ export default function PacientePrueba() {
                                     Género:
                                 </label>
                                 <select id="genero" name="genero" className='mt-2 w-full p-3' ref={generoRef} required>
-                                    <option value="masculino">Masculino</option>
-                                    <option value="femenino">Femenino</option>
+                                    <option value="masculino">Hombre</option>
+                                    <option value="femenino">Mujer</option>
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>
@@ -504,55 +514,71 @@ export default function PacientePrueba() {
                                     required
                                 />
                             </div>
+                            <div className="mb-4">
+                            <label
+                                htmlFor="diagnostico"
+                                className="text-slate-800"
+                            >
+                                Diagnóstico:
+                            </label>
+                            <input
+                                type="text"
+                                id="diagnostico"
+                                className="mt-2 w-full p-3 bg-gray-50"
+                                name="diagnostico"
+                                ref={diagnosticoRef}
+                                required
+                            />
+                            </div>
+                            <div className="mb-4">
+                            <label
+                                htmlFor="medicamentos"
+                                className="text-slate-800"
+                            >
+                                Medicamentos:
+                            </label>
+                            <input
+                                type="text"
+                                id="medicamentos"
+                                className="mt-2 w-full p-3 bg-gray-50"
+                                name="medicamentos"
+                                ref={medicamentosRef}
+                                required
+                            />
+                            </div>
                         </div>
 
                         <h1 className="text-4xl font-bold">Prueba de Esfuerzo</h1>
                         <div className='grid lg:grid-cols-4 grid-cols-1 mt-5 px-5 py-10 gap-2'>
                         <div className="mb-4">
                                 <label
-                                    htmlFor="diagnostico"
+                                    htmlFor="fecha_prueb"
                                     className="text-slate-800"
                                 >
                                     Fecha:
                                 </label>
                                 <input
                                     type="date"
-                                    id="diagnostico"
+                                    id="fecha_prueb"
                                     className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
+                                    name="fecha_prueb"
                                     ref={fechaRef}
                                     required
                                 />
                             </div>
                         <div className="mb-4">
                                 <label
-                                    htmlFor="diagnostico"
+                                    htmlFor="prueba_num"
                                     className="text-slate-800"
                                 >
                                     Prueba No.:
                                 </label>
                                 <input
                                     type="text"
-                                    id="diagnostico"
+                                    id="prueba_num"
                                     className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
+                                    name="prueba_num"
                                     ref={numPruebaRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Daignóstico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    ref={diagnosticoRef}
                                     required
                                 />
                             </div>
@@ -638,22 +664,6 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ccs"
                                     ref={ccsRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="medicamentos"
-                                    className="text-slate-800"
-                                >
-                                    Medicamentos:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="medicamentos"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="medicamentos"
-                                    ref={medicamentosRef}
                                     required
                                 />
                             </div>
@@ -791,51 +801,15 @@ export default function PacientePrueba() {
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="prevalencia"
-                                    className="text-slate-800"
-                                >
-                                    Prevalencia:
-                                </label>
-                                <input
-                                    type="numeric"
-                                    id="prevalencia"
-                                    className="mt-2 w-full p-3 bg-gray-50 "
-                                    name="prevalencia"
-                                    ref={prevalenciaRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
                                     htmlFor="confusor"
                                     className="text-slate-800"
                                 >
                                     Confusor:
                                 </label>
-                                <input
-                                    type="numeric"
-                                    id="confusor"
-                                    className="mt-2 w-full p-3 bg-gray-50 "
-                                    name="confusor"
-                                    ref={confusorRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="sensibilidad"
-                                    className="text-slate-800"
-                                >
-                                    Sensibilidad:
-                                </label>
-                                <input
-                                    type="numeric"
-                                    id="sensibilidad"
-                                    className="mt-2 w-full p-3 bg-gray-50 "
-                                    name="sensibilidad"
-                                    ref={sensibilidadRef}
-                                    required
-                                />
+                                <select id="confusor" name="confusor" className='mt-2 w-full p-3' ref={confusorRef} required>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -960,7 +934,7 @@ export default function PacientePrueba() {
                                 >
                                     Medicion de Gases:
                                 </label>
-                                <select id="medicion_gases" name="medicion_gases" className='mt-2 w-full p-3' ref={medicionGasesRef} required>
+                                <select id="medicion_gases" name="medicion_gases" className='mt-2 w-full p-3' ref={medicionGasesRef} required onChange={handleRespuestaChange}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -1801,7 +1775,7 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vo2_max_gases"
                                     ref={vo2MaxGasesRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1817,7 +1791,7 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vo2_pico_gases"
                                     ref={vo2picoGasesRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1833,7 +1807,7 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vo2_borg_12_gases"
                                     ref={vo2BorgGasesRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1849,7 +1823,7 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="r_qmax"
                                     ref={rQmaxRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1865,7 +1839,7 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="umbral_aer"
                                     ref={umbralAerRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1881,7 +1855,7 @@ export default function PacientePrueba() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="po2_teor"
                                     ref={poTeoricoRef}
-                                    required
+                                    disabled={inputBloqueado}
                                 />
                             </div>
                             <div className="mb-4 col-start-1 lg:col-end-5">

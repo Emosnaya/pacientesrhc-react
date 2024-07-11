@@ -1,15 +1,76 @@
 import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import { useRef, useState } from 'react'
+import { FaRegTrashCan ,FaPrint } from "react-icons/fa6";
+import { FaEye, FaEdit  } from "react-icons/fa";
 import clienteAxios from '../axios-client';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import useSWR from 'swr';
 
 export default function Paciente() {
     const token = localStorage.getItem('AUTH_TOKEN')
     const {id} = useParams()
     const [errores, setErrores] = useState(null)
     const navigate = useNavigate()
+    const [esfuerzo, setEsfuerzo] = useState([])
+    const [estratificacion, setEstratificacion] = useState([])
+    const [clinicos, setClinicos] = useState([])
+    const [search, setSearch] = useState("")
+
+
+    const fetcher = () => clienteAxios(`/api/esfuerzos/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }).then(function (response) {
+          setEsfuerzo(response.data.data)
+        })
+      
+        const {data, error, isLoading} = useSWR(`/api/esfuerzos/${id}`, fetcher)
+
+        const fetcherestrati = () => clienteAxios(`/api/estratificaciones/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }).then(function (response) {
+              setEstratificacion(response.data.data)
+            })
+          
+            const expedientesMed = esfuerzo.concat(estratificacion);
+          
+            const {dataest, errorest, isLoadingest} = useSWR(`/api/estratificaciones/${id}`, fetcherestrati)
+
+            const fetcherclinico = () => clienteAxios(`/api/clinicos/${id}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`
+                  }
+                }).then(function (response) {
+                  setClinicos(response.data.data)
+                })
+              
+                const expedientes = expedientesMed.concat(clinicos);
+              
+                const {dataecli, errorcli, isLoadingcli} = useSWR(`/api/clinicos/${id}`, fetcherclinico)
+                
+  let results = []
+  const searcher = (e) => {
+    setSearch(e.target.value)
+  }
+
+  if(!search){
+    results =  expedientes;
+  }else{
+    results = expedientes.filter((dato) =>{
+      return Object.values(dato).some(value =>
+        typeof value === 'string' && value.toLowerCase().includes(search.toLowerCase()));
+    }
+    )
+  }        
 
     const [paciente, setPaciente] = useState({
         id:null,
@@ -26,6 +87,8 @@ export default function Paciente() {
         talla: '',
         peso: '',
         cintura: '',
+        diagnostico: '',
+        medicamentos: ''
     })
 
 
@@ -39,44 +102,58 @@ export default function Paciente() {
             .then(({data}) => {
                 setPaciente(data)
             })
+            .catch(error => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ocurrió un error!",
+              });
+            });
         }, [])
     }
 
+
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(paciente)
-        if(paciente.id){
-            try {
-                clienteAxios.put(`/api/pacientes/${paciente.id}`, paciente,{
-                    headers:{
-                        Authorization: `Bearer ${token}`
-                    }
-                }).then(({data}) => {
-                    console.log(data);
-                    //navigate('/dashboard')
-                })
-            } catch (error) {
-                setErrores(Object.values(error.response.data.errors) )
+        Swal.fire({
+            title: "¿Quieres Actualizar?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Actualizar",
+            cancelButtonText: "Cancelar"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    clienteAxios.put(`/api/pacientes/${paciente.id}`, paciente,{
+                        headers:{
+                            Authorization: `Bearer ${token}`
+                        }
+                    }).then(({data}) => {
+                        setTimeout(function() {
+                            // Redireccionar a una página específica
+                            window.location.href = '/dashboard';
+                        }, 2000);
+                        Swal.fire({
+                            title: "Actualizado!",
+                            text: "El paciente fue actualizado",
+                            icon: "success",
+                            timer: 1500
+                          });
+                    })
+                } catch (error) {
+                    setErrores(Object.values(error.response.data.errors) )
+                }
             }
-        }else{
-            try {
-                clienteAxios.put(`/api/pacientes`, paciente,{
-                    headers:{
-                        Authorization: `Bearer ${token}`
-                    }
-                }).then(() => {
-                    navigate('/dashboard')
-                })
-            } catch (error) {
-                setErrores(Object.values(error.response.data.errors) )
-            }
-        }
+          });
     } 
     
   return (
     <>
-    <Header titulo ="Editar Paciente"/>
+    <Header titulo ={`Paciente : ${paciente.nombre} ${paciente.apellidoPat}`}/>
     <div>
+        <h1 className='text-2xl md:text-xl font-bold mt-4'>Editar Información</h1>
         <div className=" mt-5 px-5 py-10">
             <form action="" className='grid lg:grid-cols-3 grid-cols-1 gap-2' onSubmit={onSubmit}>
             {errores ? errores.map((error, i) => <Alerta key={i}>{error}</Alerta>)  : null }
@@ -163,7 +240,7 @@ export default function Paciente() {
                         name="telefono"
                         placeholder="telefono"
                         value={paciente.telefono}
-                        onChange={ev => setPaciente({...paciente,genero: ev.target.value})}
+                        onChange={ev => setPaciente({...paciente,telefono: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -191,9 +268,8 @@ export default function Paciente() {
                         Género:
                     </label>
                     <select id="genero" name="genero" className='mt-2 w-full p-3' value={paciente.genero} onChange={ev => setPaciente({...paciente,genero: ev.target.value})}>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
+                        <option value="masculino">Hombre</option>
+                        <option value="femenino">Mujer</option>
                     </select>
                 </div>
 
@@ -293,6 +369,38 @@ export default function Paciente() {
                         onChange={ev => setPaciente({...paciente,cintura: ev.target.value})}
                     />
                 </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="diagnostico"
+                    className="text-slate-800"
+                    >
+                        Diagnostico:
+                    </label>
+                    <input 
+                        type="text"
+                        id="diagnostico"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="diagnostico"
+                        value={paciente.diagnostico}
+                        onChange={ev => setPaciente({...paciente,diagnostico: ev.target.value})}
+                    />
+                </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="medicamentos"
+                    className="text-slate-800"
+                    >
+                        Medicamentos:
+                    </label>
+                    <input 
+                        type="text"
+                        id="medicamentos"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="medicamentos"
+                        value={paciente.medicamentos}
+                        onChange={ev => setPaciente({...paciente,medicamentos: ev.target.value})}
+                    />
+                </div>
                 
                 
                 <input 
@@ -302,7 +410,34 @@ export default function Paciente() {
                 />
                 <Link className="bg-red-500 hover:bg-red-600 text-white m-5 text-center p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
             </form>
-            
+        </div>
+        <h1 className='text-2xl md:text-xl font-bold mt-4'>Expedientes</h1>
+        <div className=" mt-5 md:p-5">
+          <table className="table md:w-full border-separate lg:border-collapse w-full">
+              <thead className="">
+                  <tr >
+                      <th className="border-b-2 border-gray-200">ID</th>
+                      <th className="border-b-2 border-gray-200">Tipo de expediente</th>
+                      <th className="border-b-2 border-gray-200">Fecha</th>
+                      <th className="border-b-2 border-gray-200">Acciones</th>
+                  </tr>
+              </thead>
+              <tbody className="">
+                  {expedientes.map((expediente) => (
+                      <tr key={expediente.id} className="text-center md:text-xl ">
+                          <td className="border-b-2 border-gray-200 py-4">{(expediente.numPrueba)?expediente.numPrueba:expediente.id}</td>
+                          <td className="border-b-2 border-gray-200">{(() => {if (expediente.tipo_exp === 1) {return 'Prueba de esfuerzo';} else if(expediente.tipo_exp === 2) {return 'Estratificación';}else {return'Expediente Clínico'}})()}</td>
+                          <td className="border-b-2 border-gray-200">{(expediente.fecha)?expediente.fecha:expediente.estrati_fecha}</td>
+                          <td className="flex items-center justify-between border-b-2 border-gray-200 py-5">
+                          {(() => {if (expediente.tipo_exp === 1) {return <Link to={'/prueba/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;} else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;}else {return <Link to={'/clinico/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>}})()}
+                          {(() => {if (expediente.tipo_exp === 1) {return <Link to={'/prueba/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>;} else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>;}else {return <Link to={'/clinico/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>}})()}
+                            <a onClick={ev => onDelete(expediente)} > <FaRegTrashCan className="action-icon delete hover:text-red-700" /> </a>
+                          </td>
+                      </tr>
+                  ))}
+              </tbody>
+          </table>
+          {(() => {if (expedientes === null || expedientes.length==0) {return <h2 className='text-center mt-5 font-semibold'>No hay expedientes para este paciente.</h2>}})()}
         </div>
     </div>
     </>

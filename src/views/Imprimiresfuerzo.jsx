@@ -274,6 +274,38 @@ export default function Imprimiresfuerzo() {
                         disabled
                     />
                 </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="cintura"
+                    className="text-slate-800"
+                    >
+                        Medicamentos:
+                    </label>
+                    <input 
+                        type="numeric"
+                        id="cintura"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="cintura"
+                        value={paciente.medicamentos}
+                        disabled
+                    />
+                </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="cintura"
+                    className="text-slate-800"
+                    >
+                        Diagnostico:
+                    </label>
+                    <input 
+                        type="numeric"
+                        id="cintura"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="cintura"
+                        value={paciente.diagnostico}
+                        disabled
+                    />
+                </div>
         </div>
             <form action="" onSubmit={onSubmit}>
             <h2 className='text-3xl font-bold mt-8'>Prueba de esfuerzo</h2>
@@ -307,22 +339,6 @@ export default function Imprimiresfuerzo() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="num_prueba"
                                     value={expediente.numPrueba}
-                                    disabled
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Daignóstico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    value={expediente.diagnostico}
                                     disabled
                                 />
                             </div>
@@ -408,22 +424,6 @@ export default function Imprimiresfuerzo() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ccs"
                                     value={expediente.ccs}
-                                    disabled
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="medicamentos"
-                                    className="text-slate-800"
-                                >
-                                    Medicamentos:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="medicamentos"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="medicamentos"
-                                    value={expediente.medicamentos}
                                     disabled
                                 />
                             </div>

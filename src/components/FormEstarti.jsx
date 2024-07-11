@@ -10,6 +10,21 @@ export default function FormEstarti() {
     const [pacientes, setPacientes] = useState([])
     const [paciente, setPaciente] = useState({})
     const [id, setId] = useState({})
+
+    const [respuesta, setRespuesta] = useState('');
+  const [inputBloqueado, setInputBloqueado] = useState('');
+
+  const handleRespuestaChange = (e) => {
+    const valorRespuesta = e.target.value.toLowerCase().trim();
+    setRespuesta(valorRespuesta);
+
+    // Lógica para bloquear el segundo input
+    if (valorRespuesta === 'false') {
+      setInputBloqueado(true);
+    } else {
+      setInputBloqueado(false);
+    }
+  };
   
     const fetcher = () => clienteAxios('/api/pacientes',
     {
@@ -26,11 +41,14 @@ export default function FormEstarti() {
       setPaciente(event.target.value);
     };
 
+
+
+
+
     const numPruebaRef = useRef();
     const rhc_1_fechaREF= useRef();
     const peRef= useRef();
     const estratiRef= useRef();
-    const diagnosticoRef= useRef();
     const cIsquemiaRef= useRef();
     const imRef= useRef();
 
@@ -114,7 +132,8 @@ export default function FormEstarti() {
     const umbraIsqueRef= useRef();
     const comentariosRef= useRef();
     const impiRef = useRef();
-    const cseRef = useRef();
+    const isquemiaIrmRef =useRef();
+    const ecoRef =useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -123,7 +142,6 @@ export default function FormEstarti() {
             rhc_1_fecha: rhc_1_fechaREF.current.value,
             pe: peRef.current.value,
             estrati: estratiRef.current.value,
-            diagnostico: diagnosticoRef.current.value,
             cIsquemia: cIsquemiaRef.current.value,
             im: imRef.current.value,
             ima: imaRef.current.value,
@@ -205,7 +223,8 @@ export default function FormEstarti() {
             fcDiana: fcDianaRef.current.value,
             dpDiana: dpDianaRef.current.value,
             comentarios: comentariosRef.current.value,
-            cse: cseRef.current.value
+            isquemiaIrm : isquemiaIrmRef.current.value,
+            eco : ecoRef.current.value
 
         }
         try {
@@ -313,44 +332,12 @@ export default function FormEstarti() {
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="diagnostico"
-                                    className="text-slate-800"
-                                >
-                                    Diagnostico:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="diagnostico"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="diagnostico"
-                                    ref={diagnosticoRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="CSE"
-                                    className="text-slate-800"
-                                >
-                                    CSE:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="CSE"
-                                    className="mt-2 w-full p-3 bg-gray-50"
-                                    name="CSE"
-                                    ref={cseRef}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
                                     htmlFor="c_isquemia"
                                     className="text-slate-800"
                                 >
                                     C. Isquémica:
                                 </label>
-                                <select id="c_isquemia" name="c_isquemia" className='mt-2 w-full p-3' ref={cIsquemiaRef} required>
+                                <select id="c_isquemia" name="c_isquemia" className='mt-2 w-full p-3' ref={cIsquemiaRef} required onChange={handleRespuestaChange}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -362,9 +349,10 @@ export default function FormEstarti() {
                                 >
                                     IM:
                                 </label>
-                                <select id="im" name="im" className='mt-2 w-full p-3' ref={imRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="im" name="im" className='mt-2 w-full p-3' ref={imRef}  disabled={inputBloqueado} defaultValue="false">
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
+                                    
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -374,9 +362,9 @@ export default function FormEstarti() {
                                 >
                                     IMA:
                                 </label>
-                                <select id="ima" name="ima" className='mt-2 w-full p-3' ref={imaRef}required >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="ima" name="ima" className='mt-2 w-full p-3' ref={imaRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -386,9 +374,9 @@ export default function FormEstarti() {
                                 >
                                     IMAS:
                                 </label>
-                                <select id="imas" name="imas" className='mt-2 w-full p-3' ref={imasRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imas" name="imas" className='mt-2 w-full p-3' ref={imasRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -398,9 +386,9 @@ export default function FormEstarti() {
                                 >
                                     IMAA:
                                 </label>
-                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imaaRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imaaRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -410,9 +398,9 @@ export default function FormEstarti() {
                                 >
                                     IMAL:
                                 </label>
-                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imalRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imaa" name="imaa" className='mt-2 w-full p-3' ref={imalRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -422,9 +410,9 @@ export default function FormEstarti() {
                                 >
                                     IMAE:
                                 </label>
-                                <select id="imae" name="imae" className='mt-2 w-full p-3' ref={imaeRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imae" name="imae" className='mt-2 w-full p-3' ref={imaeRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -434,9 +422,9 @@ export default function FormEstarti() {
                                 >
                                     IMInf:
                                 </label>
-                                <select id="im_inf" name="im_inf" className='mt-2 w-full p-3' ref={imInfRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="im_inf" name="im_inf" className='mt-2 w-full p-3' ref={imInfRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -446,9 +434,9 @@ export default function FormEstarti() {
                                 >
                                     IMPI:
                                 </label>
-                                <select id="impi" name="impi" className='mt-2 w-full p-3' ref={impiRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="impi" name="impi" className='mt-2 w-full p-3' ref={impiRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -458,9 +446,9 @@ export default function FormEstarti() {
                                 >
                                     IMPI+VD:
                                 </label>
-                                <select id="impi_vd" name="impi_vd" className='mt-2 w-full p-3' ref={impiVdRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="impi_vd" name="impi_vd" className='mt-2 w-full p-3' ref={impiVdRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -470,9 +458,9 @@ export default function FormEstarti() {
                                 >
                                     IMLat:
                                 </label>
-                                <select id="imlat" name="imlat" className='mt-2 w-full p-3' ref={imLatRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imlat" name="imlat" className='mt-2 w-full p-3' ref={imLatRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -482,9 +470,9 @@ export default function FormEstarti() {
                                 >
                                     IMSESST:
                                 </label>
-                                <select id="imsesst" name="imsesst" className='mt-2 w-full p-3' ref={imSesstRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imsesst" name="imsesst" className='mt-2 w-full p-3' ref={imSesstRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -494,9 +482,9 @@ export default function FormEstarti() {
                                 >
                                     IMComplicado:
                                 </label>
-                                <select id="imcomplicado" name="imcomplicado" className='mt-2 w-full p-3' ref={imComplicadoRef} required>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="imcomplicado" name="imcomplicado" className='mt-2 w-full p-3' ref={imComplicadoRef} disabled={inputBloqueado}>
+                                <option value="false">No</option>
+                                <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -865,9 +853,35 @@ export default function FormEstarti() {
                                     htmlFor="isquemia"
                                     className="text-slate-800"
                                 >
-                                    Insquemia MN:
+                                    Isquemia MN:
                                 </label>
                                 <select id="isquemia" name="isquemia" className='mt-2 w-full p-3' ref={isquemiaRef} required>
+                                    <option value="bajo">Bajo</option>
+                                    <option value="medio">Medio</option>
+                                    <option value="alto">Alto</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="isquemia_irm"
+                                    className="text-slate-800"
+                                >
+                                    Isquemia IRM:
+                                </label>
+                                <select id="isquemia_irm" name="isquemia_irm" className='mt-2 w-full p-3' ref={isquemiaIrmRef} required>
+                                    <option value="bajo">Bajo</option>
+                                    <option value="medio">Medio</option>
+                                    <option value="alto">Alto</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="eco_estres"
+                                    className="text-slate-800"
+                                >
+                                    ECO:
+                                </label>
+                                <select id="eco_estres" name="eco_estres" className='mt-2 w-full p-3' ref={ecoRef} required>
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -1211,12 +1225,12 @@ export default function FormEstarti() {
                                     htmlFor="infra135"
                                     className="text-slate-800"
                                 >
-                                    InfraST  2mm:
+                                    InfraST > 2mm:
                                 </label>
                                 <select id="infra135" name="infra135" className='mt-2 w-full p-3' ref={infra135Ref}required >
                                     <option value="false">No</option>
-                                    <option value="m_135">mayor 135</option>
-                                    <option value="me_135">menor 135</option>
+                                    <option value="m_135">mayor 135 lpm</option>
+                                    <option value="me_135">menor 135 lpm</option>
                                 </select>
                             </div>
 
@@ -1225,12 +1239,12 @@ export default function FormEstarti() {
                                     htmlFor="infra5"
                                     className="text-slate-800"
                                 >
-                                    InfraST  2mm:
+                                    InfraST > 2mm:
                                 </label>
                                 <select id="infra5" name="infra5" className='mt-2 w-full p-3' ref={infra5Ref} required>
                                     <option value="false">No</option>
-                                    <option value="m_5">mayor 5</option>
-                                    <option value="me_5">menor 5</option>
+                                    <option value="m_5">mayor 5 mets</option>
+                                    <option value="me_5">menor 5 mets</option>
                                 </select>
                             </div>
                             <div className="mb-4">

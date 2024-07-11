@@ -90,7 +90,7 @@ export default function Dashboard() {
           setTimeout(function() {
             // Redireccionar a una página específica
             window.location.href = '/dashboard';
-          }, 3000);
+          }, 2000);
           Swal.fire({
             title: "Eliminado!",
             text: "El paciente fue eliminado",
