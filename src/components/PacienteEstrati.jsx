@@ -393,8 +393,8 @@ export default function PacienteEstrati() {
                                     Género:
                                 </label>
                                 <select id="genero" name="genero" className='mt-2 w-full p-3' ref={generoRef} required>
-                                    <option value="masculino">Masculino</option>
-                                    <option value="femenino">Femenino</option>
+                                    <option value="masculino">Hombre</option>
+                                    <option value="femenino">Mujer</option>
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>

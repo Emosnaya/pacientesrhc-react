@@ -258,7 +258,7 @@ export default function FormPrueba() {
                     
                     setTimeout(function () {
                         window.location.href = '/expedientes';
-                    }, 3000);
+                    }, 2000);
                     Swal.fire({
                         position: "center",
                         icon: "success",
