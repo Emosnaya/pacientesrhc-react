@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import clienteAxios from '../axios-client'
 import useSWR from 'swr'
+import Swal from "sweetalert2";
 
 export default function FormClinico() {
     const token = localStorage.getItem('AUTH_TOKEN')
@@ -22,6 +23,298 @@ export default function FormClinico() {
       setInputBloqueado(false);
     }
   };
+  const [respuestaIm, setrespuestaIm] = useState('');
+    const [inputBloqueadoIm, setInputBloqueadoIm] = useState('');
+  
+    const handleRespuestaChangeIm = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaIm(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoIm(true);
+      } else {
+        setInputBloqueadoIm(false);
+      }
+    };
+    const [respuestaImAp, setrespuestaImAp] = useState('');
+    const [inputBloqueadoImAp, setInputBloqueadoImAp] = useState('');
+  
+    const handleRespuestaChangeImAp = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaImAp(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoImAp(true);
+      } else {
+        setInputBloqueadoImAp(false);
+      }
+    };
+    const [respuestaImLat, setrespuestaImLat] = useState('');
+    const [inputBloqueadoImLat, setInputBloqueadoImLat] = useState('');
+  
+    const handleRespuestaChangeImLat = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaImLat(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoImLat(true);
+      } else {
+        setInputBloqueadoImLat(false);
+      }
+    };
+    const [respuestaImIn, setrespuestaImIn] = useState('');
+    const [inputBloqueadoImIn, setInputBloqueadoImIn] = useState('');
+  
+    const handleRespuestaChangeImIn = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaImIn(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoImIn(true);
+      } else {
+        setInputBloqueadoImIn(false);
+      }
+    };
+     
+    const [respuestaImdV, setrespuestaImdV] = useState('');
+    const [inputBloqueadoImdV, setInputBloqueadoImdV] = useState('');
+  
+    const handleRespuestaChangeImdV = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaImdV(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoImdV(true);
+      } else {
+        setInputBloqueadoImdV(false);
+      }
+    };
+    const [respuestaImAI, setrespuestaImAI] = useState('');
+    const [inputBloqueadoImAI, setInputBloqueadoImAI] = useState('');
+  
+    const handleRespuestaChangeImAI = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaImAI(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoImAI(true);
+      } else {
+        setInputBloqueadoImAI(false);
+      }
+    };
+    const [respuestaImAE, setrespuestaImAE] = useState('');
+    const [inputBloqueadoImAE, setInputBloqueadoImAE] = useState('');
+  
+    const handleRespuestaChangeImAE = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaImAE(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoImAE(true);
+      } else {
+        setInputBloqueadoImAE(false);
+      }
+    };
+    const [respuestaCC, setrespuestaCC] = useState('');
+    const [inputBloqueadoCC, setInputBloqueadoCC] = useState('');
+  
+    const handleRespuestaChangeCC = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaCC(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoCC(true);
+      } else {
+        setInputBloqueadoCC(false);
+      }
+    };
+    const [respuestaMS, setrespuestaMS] = useState('');
+    const [inputBloqueadoMS, setInputBloqueadoMS] = useState('');
+  
+    const handleRespuestaChangeMS = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaMS(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoMS(true);
+      } else {
+        setInputBloqueadoMS(false);
+      }
+    };
+
+    const [respuestaCRVC, setrespuestaCRVC] = useState('');
+    const [inputBloqueadoCRVC, setInputBloqueadoCRVC] = useState('');
+  
+    const handleRespuestaChangeCRV = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaCRVC(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoCRVC(true);
+      } else {
+        setInputBloqueadoCRVC(false);
+      }
+    };
+
+
+    const [respuestaTab, setrespuestaTab] = useState('');
+    const [inputBloqueadoTab, setInputBloqueadoTab] = useState('');
+  
+    const handleRespuestaChangeTab = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaTab(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoTab(true);
+      } else {
+        setInputBloqueadoTab(false);
+      }
+    };
+
+    const [respuestaAF, setrespuestaAF] = useState('');
+    const [inputBloqueadoAF, setInputBloqueadoAF] = useState('');
+  
+    const handleRespuestaChangeAF = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaAF(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoAF(true);
+      } else {
+        setInputBloqueadoAF(false);
+      }
+    };
+    const [respuestabH, setrespuestabH] = useState('');
+    const [inputBloqueadobH, setInputBloqueadobH] = useState('');
+  
+    const handleRespuestaChangebH = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestabH(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadobH(true);
+      } else {
+        setInputBloqueadobH(false);
+      }
+    };
+
+    const [respuestaQs, setrespuestaQs] = useState('');
+    const [inputBloqueadoQs, setInputBloqueadoQs] = useState('');
+  
+    const handleRespuestaChangeQs = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaQs(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoQs(true);
+      } else {
+        setInputBloqueadoQs(false);
+      }
+    };
+
+    const [respuestaEcg, setrespuestaEcg] = useState('');
+    const [inputBloqueadoEcg, setInputBloqueadoEcg] = useState('');
+  
+    const handleRespuestaChangeEcg = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaEcg(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoEcg(true);
+      } else {
+        setInputBloqueadoEcg(false);
+      }
+    };
+
+    const [respuestaEco, setrespuestaEco] = useState('');
+    const [inputBloqueadoEco, setInputBloqueadoEco] = useState('');
+  
+    const handleRespuestaChangeEco = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaEco(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoEco(true);
+      } else {
+        setInputBloqueadoEco(false);
+      }
+    };
+    const [respuestaMn, setrespuestaMn] = useState('');
+    const [inputBloqueadoMn, setInputBloqueadoMn] = useState('');
+  
+    const handleRespuestaChangeMn = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaMn(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoMn(true);
+      } else {
+        setInputBloqueadoMn(false);
+      }
+    };
+
+    const [respuestaVR, setrespuestaVR] = useState('');
+    const [inputBloqueadoVR, setInputBloqueadoVR] = useState('');
+  
+    const handleRespuestaChangeVR = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaVR(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoVR(true);
+      } else {
+        setInputBloqueadoVR(false);
+      }
+    };
+
+    const [respuestaHo, setrespuestaHo] = useState('');
+    const [inputBloqueadoHo, setInputBloqueadoHo] = useState('');
+  
+    const handleRespuestaChangeHo = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaHo(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoHo(true);
+      } else {
+        setInputBloqueadoHo(false);
+      }
+    };
+
+    const [respuestaCa, setrespuestaCa] = useState('');
+    const [inputBloqueadoCa, setInputBloqueadoCa] = useState('');
+  
+    const handleRespuestaChangeCa = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaCa(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoCa(true);
+      } else {
+        setInputBloqueadoCa(false);
+      }
+    };
+
   
     const fetcher = () => clienteAxios('/api/pacientes',
     {
@@ -422,7 +715,7 @@ export default function FormClinico() {
                     
                     setTimeout(function () {
                         window.location.href = '/expedientes';
-                    }, 3000);
+                    }, 2000);
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -430,7 +723,6 @@ export default function FormClinico() {
                         showConfirmButton: false,
                         timer: 1500
                       });
-                     // 3000 milisegundos = 3 segundos
                 })
         } catch (error) {
             Swal.fire({
@@ -451,7 +743,7 @@ export default function FormClinico() {
                   >
                       Selecciona el paciente:
                   </label>
-                  <select className='mt-2 w-full p-3' id="paciente" value={paciente} onChange={handleInputChange} required>
+                  <select className='mt-2 w-full p-3' id="paciente" value={paciente} onChange={handleInputChange} >
                   <option value="">Seleccione una opción</option>
                   {pacientes.map((paciente) => (
                       <option key={paciente.id} value={paciente.id} >{paciente.nombre} {paciente.apellidoPat}</option>
@@ -474,7 +766,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fecha"
                                     ref={fechaRef}
-                                    required
+                                    
                                     
                                 />
                             </div>
@@ -491,7 +783,6 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fecha_1vez"
                                     ref={fecha1vezRef}
-                                    required
                                     
                                 />
                             </div>
@@ -508,7 +799,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="hora"
                                     ref={horaRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -518,7 +809,19 @@ export default function FormClinico() {
                                 >
                                     IM Complicado:
                                 </label>
-                                <select id="im_complicado" name="im_complicado" className='mt-2 w-full p-3' ref={imComplicadoRef} required>
+                                <select id="im_complicado" name="im_complicado" className='mt-2 w-full p-3' ref={imComplicadoRef} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="im_anterior_op"
+                                    className="text-slate-800"
+                                >
+                                    IM Anterior:
+                                </label>
+                                <select id="im_anterior_op" name="im_anterior_op" className='mt-2 w-full p-3' onChange={handleRespuestaChange} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -536,9 +839,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="im_anterior"
                                     ref={imAnteriorRef}
-                                    
+                                    disabled={inputBloqueado}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="im_septal_op"
+                                    className="text-slate-800"
+                                >
+                                    IM Septal:
+                                </label>
+                                <select id="im_septal_op" name="im_septal_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeIm} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
                             <div className="mb-4">
                                 <label
                                     htmlFor="im_septal"
@@ -552,9 +868,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="im_septal"
                                     ref={imSeptalRef}
-                                    
+                                    disabled={inputBloqueadoIm}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="im_apical_op"
+                                    className="text-slate-800"
+                                >
+                                    IM Apical:
+                                </label>
+                                <select id="im_apical_op" name="im_apical_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeImAp} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
                             <div className="mb-4">
                                 <label
                                     htmlFor="im_apical"
@@ -568,8 +897,20 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="im_apical"
                                     ref={imApicalRef}
-                                    
+                                    disabled={inputBloqueadoImAp}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="im_lateral_op"
+                                    className="text-slate-800"
+                                >
+                                    IM Lateral:
+                                </label>
+                                <select id="im_lateral_op" name="im_lateral_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeImLat} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -584,8 +925,20 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="im_lateral"
                                     ref={imLateralRef}
-                                    
+                                    disabled={inputBloqueadoImLat}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="im_inferior_op"
+                                    className="text-slate-800"
+                                >
+                                    IM Inferior:
+                                </label>
+                                <select id="im_inferior_op" name="im_inferior_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeImIn} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -600,8 +953,20 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="im_inferior"
                                     ref={imInferiorRef}
-                                    
+                                    disabled={inputBloqueadoImIn}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="im_delvd_op"
+                                    className="text-slate-800"
+                                >
+                                    IM del VD:
+                                </label>
+                                <select id="im_delvd_op" name="im_delvd_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeImdV} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -616,8 +981,20 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="im_delvd"
                                     ref={imdelVdRef}
-                                    
+                                    disabled={inputBloqueadoImdV}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="angina_inestbale_op"
+                                    className="text-slate-800"
+                                >
+                                    Angina Inestable:
+                                </label>
+                                <select id="angina_inestbale_op" name="angina_inestbale_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeImAI} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -632,7 +1009,20 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="angina_inestbale"
                                     ref={anginaInestableRef}
+                                    disabled={inputBloqueadoImAI}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="angina_estable_op"
+                                    className="text-slate-800"
+                                >
+                                    Angina Estable:
+                                </label>
+                                <select id="angina_estable_op" name="angina_estable_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeImAE} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -647,7 +1037,20 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="angina_estable"
                                     ref={anginaEstableRef}
+                                    disabled={inputBloqueadoImAE}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="choque_card_op"
+                                    className="text-slate-800"
+                                >
+                                    Choque Card:
+                                </label>
+                                <select id="choque_card_op" name="choque_card_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeCC} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -662,8 +1065,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="choque_card"
                                     ref={choqueCardRef}
+                                    disabled={inputBloqueadoCC}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="m_subita_op"
+                                    className="text-slate-800"
+                                >
+                                    M. Súbita:
+                                </label>
+                                <select id="m_subita_op" name="m_subita_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeMS}  >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
                             <div className="mb-4">
                                 <label
                                     htmlFor="m_subita"
@@ -677,6 +1094,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="m_subita"
                                     ref={mSubitaRef}
+                                    disabled={inputBloqueadoMS}
                                 />
                             </div>
                             <div className="mb-4">
@@ -686,9 +1104,11 @@ export default function FormClinico() {
                                 >
                                     Clase F CCS:
                                 </label>
-                                <select id="clase_ccs" name="clase_ccs" className='mt-2 w-full p-3' ref={claseCcsRef} required onChange={handleRespuestaChange}>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="clase_ccs" name="clase_ccs" className='mt-2 w-full p-3' ref={claseCcsRef}  >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -698,7 +1118,7 @@ export default function FormClinico() {
                                 >
                                     Falla Cardiaca:
                                 </label>
-                                <select id="falla_cardiaca" name="falla_cardiaca" className='mt-2 w-full p-3' ref={fallaCardiacaRef} required onChange={handleRespuestaChange}>
+                                <select id="falla_cardiaca" name="falla_cardiaca" className='mt-2 w-full p-3' ref={fallaCardiacaRef}  >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -710,7 +1130,7 @@ export default function FormClinico() {
                                 >
                                     Sobreviviente CPR:
                                 </label>
-                                <select id="sobreviviente_cpr" name="sobreviviente_cpr" className='mt-2 w-full p-3' ref={sobrevivienteCprRef} required>
+                                <select id="sobreviviente_cpr" name="sobreviviente_cpr" className='mt-2 w-full p-3' ref={sobrevivienteCprRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -722,7 +1142,7 @@ export default function FormClinico() {
                                 >
                                     Incapacidad Entrenar:
                                 </label>
-                                <select id="incapacidad_entrenar" name="incapacidad_entrenar" className='mt-2 w-full p-3' ref={incapacidadEntrenarRef} required >
+                                <select id="incapacidad_entrenar" name="incapacidad_entrenar" className='mt-2 w-full p-3' ref={incapacidadEntrenarRef}  >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -734,7 +1154,21 @@ export default function FormClinico() {
                                 >
                                     CF NYHA:
                                 </label>
-                                <select id="cf_nyha" name="cf_nyha" className='mt-2 w-full p-3' ref={cfNyhaRef} required>
+                                <select id="cf_nyha" name="cf_nyha" className='mt-2 w-full p-3' ref={cfNyhaRef} >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="crvc_op"
+                                    className="text-slate-800"
+                                >
+                                    CRVC:
+                                </label>
+                                <select id="crvc_op" name="crvc_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeCRV} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -752,6 +1186,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="crvc"
                                     ref={crvcRef}
+                                    disabled={inputBloqueadoCRVC}
                                 />
                             </div>
                             <div className="mb-4">
@@ -767,6 +1202,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="crvc_hemo"
                                     ref={crvcHemoRef}
+                                    disabled={inputBloqueadoCRVC}
                                 />
                             </div>
                             <div className="mb-4">
@@ -776,7 +1212,7 @@ export default function FormClinico() {
                                 >
                                     Insuficiencia Arterial Periférica:
                                 </label>
-                                <select id="insu_art_per" name="insu_art_per" className='mt-2 w-full p-3' ref={insuArtPerRef} required>
+                                <select id="insu_art_per" name="insu_art_per" className='mt-2 w-full p-3' ref={insuArtPerRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -788,7 +1224,7 @@ export default function FormClinico() {
                                 >
                                     V. Mitral:
                                 </label>
-                                <select id="v_mitral" name="v_mitral" className='mt-2 w-full p-3' ref={vMitralRef} required>
+                                <select id="v_mitral" name="v_mitral" className='mt-2 w-full p-3' ref={vMitralRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -800,7 +1236,7 @@ export default function FormClinico() {
                                 >
                                     V. Aórtica:
                                 </label>
-                                <select id="v_aortica" name="v_aortica" className='mt-2 w-full p-3' ref={vAorticaRef} required>
+                                <select id="v_aortica" name="v_aortica" className='mt-2 w-full p-3' ref={vAorticaRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -812,7 +1248,7 @@ export default function FormClinico() {
                                 >
                                     V. Tricúspide:
                                 </label>
-                                <select id="v_tricuspide" name="v_tricuspide" className='mt-2 w-full p-3' ref={vTricuspideRef} required>
+                                <select id="v_tricuspide" name="v_tricuspide" className='mt-2 w-full p-3' ref={vTricuspideRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -824,7 +1260,7 @@ export default function FormClinico() {
                                 >
                                     V. Pulmonar:
                                 </label>
-                                <select id="v_pulmonar" name="v_pulmonar" className='mt-2 w-full p-3' ref={vPulmonarRef} required >
+                                <select id="v_pulmonar" name="v_pulmonar" className='mt-2 w-full p-3' ref={vPulmonarRef}  >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -836,7 +1272,7 @@ export default function FormClinico() {
                                 >
                                     Congenitos:
                                 </label>
-                                <select id="congenitos" name="congenitos" className='mt-2 w-full p-3' ref={congenitosRef} required>
+                                <select id="congenitos" name="congenitos" className='mt-2 w-full p-3' ref={congenitosRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -893,7 +1329,7 @@ export default function FormClinico() {
                                 >
                                     Tabaquismo:
                                 </label>
-                                <select id="tabaquismo" name="tabaquismo" className='mt-2 w-full p-3' ref={tabaquismoRef} required onChange={handleRespuestaChange}>
+                                <select id="tabaquismo" name="tabaquismo" className='mt-2 w-full p-3' ref={tabaquismoRef}  onChange={handleRespuestaChangeTab} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -911,6 +1347,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="cig_x_dia"
                                     ref={cigxDiaRef}
+                                    disabled={inputBloqueadoTab}
                                 />
                             </div>
                             <div className="mb-4">
@@ -926,6 +1363,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="cig_x_year"
                                     ref={cigxYearRef}
+                                    disabled={inputBloqueadoTab}
                                 />
                             </div>
                             <div className="mb-4">
@@ -935,9 +1373,9 @@ export default function FormClinico() {
                                 >
                                     Abandonó Cigarro:
                                 </label>
-                                <select id="abadono_cigarro" name="abadono_cigarro" className='mt-2 w-full p-3' ref={abadonoCigarroRef} required onChange={handleRespuestaChange}>
-                                    <option value="true">Si</option>
+                                <select id="abadono_cigarro" name="abadono_cigarro" className='mt-2 w-full p-3' ref={abadonoCigarroRef}  disabled={inputBloqueadoTab} >
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -953,6 +1391,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="abandono_year"
                                     ref={abandonoYearRef}
+                                    disabled={inputBloqueadoTab}
                                 />
                             </div>
                             <div className="mb-4">
@@ -992,7 +1431,7 @@ export default function FormClinico() {
                                 >
                                     Actividad Física:
                                 </label>
-                                <select id="actividad_fis" name="actividad_fis" className='mt-2 w-full p-3' ref={actividadFisRef} required>
+                                <select id="actividad_fis" name="actividad_fis" className='mt-2 w-full p-3' ref={actividadFisRef}  onChange={handleRespuestaChangeAF}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -1010,6 +1449,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="tipo_actividad"
                                     ref={tipoActividadRef}
+                                    disabled={inputBloqueadoAF}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1025,6 +1465,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="actividad_hsm"
                                     ref={actividadHsmRef}
+                                    disabled={inputBloqueadoAF}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1040,6 +1481,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="actividad_years"
                                     ref={actividadYearsRef}
+                                    disabled={inputBloqueadoAF}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1055,6 +1497,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="actividad_years_abandono"
                                     ref={actividadYearsAbandonoRef}
+                                    disabled={inputBloqueadoAF}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1389,6 +1832,18 @@ export default function FormClinico() {
                             </div>
                             <div className="mb-4">
                                 <label
+                                    htmlFor="bh_op"
+                                    className="text-slate-800"
+                                >
+                                    BH:
+                                </label>
+                                <select id="bh_op" name="bh_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangebH} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
                                     htmlFor="bh"
                                     className="text-slate-800"
                                 >
@@ -1400,6 +1855,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="bh"
                                     ref={bhRef}
+                                    disabled={inputBloqueadobH}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1415,6 +1871,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="hb"
                                     ref={hbRef}
+                                    disabled={inputBloqueadobH}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1430,6 +1887,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="leucos"
                                     ref={leucosRef}
+                                    disabled={inputBloqueadobH}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1445,8 +1903,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="plaquetas"
                                     ref={plaquetasRef}
+                                    disabled={inputBloqueadobH}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="qs_op"
+                                    className="text-slate-800"
+                                >
+                                    QS:
+                                </label>
+                                <select id="qs_op" name="qs_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeQs} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
                             <div className="mb-4">
                                 <label
                                     htmlFor="qs"
@@ -1460,6 +1932,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="qs"
                                     ref={qsRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1475,6 +1948,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="glucosa"
                                     ref={glucosaRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1490,6 +1964,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="creatinina"
                                     ref={creatininaRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1505,6 +1980,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ac_urico"
                                     ref={acUricoRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1520,6 +1996,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="colesterol"
                                     ref={colesterolRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1535,6 +2012,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ldl"
                                     ref={ldlRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1550,6 +2028,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="hdl"
                                     ref={hdlRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1565,6 +2044,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="trigliceridos"
                                     ref={trigliceridosRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1580,6 +2060,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="tp"
                                     ref={tpRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1595,6 +2076,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="inr"
                                     ref={inrRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1610,6 +2092,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="tpt"
                                     ref={tptRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1625,6 +2108,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="tppcrast"
                                     ref={pcrasRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1640,8 +2124,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="otro_lab"
                                     ref={otroLabRef}
+                                    disabled={inputBloqueadoQs}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="ecg_op"
+                                    className="text-slate-800"
+                                >
+                                    ECG:
+                                </label>
+                                <select id="ecg_op" name="ecg_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeEcg} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
                             <div className="mb-4">
                                 <label
                                     htmlFor="ecg_fecha"
@@ -1655,6 +2153,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ecg_fecha"
                                     ref={ecgFechaRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1670,6 +2169,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ritmo"
                                     ref={ritmoRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1685,6 +2185,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="r_r_mm"
                                     ref={rrmmRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1700,6 +2201,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="aP"
                                     ref={aPRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1715,6 +2217,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="aQRS"
                                     ref={aQRSRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1730,6 +2233,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="aT"
                                     ref={aTRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1745,6 +2249,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="duracion_qrs"
                                     ref={duracionQrsRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1760,6 +2265,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="duracion_p"
                                     ref={duracionPRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1775,6 +2281,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="qtm"
                                     ref={qtmRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1790,6 +2297,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="pr"
                                     ref={prRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1805,6 +2313,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="bav"
                                     ref={bavRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1814,9 +2323,9 @@ export default function FormClinico() {
                                 >
                                     BRIHH:
                                 </label>
-                                <select id="brihh" name="brihh" className='mt-2 w-full p-3' ref={brihhRef} required>
+                                <select id="brihh" name="brihh" className='mt-2 w-full p-3' ref={brihhRef} disabled={inputBloqueadoEcg} >
+                                <option value="false">No</option>
                                     <option value="true">Si</option>
-                                    <option value="false">No</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1826,9 +2335,9 @@ export default function FormClinico() {
                                 >
                                     BRDHH:
                                 </label>
-                                <select id="brdhh" name="brdhh" className='mt-2 w-full p-3' ref={brdhhRef} required>
-                                    <option value="true">Si</option>
+                                <select id="brdhh" name="brdhh" className='mt-2 w-full p-3' ref={brdhhRef} disabled={inputBloqueadoEcg}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1838,9 +2347,9 @@ export default function FormClinico() {
                                 >
                                     Q AS:
                                 </label>
-                                <select id="q_as" name="q_as" className='mt-2 w-full p-3' ref={qAsRef} required>
-                                    <option value="true">Si</option>
+                                <select id="q_as" name="q_as" className='mt-2 w-full p-3' ref={qAsRef} disabled={inputBloqueadoEcg}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1850,9 +2359,9 @@ export default function FormClinico() {
                                 >
                                     Q inf:
                                 </label>
-                                <select id="q_inf" name="q_inf" className='mt-2 w-full p-3' ref={qInfRef} required>
-                                    <option value="true">Si</option>
+                                <select id="q_inf" name="q_inf" className='mt-2 w-full p-3' ref={qInfRef} disabled={inputBloqueadoEcg}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1862,9 +2371,9 @@ export default function FormClinico() {
                                 >
                                     Q lat:
                                 </label>
-                                <select id="q_lat" name="q_lat" className='mt-2 w-full p-3' ref={qLatRef} required>
-                                    <option value="true">Si</option>
+                                <select id="q_lat" name="q_lat" className='mt-2 w-full p-3' ref={qLatRef} disabled={inputBloqueadoEcg}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1880,8 +2389,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="otros_ecg"
                                     ref={otrosEcgRef}
+                                    disabled={inputBloqueadoEcg}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="eco_op"
+                                    className="text-slate-800"
+                                >
+                                    ECO:
+                                </label>
+                                <select id="eco_op" name="eco_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeEco} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+
                             <div className="mb-4">
                                 <label
                                     htmlFor="eco_fecha"
@@ -1895,6 +2418,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="eco_fecha"
                                     ref={ecoFechaRef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1910,6 +2434,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fe_por"
                                     ref={fePorRef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1925,6 +2450,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="dd_por"
                                     ref={ddPorRef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1940,6 +2466,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ds_por"
                                     ref={dsPorRef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1955,6 +2482,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="trivi_por"
                                     ref={triviPorRef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1970,6 +2498,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="rel_e_a"
                                     ref={relEARef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
                             <div className="mb-4">
@@ -1985,8 +2514,22 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="otros_eco"
                                     ref={otrosEcoRef}
+                                    disabled={inputBloqueadoEco}
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="mn_op"
+                                    className="text-slate-800"
+                                >
+                                    MN:
+                                </label>
+                                <select id="mn_op" name="mn_op" className='mt-2 w-full p-3' onChange={handleRespuestaChangeMn} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                            
                             <div className="mb-4">
                                 <label
                                     htmlFor="mn_fecha"
@@ -2000,6 +2543,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="mn_fecha"
                                     ref={mnFechaRef}
+                                    disabled={inputBloqueadoMn}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2015,6 +2559,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fe_por_mn"
                                     ref={feporMnRef}
+                                    disabled={inputBloqueadoMn}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2024,9 +2569,9 @@ export default function FormClinico() {
                                 >
                                     Ant (IM):
                                 </label>
-                                <select id="ant_im" name="ant_im" className='mt-2 w-full p-3' ref={antImRef} required>
-                                    <option value="true">Si</option>
+                                <select id="ant_im" name="ant_im" className='mt-2 w-full p-3' ref={antImRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2036,9 +2581,9 @@ export default function FormClinico() {
                                 >
                                     Ant (isq):
                                 </label>
-                                <select id="ant_isq" name="ant_isq" className='mt-2 w-full p-3' ref={antIsqRef} required>
-                                    <option value="true">Si</option>
+                                <select id="ant_isq" name="ant_isq" className='mt-2 w-full p-3' ref={antIsqRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2048,9 +2593,9 @@ export default function FormClinico() {
                                 >
                                     Ant (RR):
                                 </label>
-                                <select id="ant_rr" name="ant_rr" className='mt-2 w-full p-3' ref={antRrRef} required>
-                                    <option value="true">Si</option>
+                                <select id="ant_rr" name="ant_rr" className='mt-2 w-full p-3' ref={antRrRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2060,9 +2605,9 @@ export default function FormClinico() {
                                 >
                                     Sept (IM):
                                 </label>
-                                <select id="sept_im" name="sept_im" className='mt-2 w-full p-3' ref={septIMRef} required>
-                                    <option value="true">Si</option>
+                                <select id="sept_im" name="sept_im" className='mt-2 w-full p-3' ref={septIMRef} disabled={inputBloqueadoMn}>                             
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2072,9 +2617,9 @@ export default function FormClinico() {
                                 >
                                     Sept (isq):
                                 </label>
-                                <select id="sept_isq" name="sept_isq" className='mt-2 w-full p-3' ref={septIsqRef} required>
-                                    <option value="true">Si</option>
+                                <select id="sept_isq" name="sept_isq" className='mt-2 w-full p-3' ref={septIsqRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2084,9 +2629,9 @@ export default function FormClinico() {
                                 >
                                     Sept (RR):
                                 </label>
-                                <select id="sept_rr" name="sept_rr" className='mt-2 w-full p-3' ref={septRrRef} required>
-                                    <option value="true">Si</option>
+                                <select id="sept_rr" name="sept_rr" className='mt-2 w-full p-3' ref={septRrRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2096,9 +2641,9 @@ export default function FormClinico() {
                                 >
                                     Lat (IM):
                                 </label>
-                                <select id="lat_im" name="lat_im" className='mt-2 w-full p-3' ref={latImRef} required>
-                                    <option value="true">Si</option>
+                                <select id="lat_im" name="lat_im" className='mt-2 w-full p-3' ref={latImRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2108,9 +2653,9 @@ export default function FormClinico() {
                                 >
                                     Lat (isq):
                                 </label>
-                                <select id="lat_isq" name="lat_isq" className='mt-2 w-full p-3' ref={latIsqRef} required>
-                                    <option value="true">Si</option>
+                                <select id="lat_isq" name="lat_isq" className='mt-2 w-full p-3' ref={latIsqRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2120,9 +2665,9 @@ export default function FormClinico() {
                                 >
                                     Lat (RR):
                                 </label>
-                                <select id="lat_rr" name="lat_rr" className='mt-2 w-full p-3' ref={latRrRef} required>
-                                    <option value="true">Si</option>
+                                <select id="lat_rr" name="lat_rr" className='mt-2 w-full p-3' ref={latRrRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2132,9 +2677,9 @@ export default function FormClinico() {
                                 >
                                     Inf (IM):
                                 </label>
-                                <select id="inf_im" name="inf_im" className='mt-2 w-full p-3' ref={infIMRef} required>
-                                    <option value="true">Si</option>
+                                <select id="inf_im" name="inf_im" className='mt-2 w-full p-3' ref={infIMRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2144,9 +2689,9 @@ export default function FormClinico() {
                                 >
                                     Inf (isq):
                                 </label>
-                                <select id="inf_isq" name="inf_isq" className='mt-2 w-full p-3' ref={infIsqRef} required>
-                                    <option value="true">Si</option>
+                                <select id="inf_isq" name="inf_isq" className='mt-2 w-full p-3' ref={infIsqRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -2156,19 +2701,20 @@ export default function FormClinico() {
                                 >
                                     Inf (RR):
                                 </label>
-                                <select id="inf_rr" name="inf_rr" className='mt-2 w-full p-3' ref={infRrRef} required>
-                                    <option value="true">Si</option>
+                                <select id="inf_rr" name="inf_rr" className='mt-2 w-full p-3' ref={infRrRef} disabled={inputBloqueadoMn}>
                                     <option value="false">No</option>
+                                    <option value="true">Si</option>
                                 </select>
                             </div>
+
                             <div className="mb-4">
                                 <label
-                                    htmlFor="vrie"
+                                    htmlFor="vrie_op"
                                     className="text-slate-800"
                                 >
                                     VRIE:
                                 </label>
-                                <select id="vrie" name="vrie" className='mt-2 w-full p-3' ref={vrieRef} required>
+                                <select id="vrie_op" name="vrie_op" className='mt-2 w-full p-3' ref={vrieRef} onChange={handleRespuestaChangeVR}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2186,6 +2732,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vrie_fcha"
                                     ref={vrieFechaRef}
+                                    disabled={inputBloqueadoVR}
                                 />
                                 
                             </div>
@@ -2202,6 +2749,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fevi_basal"
                                     ref={feviBasalRef}
+                                    disabled={inputBloqueadoVR}
                                 />
                                 
                             </div>
@@ -2218,6 +2766,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fevi_10_dobuta"
                                     ref={fevi10DobutaRef}
+                                    disabled={inputBloqueadoVR}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2233,6 +2782,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="reserva_inot_absolut"
                                     ref={reservaInotARef}
+                                    disabled={inputBloqueadoVR}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2248,6 +2798,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="reserva_inot_relat"
                                     ref={reservaInotRRef}
+                                    disabled={inputBloqueadoVR}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2263,6 +2814,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vrie_otros"
                                     ref={vrieOtroRef}
+                                    disabled={inputBloqueadoVR}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2278,16 +2830,17 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="vrie_riesgo"
                                     ref={vrieRiesgoRef}
+                                    disabled={inputBloqueadoVR}
                                 />
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="holter"
+                                    htmlFor="holter_op"
                                     className="text-slate-800"
                                 >
                                     Holter:
                                 </label>
-                                <select id="holter" name="holter" className='mt-2 w-full p-3' ref={holterRef} required>
+                                <select id="holter_op" name="holter_op" className='mt-2 w-full p-3' ref={holterRef} onChange={handleRespuestaChangeHo}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2305,6 +2858,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="holter_fecha"
                                     ref={holterFechaRef}
+                                    disabled={inputBloqueadoHo}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2320,6 +2874,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="holter_dignostico"
                                     ref={holterDiagnosticoRef}
+                                    disabled={inputBloqueadoHo}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2335,6 +2890,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="holter_riesgo"
                                     ref={holterRiesgoRef}
+                                    disabled={inputBloqueadoHo}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2344,7 +2900,7 @@ export default function FormClinico() {
                                 >
                                     Cateterismo:
                                 </label>
-                                <select id="cateterismo" name="cateterismo" className='mt-2 w-full p-3' ref={cateterismoRef} required>
+                                <select id="cateterismo" name="cateterismo" className='mt-2 w-full p-3' ref={cateterismoRef} onChange={handleRespuestaChangeCa}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2362,6 +2918,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_fecha"
                                     ref={catetFechaRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2377,6 +2934,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_fe"
                                     ref={catetFeRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2392,6 +2950,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_d2vi"
                                     ref={catetD2viRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2407,6 +2966,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_tco"
                                     ref={catetTcoRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2422,6 +2982,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_da_prox"
                                     ref={catetDaRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2437,6 +2998,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_da_med"
                                     ref={catetDaMedRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2452,6 +3014,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_da_dist"
                                     ref={catetDaDistRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2467,6 +3030,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_1a_d"
                                     ref={catet1aDRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2482,6 +3046,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_2a_d"
                                     ref={catet2aDRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2497,6 +3062,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_cx_prox"
                                     ref={catetCxPRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2512,6 +3078,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_cx_dist"
                                     ref={catetCxDRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2527,6 +3094,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_om"
                                     ref={catetOmRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2542,6 +3110,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_pl"
                                     ref={catetPlRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2557,6 +3126,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_cd_aprox"
                                     ref={catetCdproxRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2572,6 +3142,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_cd_med"
                                     ref={catetCdMedRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2587,6 +3158,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_cd_dist"
                                     ref={catetCdDistRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2602,6 +3174,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_r_vent_izq"
                                     ref={catetRVIzqRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2617,6 +3190,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_dp"
                                     ref={catetDpRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2632,6 +3206,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_otros"
                                     ref={catetOtroRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2647,6 +3222,7 @@ export default function FormClinico() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="catet_movilidad"
                                     ref={catetMovilidadRef}
+                                    disabled={inputBloqueadoCa}
                                 />
                             </div>
                             <div className="mb-4">
@@ -2656,7 +3232,7 @@ export default function FormClinico() {
                                 >
                                     Riesgo:
                                 </label>
-                                <select id="catet_riesgo" name="catet_riesgo" className='mt-2 w-full p-3' ref={catetRiesgoRef} required>
+                                <select id="catet_riesgo" name="catet_riesgo" className='mt-2 w-full p-3' ref={catetRiesgoRef}  disabled={inputBloqueadoCa}>
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -2669,7 +3245,7 @@ export default function FormClinico() {
                                 >
                                     Terminó:
                                 </label>
-                                <select id="termino" name="termino" className='mt-2 w-full p-3' ref={terminoRef} required>
+                                <select id="termino" name="termino" className='mt-2 w-full p-3' ref={terminoRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2696,7 +3272,7 @@ export default function FormClinico() {
                                 >
                                     Aprendió Borg:
                                 </label>
-                                <select id="aprendio_borg" name="aprendio_borg" className='mt-2 w-full p-3' ref={aprendioBorgRef} required>
+                                <select id="aprendio_borg" name="aprendio_borg" className='mt-2 w-full p-3' ref={aprendioBorgRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2708,7 +3284,7 @@ export default function FormClinico() {
                                 >
                                     Muerte:
                                 </label>
-                                <select id="muerte" name="muerte" className='mt-2 w-full p-3' ref={muerteRef} required>
+                                <select id="muerte" name="muerte" className='mt-2 w-full p-3' ref={muerteRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2720,7 +3296,7 @@ export default function FormClinico() {
                                 >
                                     Inestabilidad cardiovascular:
                                 </label>
-                                <select id="inestabilidad_cardio" name="inestabilidad_cardio" className='mt-2 w-full p-3' ref={inestabilidadCardioRef} required>
+                                <select id="inestabilidad_cardio" name="inestabilidad_cardio" className='mt-2 w-full p-3' ref={inestabilidadCardioRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2732,7 +3308,7 @@ export default function FormClinico() {
                                 >
                                     Hospitalización:
                                 </label>
-                                <select id="hospitalizacion" name="hospitalizacion" className='mt-2 w-full p-3' ref={hospitalizacionRef} required>
+                                <select id="hospitalizacion" name="hospitalizacion" className='mt-2 w-full p-3' ref={hospitalizacionRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2744,7 +3320,7 @@ export default function FormClinico() {
                                 >
                                     Suspendió por "muto propio":
                                 </label>
-                                <select id="susp_motu_propio" name="susp_motu_propio" className='mt-2 w-full p-3' ref={suspMotuPropioRef} required>
+                                <select id="susp_motu_propio" name="susp_motu_propio" className='mt-2 w-full p-3' ref={suspMotuPropioRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2756,7 +3332,7 @@ export default function FormClinico() {
                                 >
                                     Lesión Osteomuscular:
                                 </label>
-                                <select id="lesion_osteo" name="lesion_osteo" className='mt-2 w-full p-3' ref={lesionOsteoRef} required>
+                                <select id="lesion_osteo" name="lesion_osteo" className='mt-2 w-full p-3' ref={lesionOsteoRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2768,7 +3344,7 @@ export default function FormClinico() {
                                 >
                                     Otros:
                                 </label>
-                                <select id="res_otros" name="res_otros" className='mt-2 w-full p-3' ref={resOtrosRef} required>
+                                <select id="res_otros" name="res_otros" className='mt-2 w-full p-3' ref={resOtrosRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2810,7 +3386,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede comer, bañarse, vestirse o ir al baño?
                                 </label>
-                                <select id="comer_vestirse" name="comer_vestirse" className='mt-2 w-full p-3' ref={comerVestirseRef} required>
+                                <select id="comer_vestirse" name="comer_vestirse" className='mt-2 w-full p-3' ref={comerVestirseRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2822,7 +3398,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede caminar dentro de casa?
                                 </label>
-                                <select id="caminar_casa" name="caminar_casa" className='mt-2 w-full p-3' ref={caminarCasaRef} required>
+                                <select id="caminar_casa" name="caminar_casa" className='mt-2 w-full p-3' ref={caminarCasaRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2834,7 +3410,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede caminar 2 cuadras en plano?
                                 </label>
-                                <select id="caminar_2_cuadras" name="caminar_2_cuadras" className='mt-2 w-full p-3' ref={caminar2CuadrasRef} required>
+                                <select id="caminar_2_cuadras" name="caminar_2_cuadras" className='mt-2 w-full p-3' ref={caminar2CuadrasRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2846,7 +3422,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede subir un piso de escaleras?
                                 </label>
-                                <select id="subir_piso" name="subir_piso" className='mt-2 w-full p-3' ref={subirPisoRef} required>
+                                <select id="subir_piso" name="subir_piso" className='mt-2 w-full p-3' ref={subirPisoRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2858,7 +3434,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede correr una distancia corta?
                                 </label>
-                                <select id="correr_corta" name="correr_corta" className='mt-2 w-full p-3' ref={correrCortaRef} required>
+                                <select id="correr_corta" name="correr_corta" className='mt-2 w-full p-3' ref={correrCortaRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2870,7 +3446,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede lavar los trastes ó sacudir el polvo?
                                 </label>
-                                <select id="lavar_trastes" name="lavar_trastes" className='mt-2 w-full p-3' ref={lavarTrastesRef} required>
+                                <select id="lavar_trastes" name="lavar_trastes" className='mt-2 w-full p-3' ref={lavarTrastesRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2882,7 +3458,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede aspirar la casa ó cargar el mandado?
                                 </label>
-                                <select id="aspirar_casa" name="aspirar_casa" className='mt-2 w-full p-3' ref={aspirarCasaRef} required>
+                                <select id="aspirar_casa" name="aspirar_casa" className='mt-2 w-full p-3' ref={aspirarCasaRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2894,7 +3470,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede trapear los pisos ó cargar cosas pesadas?
                                 </label>
-                                <select id="trapear" name="trapear" className='mt-2 w-full p-3' ref={trapearRef} required>
+                                <select id="trapear" name="trapear" className='mt-2 w-full p-3' ref={trapearRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2906,7 +3482,7 @@ export default function FormClinico() {
                                 >
                                     ¿Puede hacer jardinería (podar el pasto, levantar las hojas secas)?
                                 </label>
-                                <select id="jardineria" name="jardineria" className='mt-2 w-full p-3' ref={jardineriaRef} required>
+                                <select id="jardineria" name="jardineria" className='mt-2 w-full p-3' ref={jardineriaRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2918,7 +3494,7 @@ export default function FormClinico() {
                                 >
                                     ¿Tiene relaciones sexuales?
                                 </label>
-                                <select id="relaciones" name="relaciones" className='mt-2 w-full p-3' ref={relacionesRef} required>
+                                <select id="relaciones" name="relaciones" className='mt-2 w-full p-3' ref={relacionesRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2930,7 +3506,7 @@ export default function FormClinico() {
                                 >
                                     ¿Juega golf, boliche, baila, juega tenis (dobles), futbol, ó beisbol?
                                 </label>
-                                <select id="jugar" name="jugar" className='mt-2 w-full p-3' ref={jugarRef} required>
+                                <select id="jugar" name="jugar" className='mt-2 w-full p-3' ref={jugarRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2942,7 +3518,7 @@ export default function FormClinico() {
                                 >
                                     ¿Juega deportes extenuantes como natación, tenis (singles), futbol, basquetbol?
                                 </label>
-                                <select id="deportes_extenuantes" name="deportes_extenuantes" className='mt-2 w-full p-3' ref={deportesExtenuantesRef} required>
+                                <select id="deportes_extenuantes" name="deportes_extenuantes" className='mt-2 w-full p-3' ref={deportesExtenuantesRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -2992,7 +3568,7 @@ export default function FormClinico() {
                                     ref={exploracionFisicaRef}
                                 />
                             </div>
-                            <div className="mb-4">
+                            <div className="mb-4 col-start-1 lg:col-end-5">
                                 <label
                                     htmlFor="estudios"
                                     className="text-slate-800"
@@ -3007,7 +3583,7 @@ export default function FormClinico() {
                                     ref={estudiosRef}
                                 />
                             </div>
-                            <div className="mb-4">
+                            <div className="mb-4 col-start-1 lg:col-end-5">
                                 <label
                                     htmlFor="diagnostico_general"
                                     className="text-slate-800"
@@ -3022,7 +3598,7 @@ export default function FormClinico() {
                                     ref={diagnosticoGeneralRef}
                                 />
                             </div>
-                            <div className="mb-4">
+                            <div className="mb-4 col-start-1 lg:col-end-5">
                                 <label
                                     htmlFor="plan"
                                     className="text-slate-800"
