@@ -714,7 +714,7 @@ export default function FormClinico() {
                 
                     
                     setTimeout(function () {
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -749,7 +749,7 @@ export default function FormClinico() {
                       <option key={paciente.id} value={paciente.id} >{paciente.nombre} {paciente.apellidoPat}</option>
                   ))}
                   </select>
-              </div>
+            </div>
             <form action="" onSubmit={onSubmit}>
             <h1 className="text-4xl font-bold">Expediente Clínico</h1>
                         <div className='grid lg:grid-cols-4 grid-cols-1 mt-5 px-5 py-10 gap-2'>
@@ -2898,7 +2898,7 @@ export default function FormClinico() {
                                     htmlFor="cateterismo"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo:
+                                    Cateterismo / Angiotac:
                                 </label>
                                 <select id="cateterismo" name="cateterismo" className='mt-2 w-full p-3' ref={cateterismoRef} onChange={handleRespuestaChangeCa}>
                                     <option value="true">Si</option>
@@ -2910,7 +2910,7 @@ export default function FormClinico() {
                                     htmlFor="catet_fecha"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo Fecha:
+                                    Cateterismo / Angiotac Fecha:
                                 </label>
                                 <input
                                     type="date"

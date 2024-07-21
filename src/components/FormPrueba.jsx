@@ -142,6 +142,7 @@ export default function FormPrueba() {
     const poTeoricoRef = useRef();
     const comentariosRef = useRef();
     const fechaRef = useRef();
+    const ectopiaVenRef= useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -169,6 +170,7 @@ export default function FormPrueba() {
             confusor: confusorRef.current.value,
             especificidad: especificidadRef.current.value,
             pruebaIngreso: pruebaIngresoRef.current.value,
+            ectopia : ectopiaVenRef.current.value,
 
             pruebaFin2: pruebaFin2Ref.current.value,
             pruebaFin3: pruebaFin3Ref.current.value,
@@ -257,7 +259,7 @@ export default function FormPrueba() {
                 }).then(function (response) {
                     
                     setTimeout(function () {
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -976,7 +978,7 @@ export default function FormPrueba() {
                                     htmlFor="fc_mayor_85"
                                     className="text-slate-800"
                                 >
-                                    FC >85%:
+                                    FC  &gt;85%:
                                 </label>
                                 <select id="fc_mayor_85" name="fc_mayor_85" className='mt-2 w-full p-3' ref={fcMayor85Ref} required>
                                     <option value="true">Si</option>
@@ -1374,6 +1376,18 @@ export default function FormPrueba() {
                                     ref={riesgoRef}
                                     required
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="ectopiaVen"
+                                    className="text-slate-800"
+                                >
+                                    Ectopia ventricular frecuente:
+                                </label>
+                                <select id="ectopiaVen" name="ectopiaVen" className='mt-2 w-full p-3' ref={ectopiaVenRef} required>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label

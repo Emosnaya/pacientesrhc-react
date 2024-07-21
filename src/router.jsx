@@ -15,6 +15,8 @@ import Imprimiresfuerzo from "./views/Imprimiresfuerzo";
 import EstratiImp from "./views/EstratiImp";
 import ExpClinico from "./views/ExpClinico";
 import ImpClinico from "./views/ImpClinico";
+import EditPaciente from "./views/EditPaciente";
+import Compare from "./views/Compare";
 
 const router = createBrowserRouter([
 
@@ -33,13 +35,13 @@ const router = createBrowserRouter([
 
             },
             {
-                path: '/expedientes',
-                element: <Expedientes/>
+                path: '/paciente/:id',
+                element: <Paciente/>
 
             },
             {
-                path: '/paciente/:id',
-                element: <Paciente/>
+                path: '/paciente/edit/:id',
+                element: <EditPaciente/>
 
             },
             {
@@ -75,6 +77,11 @@ const router = createBrowserRouter([
             {
                 path: '/perfil/:id',
                 element: <Perfil/>
+            }
+            ,
+            {
+                path: '/compare/:id',
+                element: <Compare/>
             }
 
         ]

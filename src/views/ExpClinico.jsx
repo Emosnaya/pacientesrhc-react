@@ -39,7 +39,7 @@ export default function ExpClinico() {
                     // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -2761,7 +2761,7 @@ export default function ExpClinico() {
                                 value="Guardar"
                                 className="bg-green-500 hover:bg-green-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

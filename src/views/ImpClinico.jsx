@@ -39,6 +39,7 @@ export default function ImpClinico() {
     }
     const onSubmit = (e) => {
         e.preventDefault()
+
             try {
                 clienteAxios.get(`/api/clinico/imprimir/${expediente.id}`, { 
                   responseType: 'arraybuffer' ,
@@ -2980,7 +2981,7 @@ export default function ImpClinico() {
                                 value="Imprimir"
                                 className="bg-blue-500 hover:bg-blue-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

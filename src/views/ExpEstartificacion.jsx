@@ -38,7 +38,7 @@ export default function ExpEstartificacion() {
                     // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -1039,6 +1039,23 @@ export default function ExpEstartificacion() {
                             </div>
                             <div className="mb-4">
                                 <label
+                                    htmlFor="sesiones"
+                                    className="text-slate-800"
+                                >
+                                    Sesiones:
+                                </label>
+                                <input
+                                    type="number"
+                                    id="sesiones"
+                                    step="0.01"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="sesiones"
+                                    value={expediente.sesiones} 
+                                    onChange={ev => setExpediente({...expediente,sesiones: ev.target.value})}
+                                />  
+                            </div>
+                            <div className="mb-4">
+                                <label
                                     htmlFor="borg"
                                     className="text-slate-800"
                                 >
@@ -1108,7 +1125,7 @@ export default function ExpEstartificacion() {
                                 value="Guardar"
                                 className="bg-green-500 hover:bg-green-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

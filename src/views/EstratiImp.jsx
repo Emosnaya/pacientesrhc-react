@@ -1191,12 +1191,12 @@ export default function EstratiImp() {
                                     htmlFor="infra135"
                                     className="text-slate-800"
                                 >
-                                    InfraST  2mm:
+                                    InfraST &gt;  2mm:
                                 </label>
                                 <select id="infra135" name="infra135" className='mt-2 w-full p-3' value={expediente.infra_st_mayor2_135} disabled>
                                     <option value="false">No</option>
-                                    <option value="m_135">mayor 135</option>
-                                    <option value="me_135">menor 135</option>
+                                    <option value="m_135">mayor 135 lpm</option>
+                                    <option value="me_135">menor 135 lpm</option>
                                 </select>
                             </div>
 
@@ -1205,12 +1205,12 @@ export default function EstratiImp() {
                                     htmlFor="infra5"
                                     className="text-slate-800"
                                 >
-                                    InfraST  2mm:
+                                    InfraST &gt;  2mm:
                                 </label>
                                 <select id="infra5" name="infra5" className='mt-2 w-full p-3' value={expediente.infra_st_mayor2_5mets} disabled>
                                     <option value="false">No</option>
-                                    <option value="m_5">mayor 5</option>
-                                    <option value="me_5">menor 5</option>
+                                    <option value="m_5">mayor 5 mets</option>
+                                    <option value="me_5">menor 5 mets</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1324,7 +1324,7 @@ export default function EstratiImp() {
                                 value="Imprimir"
                                 className="bg-blue-500 hover:bg-blue-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

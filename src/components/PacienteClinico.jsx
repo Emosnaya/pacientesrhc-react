@@ -3183,7 +3183,7 @@ export default function PacienteClinico() {
                                     htmlFor="cateterismo"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo:
+                                    Cateterismo / Angiotac:
                                 </label>
                                 <select id="cateterismo" name="cateterismo" className='mt-2 w-full p-3' ref={cateterismoRef} onChange={handleRespuestaChangeCa}>
                                     <option value="true">Si</option>
@@ -3195,7 +3195,7 @@ export default function PacienteClinico() {
                                     htmlFor="catet_fecha"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo Fecha:
+                                    Cateterismo / Angiotac Fecha:
                                 </label>
                                 <input
                                     type="date"

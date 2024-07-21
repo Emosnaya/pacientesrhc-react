@@ -46,6 +46,7 @@ export default function FormEstarti() {
 
 
     const numPruebaRef = useRef();
+    const sesionesRef = useRef();
     const rhc_1_fechaREF= useRef();
     const peRef= useRef();
     const estratiRef= useRef();
@@ -199,6 +200,7 @@ export default function FormEstarti() {
             tolerancia_esfuerzo: tolerancia_esfuerzoRef.current.value,
             respuestaPre: respuestaPreRef.current.value,
             indiceTa: indiceTaRef.current.value,
+            sesiones: sesionesRef.current.value,
 
             porcentajeFC: porcentajeFCRef.current.value,
             cronotr: cronotrRef.current.value,
@@ -240,7 +242,7 @@ export default function FormEstarti() {
                 
                     
                     setTimeout(function () {
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 3000);
                     Swal.fire({
                         position: "center",
@@ -1225,7 +1227,7 @@ export default function FormEstarti() {
                                     htmlFor="infra135"
                                     className="text-slate-800"
                                 >
-                                    InfraST > 2mm:
+                                    InfraST  &gt; 2mm:
                                 </label>
                                 <select id="infra135" name="infra135" className='mt-2 w-full p-3' ref={infra135Ref}required >
                                     <option value="false">No</option>
@@ -1239,7 +1241,7 @@ export default function FormEstarti() {
                                     htmlFor="infra5"
                                     className="text-slate-800"
                                 >
-                                    InfraST > 2mm:
+                                    InfraST  &gt; 2mm:
                                 </label>
                                 <select id="infra5" name="infra5" className='mt-2 w-full p-3' ref={infra5Ref} required>
                                     <option value="false">No</option>
@@ -1286,6 +1288,23 @@ export default function FormEstarti() {
                                     <option value="4">4</option>
                                     <option value="6">6</option>
                                 </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="sesiones"
+                                    className="text-slate-800"
+                                >
+                                    Sesiones:
+                                </label>
+                                <input
+                                    type="number"
+                                    id="sesiones"
+                                    step="0.01"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="sesiones"
+                                    ref={sesionesRef}
+                                />
+                                
                             </div>
                             <div className="mb-4">
                                 <label
