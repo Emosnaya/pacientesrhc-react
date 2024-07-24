@@ -264,127 +264,127 @@ export default function Compare() {
                         <td>Fc basal</td>
                           <td className="border-b-2 border-gray-200 py-4">{esfuerzoUno.fcBasal}</td>
                           <td className="border-b-2 border-gray-200">{esfuerzoDos.fcBasal}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.fcBasal*100)/esfuerzoUno.fcBasal)-100)}  ref={fcBasalRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={     parseFloat((((esfuerzoDos.fcBasal*100)/esfuerzoUno.fcBasal)-100).toFixed(2))}  ref={fcBasalRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Doble Producto Basal</td>
                           <td className="border-b-2 border-gray-200 py-4">{esfuerzoUno.dapBasal}</td>
                           <td className="border-b-2 border-gray-200">{esfuerzoDos.dapBasal}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.dapBasal*100)/esfuerzoUno.dapBasal)-100)}  ref={dpBasalRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  parseFloat((((esfuerzoDos.dapBasal*100)/esfuerzoUno.dapBasal)-100).toFixed(2))}  ref={dpBasalRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Fc máxima</td>
                           <td className="border-b-2 border-gray-200 py-4">{esfuerzoUno.fcMax}</td>
                           <td className="border-b-2 border-gray-200">{esfuerzoDos.fcMax}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.fcMax*100)/esfuerzoUno.fcMax)-100)}  ref={fcMaxRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  parseFloat((((esfuerzoDos.fcMax*100)/esfuerzoUno.fcMax)-100).toFixed(2))}  ref={fcMaxRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Doble Producto máximo</td>
                           <td className="border-b-2 border-gray-200 py-4">{esfuerzoUno.dpMax}</td>
                           <td className="border-b-2 border-gray-200">{esfuerzoDos.dpMax}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.dpMax*100)/esfuerzoUno.dpMax)-100)}  ref={dpMaxRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  parseFloat((((esfuerzoDos.dpMax*100)/esfuerzoUno.dpMax)-100).toFixed(2))}  ref={dpMaxRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Fc Borg 12</td>
                           <td className="border-b-2 border-gray-200 py-4">{esfuerzoUno.fcBorg12}</td>
                           <td className="border-b-2 border-gray-200">{esfuerzoDos.fcBorg12}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.fcBorg12*100)/esfuerzoUno.fcBorg12)-100)}  ref={fcBorg12Ref} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={   parseFloat((((esfuerzoDos.fcBorg12*100)/esfuerzoUno.fcBorg12)-100).toFixed(2))}  ref={fcBorg12Ref} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Doble Producto Borg 12</td>
                           <td className="border-b-2 border-gray-200 py-4">{esfuerzoUno.dpBorg12}</td>
                           <td className="border-b-2 border-gray-200">{esfuerzoDos.dpBorg12}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.dpBorg12*100)/esfuerzoUno.dpBorg12)-100)}  ref={dpBorg12Ref} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={   parseFloat((((esfuerzoDos.dpBorg12*100)/esfuerzoUno.dpBorg12)-100).toFixed(2))}  ref={dpBorg12Ref} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Carga máxima (METs)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.mets_max)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.mets_max)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.mets_max*100)/esfuerzoUno.mets_max)-100)} ref={metsMaxRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  parseFloat((((esfuerzoDos.mets_max*100)/esfuerzoUno.mets_max)-100).toFixed(2))} ref={metsMaxRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>% METs alcanzado</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.vo2_alcanzado)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.vo2_alcanzado)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.vo2_alcanzado*100)/esfuerzoUno.vo2_alcanzado)-100)}  ref={vo2AlcanzadoRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={   parseFloat((((esfuerzoDos.vo2_alcanzado*100)/esfuerzoUno.vo2_alcanzado)-100).toFixed(2))}  ref={vo2AlcanzadoRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Tiempo de ejercicio (min)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.tiempoEsfuerzo)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.tiempoEsfuerzo)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={Math.round(((esfuerzoDos.tiempoEsfuerzo*100)/esfuerzoUno.tiempoEsfuerzo)-100)}  ref={tiempoEsfuerzoRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ parseFloat((((esfuerzoDos.tiempoEsfuerzo*100)/esfuerzoUno.tiempoEsfuerzo)-100).toFixed(2))}  ref={tiempoEsfuerzoRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Recuperación de la FC 1'(lpm)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.fcmax_fc1er)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.fcmax_fc1er)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  Math.round(((esfuerzoDos.fcmax_fc1er*100)/esfuerzoUno.fcmax_fc1er)-100)}  ref={fcmaxFerRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={   parseFloat((((esfuerzoDos.fcmax_fc1er*100)/esfuerzoUno.fcmax_fc1er)-100).toFixed(2))}  ref={fcmaxFerRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Umbral Isquémico (METs)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.mets_U_isq)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.mets_U_isq)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ Math.round(((esfuerzoDos.mets_U_isq*100)/esfuerzoUno.mets_U_isq)-100)}  ref={metsUisqRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  parseFloat((((esfuerzoDos.mets_U_isq*100)/esfuerzoUno.mets_U_isq)-100).toFixed(2))}  ref={metsUisqRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Umbral Isquémico (FC)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.fc_U_isq)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.fc_U_isq)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0 && esfuerzoUno.MaxInfra!=null && esfuerzoUno.MaxInfra!= 0 ?Math.round(((esfuerzoDos.fc_U_isq*100)/esfuerzoUno.fc_U_isq)-100):0}  ref={fcUisqRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0 && esfuerzoUno.MaxInfra!=null && esfuerzoUno.MaxInfra!= 0 ? parseFloat((((esfuerzoDos.fc_U_isq*100)/esfuerzoUno.fc_U_isq)-100).toFixed(2)):0}  ref={fcUisqRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Máximo Desnivel ST</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.MaxInfra)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.MaxInfra)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0?Math.round(((esfuerzoDos.MaxInfra*100)/esfuerzoUno.MaxInfra)-100):0}  ref={MaxInfraRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0? parseFloat((((esfuerzoDos.MaxInfra*100)/esfuerzoUno.MaxInfra)-100).toFixed(2)):0}  ref={MaxInfraRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Índice TA en esfuerzo</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.indice_tas)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.indice_tas)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.indice_tas!=null && esfuerzoDos.indice_tas!= 0?Math.round(((esfuerzoDos.indice_tas*100)/esfuerzoUno.indice_tas)-100):0}  ref={indiceTasRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.indice_tas!=null && esfuerzoDos.indice_tas!= 0? parseFloat((((esfuerzoDos.indice_tas*100)/esfuerzoUno.indice_tas)-100).toFixed(2)):0}  ref={indiceTasRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Recuperación de la TAS 1/3</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.recup_tas)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.recup_tas)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.recup_tas!=null && esfuerzoDos.recup_tas!= 0?Math.round(((esfuerzoDos.recup_tas*100)/esfuerzoUno.recup_tas)-100):0}  ref={recuptasRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.recup_tas!=null && esfuerzoDos.recup_tas!= 0? parseFloat((((esfuerzoDos.recup_tas*100)/esfuerzoUno.recup_tas)-100).toFixed(2)):0}  ref={recuptasRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Resp. Cronotrópica (lpm/MET)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.resp_crono)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.resp_crono)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.resp_crono!=null && esfuerzoDos.resp_crono!= 0?Math.round(((esfuerzoDos.resp_crono*100)/esfuerzoUno.resp_crono)-100):0} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.resp_crono!=null && esfuerzoDos.resp_crono!= 0?parseFloat((((esfuerzoDos.resp_crono*100)/esfuerzoUno.resp_crono)-100).toFixed(2)):0} ref={respCronoRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>IEM</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.iem)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.iem)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.iem!=null && esfuerzoDos.iem!= 0?Math.round(((esfuerzoDos.iem*100)/esfuerzoUno.iem)-100):0}  ref={iemRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.iem!=null && esfuerzoDos.iem!= 0?parseFloat((((esfuerzoDos.iem*100)/esfuerzoUno.iem)-100).toFixed(2)):0}  ref={iemRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Poder Cardiaco en ejercicio</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.pce)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.pce)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.pce!=null && esfuerzoDos.pce!= 0?Math.round(((esfuerzoDos.pce*100)/esfuerzoUno.pce)-100):0}  ref={pceRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.pce!=null && esfuerzoDos.pce!= 0?parseFloat((((esfuerzoDos.pce*100)/esfuerzoUno.pce)-100).toFixed(2)):0}  ref={pceRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Puntuación de Duke</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.duke)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.duke)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.duke!=null && esfuerzoDos.duke!= 0?Math.round(((esfuerzoDos.duke*100)/esfuerzoUno.duke)-100):0}  ref={dukeRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.duke!=null && esfuerzoDos.duke!= 0?parseFloat((((esfuerzoDos.duke*100)/esfuerzoUno.duke)-100).toFixed(2)):0}  ref={dukeRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Puntuación de Veteranos</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.veteranos)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.veteranos)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.veteranos!=null && esfuerzoDos.veteranos!= 0?Math.round(esfuerzoDos.veteranos-esfuerzoUno.veteranos):0}  ref={veteranosRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.veteranos!=null && esfuerzoDos.veteranos!= 0?parseFloat((esfuerzoDos.veteranos-esfuerzoUno.veteranos).toFixed(2)):0}  ref={veteranosRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Score de Angor</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.scoreAngina)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.scoreAngina)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  esfuerzoDos.scoreAngina!=null && esfuerzoDos.scoreAngina!= 0?Math.round(esfuerzoDos.scoreAngina-esfuerzoUno.scoreAngina):0}  ref={scoreAnginaRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  esfuerzoDos.scoreAngina!=null && esfuerzoDos.scoreAngina!= 0?parseFloat((esfuerzoDos.scoreAngina-esfuerzoUno.scoreAngina).toFixed(2)):0}  ref={scoreAnginaRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Ectopia Ventricular Frecuente</td>
