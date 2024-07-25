@@ -187,7 +187,7 @@ export default function Compare() {
                 }).then(function (response) {
                 
                     
-                    setTimeout(function () {
+                    /*setTimeout(function () {
                         window.location.href = `/paciente/${id}`;
                     }, 2000);
                     Swal.fire({
@@ -196,7 +196,7 @@ export default function Compare() {
                         title: "Guardado Correctamente",
                         showConfirmButton: false,
                         timer: 1500
-                      }); 
+                      });*/ 
                 })
         } catch (error) {
             Swal.fire({
@@ -372,7 +372,7 @@ export default function Compare() {
                         <td>Puntuación de Duke</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.duke)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.duke)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.duke!=null && esfuerzoDos.duke!= 0?parseFloat((((esfuerzoDos.duke*100)/esfuerzoUno.duke)-100).toFixed(2)):0}  ref={dukeRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={esfuerzoDos.duke!=null && esfuerzoDos.duke!= 0?parseFloat((esfuerzoDos.duke-esfuerzoUno.duke).toFixed(2)):0}  ref={dukeRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Puntuación de Veteranos</td>
