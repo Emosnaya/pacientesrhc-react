@@ -187,7 +187,7 @@ export default function Compare() {
                 }).then(function (response) {
                 
                     
-                    /*setTimeout(function () {
+                    setTimeout(function () {
                         window.location.href = `/paciente/${id}`;
                     }, 2000);
                     Swal.fire({
@@ -196,7 +196,7 @@ export default function Compare() {
                         title: "Guardado Correctamente",
                         showConfirmButton: false,
                         timer: 1500
-                      });*/ 
+                      });
                 })
         } catch (error) {
             Swal.fire({

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import useSWR from "swr";
 import clienteAxios from "../axios-client";
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 
@@ -8,7 +9,7 @@ export default function FormPrueba() {
     const token = localStorage.getItem('AUTH_TOKEN')
   const [pacientes, setPacientes] = useState([])
   const [paciente, setPaciente] = useState({})
-  const [id, setId] = useState({})
+  const { id } = useParams()
 
   const [respuesta, setRespuesta] = useState('');
   const [inputBloqueado, setInputBloqueado] = useState('');
@@ -25,20 +26,6 @@ export default function FormPrueba() {
     }
   };
 
-  const fetcher = () => clienteAxios('/api/pacientes',
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }).then(function (response) {
-    setPacientes(response.data.data)
-  })
-  const {data, error, isLoading} = useSWR('/api/pacientes', fetcher)
-
-  const handleInputChange = (event) => {
-    setId(event.target.value);
-    setPaciente(event.target.value);
-  };
 
 
 
@@ -284,20 +271,6 @@ export default function FormPrueba() {
   return (
     <>
      <div className="">
-              <div className="mb-4">
-                  <label
-                      htmlFor="paciente"
-                      className="text-slate-800 text-xl"
-                  >
-                      Selecciona el paciente:
-                  </label>
-                  <select className='mt-2 w-full p-3' id="paciente" value={paciente} onChange={handleInputChange} >
-                  <option value="">Seleccione una opción</option>
-                  {pacientes.map((paciente) => (
-                      <option key={paciente.id} value={paciente.id} >{paciente.nombre} {paciente.apellidoPat}</option>
-                  ))}
-                  </select>
-              </div>
             <form action="" onSubmit={onSubmit}>
             <h1 className="text-4xl font-bold">Prueba de Esfuerzo</h1>
                         <div className='grid lg:grid-cols-4 grid-cols-1 mt-5 px-5 py-10 gap-2'>

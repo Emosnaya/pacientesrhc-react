@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
+import React, { useEffect } from 'react'
 import useSWR from "swr";
 import clienteAxios from "../axios-client";
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from "sweetalert2";
+import { set } from "date-fns";
 
 
 export default function FormEstarti() {
@@ -9,7 +12,7 @@ export default function FormEstarti() {
     const token = localStorage.getItem('AUTH_TOKEN')
     const [pacientes, setPacientes] = useState([])
     const [paciente, setPaciente] = useState({})
-    const [id, setId] = useState({})
+    const { id } = useParams()
 
     const [respuesta, setRespuesta] = useState('');
   const [inputBloqueado, setInputBloqueado] = useState('');
@@ -25,21 +28,7 @@ export default function FormEstarti() {
       setInputBloqueado(false);
     }
   };
-  
-    const fetcher = () => clienteAxios('/api/pacientes',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then(function (response) {
-      setPacientes(response.data.data)
-    })
-    const {data, error, isLoading} = useSWR('/api/pacientes', fetcher)
-  
-    const handleInputChange = (event) => {
-      setId(event.target.value);
-      setPaciente(event.target.value);
-    };
+
 
 
 
@@ -266,20 +255,6 @@ export default function FormEstarti() {
   return (
     <>
     <div className="">
-            <div className="mb-4">
-                  <label
-                      htmlFor="paciente"
-                      className="text-slate-800 text-xl"
-                  >
-                      Selecciona el paciente:
-                  </label>
-                  <select className='mt-2 w-full p-3' id="paciente" value={paciente} onChange={handleInputChange} required>
-                  <option value="">Seleccione una opción</option>
-                  {pacientes.map((paciente) => (
-                      <option key={paciente.id} value={paciente.id} >{paciente.nombre} {paciente.apellidoPat}</option>
-                  ))}
-                  </select>
-              </div>
             <form action="" onSubmit={onSubmit}>
             <h1 className="text-4xl font-bold">Estratificación</h1>
                         <div className='grid lg:grid-cols-4 grid-cols-1 mt-5 px-5 py-10 gap-2'>
@@ -296,7 +271,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="rhc_1_fecha"
                                     ref={rhc_1_fechaREF}
-                                    required
+                                    
                                     
                                 />
                             </div>
@@ -313,7 +288,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="pe_fecha"
                                     ref={peRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -329,7 +304,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="estratificacion"
                                     ref={estratiRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -339,7 +314,7 @@ export default function FormEstarti() {
                                 >
                                     C. Isquémica:
                                 </label>
-                                <select id="c_isquemia" name="c_isquemia" className='mt-2 w-full p-3' ref={cIsquemiaRef} required onChange={handleRespuestaChange}>
+                                <select id="c_isquemia" name="c_isquemia" className='mt-2 w-full p-3' ref={cIsquemiaRef}  onChange={handleRespuestaChange}>
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -496,7 +471,7 @@ export default function FormEstarti() {
                                 >
                                     Valvular:
                                 </label>
-                                <select id="valvular" name="valvular" className='mt-2 w-full p-3' ref={valvularRef} required>
+                                <select id="valvular" name="valvular" className='mt-2 w-full p-3' ref={valvularRef} >
                                     <option value="ao_l">Ao(I)</option>
                                     <option value="ao_est">Ao(Est)</option>
                                     <option value="mitr_l">Mitr(I)</option>
@@ -515,7 +490,7 @@ export default function FormEstarti() {
                                 >
                                     otro:
                                 </label>
-                                <select id="otro" name="otro" className='mt-2 w-full p-3' ref={otroRef} required>
+                                <select id="otro" name="otro" className='mt-2 w-full p-3' ref={otroRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -527,7 +502,7 @@ export default function FormEstarti() {
                                 >
                                     MCD:
                                 </label>
-                                <select id="mcd" name="mcd" className='mt-2 w-full p-3' ref={mcdRef} required>
+                                <select id="mcd" name="mcd" className='mt-2 w-full p-3' ref={mcdRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -539,7 +514,7 @@ export default function FormEstarti() {
                                 >
                                     ICC:
                                 </label>
-                                <select id="icc" name="icc" className='mt-2 w-full p-3' ref={iccRef} required>
+                                <select id="icc" name="icc" className='mt-2 w-full p-3' ref={iccRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -551,7 +526,7 @@ export default function FormEstarti() {
                                 >
                                     Reanimacion:
                                 </label>
-                                <select id="reanimacion" name="reanimacion" className='mt-2 w-full p-3' ref={reanimacionRef} required>
+                                <select id="reanimacion" name="reanimacion" className='mt-2 w-full p-3' ref={reanimacionRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -563,7 +538,7 @@ export default function FormEstarti() {
                                 >
                                     Falla para entrenar:
                                 </label>
-                                <select id="fallaEntrenar" name="fallaEntrenar" className='mt-2 w-full p-3' ref={fallaEntrenarRef} required>
+                                <select id="fallaEntrenar" name="fallaEntrenar" className='mt-2 w-full p-3' ref={fallaEntrenarRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -575,7 +550,7 @@ export default function FormEstarti() {
                                 >
                                     Tabaquismo:
                                 </label>
-                                <select id="tabaquismo" name="tabaquismo" className='mt-2 w-full p-3' ref={tabaquismoRef} required>
+                                <select id="tabaquismo" name="tabaquismo" className='mt-2 w-full p-3' ref={tabaquismoRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -587,7 +562,7 @@ export default function FormEstarti() {
                                 >
                                     Dislipidemia:
                                 </label>
-                                <select id="dislipidemia" name="dislipidemia" className='mt-2 w-full p-3' ref={dislipidemiaRef} required>
+                                <select id="dislipidemia" name="dislipidemia" className='mt-2 w-full p-3' ref={dislipidemiaRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -599,7 +574,7 @@ export default function FormEstarti() {
                                 >
                                     DM:
                                 </label>
-                                <select id="dm" name="dm" className='mt-2 w-full p-3' ref={dmRef} required>
+                                <select id="dm" name="dm" className='mt-2 w-full p-3' ref={dmRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -611,7 +586,7 @@ export default function FormEstarti() {
                                 >
                                     HAS:
                                 </label>
-                                <select id="has" name="has" className='mt-2 w-full p-3' ref={hasRef} required>
+                                <select id="has" name="has" className='mt-2 w-full p-3' ref={hasRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -623,7 +598,7 @@ export default function FormEstarti() {
                                 >
                                     Obesidad:
                                 </label>
-                                <select id="obesidad" name="obesidad" className='mt-2 w-full p-3' ref={obesidadRef} required>
+                                <select id="obesidad" name="obesidad" className='mt-2 w-full p-3' ref={obesidadRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -635,7 +610,7 @@ export default function FormEstarti() {
                                 >
                                     Estrés:
                                 </label>
-                                <select id="estres" name="estres" className='mt-2 w-full p-3' ref={estresRef} required>
+                                <select id="estres" name="estres" className='mt-2 w-full p-3' ref={estresRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -647,7 +622,7 @@ export default function FormEstarti() {
                                 >
                                     Sedentarismo:
                                 </label>
-                                <select id="sedentarismo" name="sedentarismo" className='mt-2 w-full p-3' ref={sedentarismoRef} required>
+                                <select id="sedentarismo" name="sedentarismo" className='mt-2 w-full p-3' ref={sedentarismoRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -659,7 +634,7 @@ export default function FormEstarti() {
                                 >
                                     Otro Factor:
                                 </label>
-                                <select id="otro_factor" name="otro_factor" className='mt-2 w-full p-3' ref={otroFactorRef} required>
+                                <select id="otro_factor" name="otro_factor" className='mt-2 w-full p-3' ref={otroFactorRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -671,7 +646,7 @@ export default function FormEstarti() {
                                 >
                                     Depresión:
                                 </label>
-                                <select id="depresion" name="depresion" className='mt-2 w-full p-3' ref={depresionRef}  required>
+                                <select id="depresion" name="depresion" className='mt-2 w-full p-3' ref={depresionRef}  >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -683,7 +658,7 @@ export default function FormEstarti() {
                                 >
                                     Ansiedad:
                                 </label>
-                                <select id="ansiedad" name="ansiedad" className='mt-2 w-full p-3' ref={ansiedadRef} required>
+                                <select id="ansiedad" name="ansiedad" className='mt-2 w-full p-3' ref={ansiedadRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -695,7 +670,7 @@ export default function FormEstarti() {
                                 >
                                     Sintomatología:
                                 </label>
-                                <select id="sintomatologia" name="sintomatologia" className='mt-2 w-full p-3' ref={sintomatologiaRef} required>
+                                <select id="sintomatologia" name="sintomatologia" className='mt-2 w-full p-3' ref={sintomatologiaRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -715,7 +690,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="puntuacionAtp"
                                     ref={puntuacionAtpRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -732,7 +707,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="heartScore"
                                     ref={heartScoreRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -749,7 +724,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="colTotal"
                                     ref={colTotalRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -766,7 +741,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="ldl"
                                     ref={ldlRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -783,7 +758,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="hdl"
                                     ref={hdlRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -800,7 +775,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="tg"
                                     ref={tgRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -817,7 +792,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="fevi"
                                     ref={feviRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -834,7 +809,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="pcr"
                                     ref={pcrRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -844,7 +819,7 @@ export default function FormEstarti() {
                                 >
                                     Enf Coronaria:
                                 </label>
-                                <select id="enfCoronaria" name="enfCoronaria" className='mt-2 w-full p-3' ref={enfCoronariaRef} required>
+                                <select id="enfCoronaria" name="enfCoronaria" className='mt-2 w-full p-3' ref={enfCoronariaRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -857,7 +832,7 @@ export default function FormEstarti() {
                                 >
                                     Isquemia MN:
                                 </label>
-                                <select id="isquemia" name="isquemia" className='mt-2 w-full p-3' ref={isquemiaRef} required>
+                                <select id="isquemia" name="isquemia" className='mt-2 w-full p-3' ref={isquemiaRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -870,7 +845,7 @@ export default function FormEstarti() {
                                 >
                                     Isquemia IRM:
                                 </label>
-                                <select id="isquemia_irm" name="isquemia_irm" className='mt-2 w-full p-3' ref={isquemiaIrmRef} required>
+                                <select id="isquemia_irm" name="isquemia_irm" className='mt-2 w-full p-3' ref={isquemiaIrmRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -883,7 +858,7 @@ export default function FormEstarti() {
                                 >
                                     ECO:
                                 </label>
-                                <select id="eco_estres" name="eco_estres" className='mt-2 w-full p-3' ref={ecoRef} required>
+                                <select id="eco_estres" name="eco_estres" className='mt-2 w-full p-3' ref={ecoRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -896,7 +871,7 @@ export default function FormEstarti() {
                                 >
                                     Holter:
                                 </label>
-                                <select id="holter" name="holter" className='mt-2 w-full p-3' ref={holterRef} required>
+                                <select id="holter" name="holter" className='mt-2 w-full p-3' ref={holterRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -909,7 +884,7 @@ export default function FormEstarti() {
                                 >
                                     Capacidad para PE:
                                 </label>
-                                <select id="capacidadPe" name="capacidadPe" className='mt-2 w-full p-3' ref={capacidadPeRef} required>
+                                <select id="capacidadPe" name="capacidadPe" className='mt-2 w-full p-3' ref={capacidadPeRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -928,7 +903,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="fc_basal"
                                     ref={fcBasalRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -945,7 +920,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="fc_max"
                                     ref={fcMaxRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -962,7 +937,7 @@ export default function FormEstarti() {
                                     name="fc_borg_12"
                                     step="0.01"
                                     ref={fcBorg12Ref}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -979,7 +954,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="dp_borg_12"
                                     ref={dpBorg12Ref}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -996,7 +971,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="mets_borg_12"
                                     ref={metsBorg12Ref}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1013,7 +988,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="carga_maxima"
                                     ref={carga_maximaRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1030,7 +1005,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="tolerancia_esfuerzo"
                                     ref={tolerancia_esfuerzoRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1047,7 +1022,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="respuestaPre"
                                     ref={respuestaPreRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1064,7 +1039,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="indiceTa"
                                     ref={indiceTaRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1081,7 +1056,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="porcentajeFC"
                                     ref={porcentajeFCRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1098,7 +1073,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="cronotr"
                                     ref={cronotrRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1115,7 +1090,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="poderCardiaco"
                                     ref={poderCardiacoRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1132,7 +1107,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="recuperacionTas"
                                     ref={recuperacionTasRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1149,7 +1124,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="recuperacionFc"
                                     ref={recuperacionFcRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1166,7 +1141,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="duke"
                                     ref={dukeRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1183,7 +1158,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="veteranos"
                                     ref={veteranosRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4">
@@ -1193,7 +1168,7 @@ export default function FormEstarti() {
                                 >
                                     Ectopia ventricular frecuente:
                                 </label>
-                                <select id="ectopiaVen" name="ectopiaVen" className='mt-2 w-full p-3' ref={ectopiaVenRef} required>
+                                <select id="ectopiaVen" name="ectopiaVen" className='mt-2 w-full p-3' ref={ectopiaVenRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -1205,7 +1180,7 @@ export default function FormEstarti() {
                                 >
                                     Umbral isquémico:
                                 </label>
-                                <select id="umbraIsque" name="umbraIsque" className='mt-2 w-full p-3' ref={umbraIsqueRef} required>
+                                <select id="umbraIsque" name="umbraIsque" className='mt-2 w-full p-3' ref={umbraIsqueRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -1217,7 +1192,7 @@ export default function FormEstarti() {
                                 >
                                     Supradesnivel ST:
                                 </label>
-                                <select id="supradesnivel" name="supradesnivel" className='mt-2 w-full p-3' ref={supradesnivelRef}required >
+                                <select id="supradesnivel" name="supradesnivel" className='mt-2 w-full p-3' ref={supradesnivelRef} >
                                     <option value="true">Si</option>
                                     <option value="false">No</option>
                                 </select>
@@ -1229,7 +1204,7 @@ export default function FormEstarti() {
                                 >
                                     InfraST  &gt; 2mm:
                                 </label>
-                                <select id="infra135" name="infra135" className='mt-2 w-full p-3' ref={infra135Ref}required >
+                                <select id="infra135" name="infra135" className='mt-2 w-full p-3' ref={infra135Ref} >
                                     <option value="false">No</option>
                                     <option value="m_135">mayor 135 lpm</option>
                                     <option value="me_135">menor 135 lpm</option>
@@ -1243,7 +1218,7 @@ export default function FormEstarti() {
                                 >
                                     InfraST  &gt; 2mm:
                                 </label>
-                                <select id="infra5" name="infra5" className='mt-2 w-full p-3' ref={infra5Ref} required>
+                                <select id="infra5" name="infra5" className='mt-2 w-full p-3' ref={infra5Ref} >
                                     <option value="false">No</option>
                                     <option value="m_5">mayor 5 mets</option>
                                     <option value="me_5">menor 5 mets</option>
@@ -1256,7 +1231,7 @@ export default function FormEstarti() {
                                 >
                                     Riesgo global:
                                 </label>
-                                <select id="riesgoGlobal" name="riesgoGlobal" className='mt-2 w-full p-3' ref={riesgoGlobalRef} required>
+                                <select id="riesgoGlobal" name="riesgoGlobal" className='mt-2 w-full p-3' ref={riesgoGlobalRef} >
                                     <option value="bajo">Bajo</option>
                                     <option value="medio">Medio</option>
                                     <option value="alto">Alto</option>
@@ -1269,7 +1244,7 @@ export default function FormEstarti() {
                                 >
                                     Grupo:
                                 </label>
-                                <select id="grupo" name="grupo" className='mt-2 w-full p-3' ref={grupoRef} required>
+                                <select id="grupo" name="grupo" className='mt-2 w-full p-3' ref={grupoRef} >
                                     <option value="a">A</option>
                                     <option value="b">B</option>
                                     <option value="c">C</option>
@@ -1283,7 +1258,7 @@ export default function FormEstarti() {
                                 >
                                     Semanas:
                                 </label>
-                                <select id="semanas" name="semanas" className='mt-2 w-full p-3' ref={semanasRef} required>
+                                <select id="semanas" name="semanas" className='mt-2 w-full p-3' ref={semanasRef} >
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="4">4</option>
@@ -1314,7 +1289,7 @@ export default function FormEstarti() {
                                 >
                                     Borg:
                                 </label>
-                                <select id="borg" name="borg" className='mt-2 w-full p-3' ref={borgRef} required>
+                                <select id="borg" name="borg" className='mt-2 w-full p-3' ref={borgRef} >
                                     <option value="8">8</option>
                                     <option value="10">10</option>
                                     <option value="12">12</option>
@@ -1328,7 +1303,7 @@ export default function FormEstarti() {
                                 >
                                     Fc Diana:
                                 </label>
-                                <select id="fcDiana" name="fcDiana" className='mt-2 w-full p-3' ref={fcDianaRef} required>
+                                <select id="fcDiana" name="fcDiana" className='mt-2 w-full p-3' ref={fcDianaRef} >
                                     <option value="Bo">Bo</option>
                                     <option value="K">K</option>
                                     <option value="BI">BI</option>
@@ -1349,7 +1324,7 @@ export default function FormEstarti() {
                                     className="mt-2 w-full p-3 bg-gray-50 "
                                     name="dpDiana"
                                     ref={dpDianaRef}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="mb-4 col-start-1 lg:col-end-5">
