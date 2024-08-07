@@ -298,14 +298,14 @@ export default function Compare() {
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Carga máxima (METs)</td>
-                          <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.mets_max)}</td>
-                          <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.mets_max)}</td>
+                          <td className="border-b-2 border-gray-200 py-4">{  Math.round(esfuerzoUno.mets_max*100)/100}</td>
+                          <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.mets_max*100)/100}</td>
                           <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={  parseFloat((((esfuerzoDos.mets_max*100)/esfuerzoUno.mets_max)-100).toFixed(2))} ref={metsMaxRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>% METs alcanzado</td>
-                          <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.vo2_alcanzado)}</td>
-                          <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.vo2_alcanzado)}</td>
+                          <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.vo2_alcanzado *100)/100}</td>
+                          <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.vo2_alcanzado*100)/100}</td>
                           <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={   parseFloat((((esfuerzoDos.vo2_alcanzado*100)/esfuerzoUno.vo2_alcanzado)-100).toFixed(2))}  ref={vo2AlcanzadoRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
@@ -330,7 +330,7 @@ export default function Compare() {
                         <td>Umbral Isquémico (FC)</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.fc_U_isq)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.fc_U_isq)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0 && esfuerzoUno.MaxInfra!=null && esfuerzoUno.MaxInfra!= 0 ? parseFloat((((esfuerzoDos.fc_U_isq*100)/esfuerzoUno.fc_U_isq)-100).toFixed(2)):0}  ref={fcUisqRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.fc_U_isq!=null && esfuerzoDos.fc_U_isq!= 0 && esfuerzoUno.fc_U_isq!=null && esfuerzoUno.fc_U_isq!= 0 ? parseFloat((((esfuerzoDos.fc_U_isq*100)/esfuerzoUno.fc_U_isq)-100).toFixed(2)):0}  ref={fcUisqRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Máximo Desnivel ST</td>
