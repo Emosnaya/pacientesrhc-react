@@ -2157,6 +2157,7 @@ export default function PacienteClinico() {
                                     name="hb"
                                     ref={hbRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2173,6 +2174,7 @@ export default function PacienteClinico() {
                                     name="leucos"
                                     ref={leucosRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2189,6 +2191,7 @@ export default function PacienteClinico() {
                                     name="plaquetas"
                                     ref={plaquetasRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2234,6 +2237,7 @@ export default function PacienteClinico() {
                                     name="glucosa"
                                     ref={glucosaRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2250,6 +2254,7 @@ export default function PacienteClinico() {
                                     name="creatinina"
                                     ref={creatininaRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2266,6 +2271,7 @@ export default function PacienteClinico() {
                                     name="ac_urico"
                                     ref={acUricoRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2282,6 +2288,7 @@ export default function PacienteClinico() {
                                     name="colesterol"
                                     ref={colesterolRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2298,6 +2305,7 @@ export default function PacienteClinico() {
                                     name="ldl"
                                     ref={ldlRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2314,6 +2322,7 @@ export default function PacienteClinico() {
                                     name="hdl"
                                     ref={hdlRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2330,6 +2339,7 @@ export default function PacienteClinico() {
                                     name="trigliceridos"
                                     ref={trigliceridosRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2346,6 +2356,7 @@ export default function PacienteClinico() {
                                     name="tp"
                                     ref={tpRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2362,6 +2373,7 @@ export default function PacienteClinico() {
                                     name="inr"
                                     ref={inrRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2378,6 +2390,7 @@ export default function PacienteClinico() {
                                     name="tpt"
                                     ref={tptRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2394,6 +2407,7 @@ export default function PacienteClinico() {
                                     name="tppcrast"
                                     ref={pcrasRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2404,7 +2418,7 @@ export default function PacienteClinico() {
                                     Otro Lab:
                                 </label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="otro_lab"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="otro_lab"
