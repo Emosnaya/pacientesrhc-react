@@ -1591,7 +1591,7 @@ export default function ExpClinico() {
                                     htmlFor="dd_por"
                                     className="text-slate-800"
                                 >
-                                    DD(mm):
+                                    SGL:
                                 </label>
                                 <input
                                     type="number"
@@ -1607,7 +1607,7 @@ export default function ExpClinico() {
                                     htmlFor="ds_por"
                                     className="text-slate-800"
                                 >
-                                    DS(mm):
+                                    PSAP:
                                 </label>
                                 <input
                                     type="number"
@@ -1620,16 +1620,16 @@ export default function ExpClinico() {
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="trivi_por"
+                                    htmlFor="movilidad"
                                     className="text-slate-800"
                                 >
-                                    TRIVI(ms):
+                                    Movilidad:
                                 </label>
                                 <input
-                                    type="number"
-                                    id="trivi_por"
+                                    type="text"
+                                    id="movilidad"
                                     className="mt-2 w-full p-3 bg-gray-50"
-                                    name="trivi_por"
+                                    name="movilidad"
                                     value={expediente.trivi_por}
                                     onChange={ev => setExpediente({...expediente,trivi_por: ev.target.value})} 
                                 />
@@ -1639,7 +1639,7 @@ export default function ExpClinico() {
                                     htmlFor="rel_e_a"
                                     className="text-slate-800"
                                 >
-                                    Rel e-A:
+                                    Tapse:
                                 </label>
                                 <input
                                     type="number"
@@ -1649,6 +1649,19 @@ export default function ExpClinico() {
                                     value={expediente.rel_e_a}
                                     onChange={ev => setExpediente({...expediente,rel_e_a: ev.target.value})} 
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="valvulopatia"
+                                    className="text-slate-800"
+                                >
+                                    Valvulopatía:
+                                </label>
+                                <select id="valvulopatia" name="valvulopatia" className='mt-2 w-full p-3' value={expediente.valvulopatia===1 ||expediente.valvulopatia ==="true"?"true":"false"}
+                                    onChange={ev => setExpediente({...expediente,valvulopatia: ev.target.value})}  >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label

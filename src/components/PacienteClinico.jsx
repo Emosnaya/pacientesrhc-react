@@ -513,6 +513,7 @@ export default function PacienteClinico() {
     const diagnosticoGeneralRef= useRef();
     const planRef= useRef();
     const congenitosRef= useRef();
+    const valvulopatiaRef= useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -716,10 +717,10 @@ export default function PacienteClinico() {
             exploracionFisica: exploracionFisicaRef.current.value,
             estudios: estudiosRef.current.value,
             diagnosticoGeneral: diagnosticoGeneralRef.current.value,
-            plan: planRef.current.value
+            plan: planRef.current.value,
+            valvulopatia: valvulopatiaRef.current.value
 
         }
-        console.log(datos)
         try {
             clienteAxios.post('/api/clinico', {
                 paciente,
@@ -2741,7 +2742,7 @@ export default function PacienteClinico() {
                                     htmlFor="dd_por"
                                     className="text-slate-800"
                                 >
-                                    DD(mm):
+                                    SGL:
                                 </label>
                                 <input
                                     type="number"
@@ -2750,6 +2751,7 @@ export default function PacienteClinico() {
                                     name="dd_por"
                                     ref={ddPorRef}
                                     disabled={inputBloqueadoEco}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2757,7 +2759,7 @@ export default function PacienteClinico() {
                                     htmlFor="ds_por"
                                     className="text-slate-800"
                                 >
-                                    DS(mm):
+                                    PSAP:
                                 </label>
                                 <input
                                     type="number"
@@ -2773,10 +2775,10 @@ export default function PacienteClinico() {
                                     htmlFor="trivi_por"
                                     className="text-slate-800"
                                 >
-                                    TRIVI(ms):
+                                    Movilidad:
                                 </label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="trivi_por"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="trivi_por"
@@ -2789,7 +2791,7 @@ export default function PacienteClinico() {
                                     htmlFor="rel_e_a"
                                     className="text-slate-800"
                                 >
-                                    Rel e-A:
+                                    Tapse:
                                 </label>
                                 <input
                                     type="number"
@@ -2799,6 +2801,18 @@ export default function PacienteClinico() {
                                     ref={relEARef}
                                     disabled={inputBloqueadoEco}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="valvulopatia"
+                                    className="text-slate-800"
+                                >
+                                    Valvulopatía:
+                                </label>
+                                <select id="valvulopatia" name="valvulopatia" className='mt-2 w-full p-3' ref={valvulopatiaRef} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
