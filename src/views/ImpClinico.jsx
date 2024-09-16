@@ -1559,7 +1559,7 @@ export default function ImpClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    Fc Ecog:
                                 </label>
                                 <input
                                     type="number"

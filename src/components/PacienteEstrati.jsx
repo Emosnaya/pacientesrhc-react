@@ -763,6 +763,7 @@ export default function PacienteEstrati() {
                                     <option value="tric_l">Tric(I)</option>
                                     <option value="tric_est">Tric(Est)</option>
                                     <option value="otro">Otro</option>
+                                    <option value="no">No</option>
                                 </select>
                             </div>
                             <div className="mb-4">

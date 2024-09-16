@@ -1339,15 +1339,15 @@ export default function ExpClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    Fc Ecog:
                                 </label>
                                 <input
                                     type="number"
                                     id="r_r_mm"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="r_r_mm"
-                                    value={expediente.r_r_mm}
-                                    onChange={ev => setExpediente({...expediente,r_r_mm: ev.target.value})}   
+                                    value={expediente.fc_ecog}
+                                    onChange={ev => setExpediente({...expediente,fc_ecog: ev.target.value})}   
                                 />
                             </div>
                             <div className="mb-4">

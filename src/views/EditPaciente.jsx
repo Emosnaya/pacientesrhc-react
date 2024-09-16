@@ -161,7 +161,7 @@ export default function EditPaciente() {
                         name="apellidoMat"
                         placeholder="Apellido Materno"
                         value={paciente.apellidoMat}
-                        onChange={ev => setPaciente({...paciente,genero: ev.target.value})}
+                        onChange={ev => setPaciente({...paciente,apellidoMat: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">

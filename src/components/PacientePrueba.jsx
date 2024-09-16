@@ -623,6 +623,7 @@ export default function PacientePrueba() {
                                     <option value="ecott">ECOTT</option>
                                     <option value="irm">IRM</option>
                                     <option value="nv">NV</option>
+                                    <option value="mn">MN</option>
                                 </select>
                             </div>
                             <div className="mb-4">

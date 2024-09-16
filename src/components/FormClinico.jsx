@@ -2195,7 +2195,7 @@ export default function FormClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    FC Ecog:
                                 </label>
                                 <input
                                     type="number"
