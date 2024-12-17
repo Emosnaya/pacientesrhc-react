@@ -336,7 +336,7 @@ export default function Compare() {
                         <td>Máximo Desnivel ST</td>
                           <td className="border-b-2 border-gray-200 py-4">{ Math.round(esfuerzoUno.MaxInfra)}</td>
                           <td className="border-b-2 border-gray-200">{ Math.round(esfuerzoDos.MaxInfra)}</td>
-                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0? parseFloat((((esfuerzoDos.MaxInfra*100)/esfuerzoUno.MaxInfra)-100).toFixed(2)):0}  ref={MaxInfraRef} disabled/></td>
+                          <td className="border-b-2 border-gray-200"><input type="text" className="text-center" value={ esfuerzoDos.MaxInfra!=null && esfuerzoDos.MaxInfra!= 0 && esfuerzoUno.MaxInfra!= 0 && esfuerzoUno.MaxInfra!= null? parseFloat((((esfuerzoDos.MaxInfra*100)/esfuerzoUno.MaxInfra)-100).toFixed(2)):0}  ref={MaxInfraRef} disabled/></td>
                       </tr>
                       <tr className="text-center md:text-xl ">
                         <td>Índice TA en esfuerzo</td>

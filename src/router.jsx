@@ -17,6 +17,10 @@ import ExpClinico from "./views/ExpClinico";
 import ImpClinico from "./views/ImpClinico";
 import EditPaciente from "./views/EditPaciente";
 import Compare from "./views/Compare";
+import EditNutri from "./views/Edit/EditNutri";
+import ImpNutri from "./views/Imprimir/ImpNutri";
+import EditPsico from "./views/Edit/EditPsico";
+import ImpPsico from "./views/Imprimir/ImpPsico";
 
 const router = createBrowserRouter([
 
@@ -82,7 +86,27 @@ const router = createBrowserRouter([
             {
                 path: '/compare/:id',
                 element: <Compare/>
-            }
+            },
+            {
+                path: '/nutri/:id',
+                element: <EditNutri/>
+
+            },
+            {
+                path: '/nutri/imprimir/:id',
+                element: <ImpNutri/>
+
+            },
+            {
+                path: '/psico/:id',
+                element: <EditPsico/>
+
+            },
+            {
+                path: '/psico/imprimir/:id',
+                element: <ImpPsico/>
+
+            },
 
         ]
     },

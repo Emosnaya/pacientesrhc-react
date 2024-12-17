@@ -12,6 +12,7 @@ export default function FormEstarti() {
     const token = localStorage.getItem('AUTH_TOKEN')
     const [pacientes, setPacientes] = useState([])
     const [paciente, setPaciente] = useState({})
+    const [isNumberVisible, setIsNumberVisible] = useState(false);
     const { id } = useParams()
 
     const [respuesta, setRespuesta] = useState('');
@@ -29,11 +30,11 @@ export default function FormEstarti() {
     }
   };
 
-
-
-
-
-
+  const handleFcDianaChange = (event) => {
+    const selectedValue = event.target.value;
+    // Verifica si el valor seleccionado es "UISQ"
+    setIsNumberVisible(selectedValue === 'UISQ');
+};
     const numPruebaRef = useRef();
     const sesionesRef = useRef();
     const rhc_1_fechaREF= useRef();
@@ -124,6 +125,7 @@ export default function FormEstarti() {
     const impiRef = useRef();
     const isquemiaIrmRef =useRef();
     const ecoRef =useRef();
+    const fcdianaNumberRef = useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -215,7 +217,8 @@ export default function FormEstarti() {
             dpDiana: dpDianaRef.current.value,
             comentarios: comentariosRef.current.value,
             isquemiaIrm : isquemiaIrmRef.current.value,
-            eco : ecoRef.current.value
+            eco : ecoRef.current.value,
+            fcdianaNumber: fcdianaNumberRef.current.value
 
         }
         try {
@@ -1304,13 +1307,27 @@ export default function FormEstarti() {
                                 >
                                     Fc Diana:
                                 </label>
-                                <select id="fcDiana" name="fcDiana" className='mt-2 w-full p-3' ref={fcDianaRef} >
+                                <select id="fcDiana" name="fcDiana" className='mt-2 w-full p-3' ref={fcDianaRef} onChange={handleFcDianaChange}>
                                     <option value="Bo">Bo</option>
                                     <option value="K">K</option>
                                     <option value="BI">BI</option>
                                     <option value="N">N</option>
+                                    <option value="UISQ">UISQ</option>
                                 </select>
                             </div>
+                      <div className={`mb-4 ${isNumberVisible ? '' : 'hidden'}`}>
+                          <label htmlFor="fcdianaNumber" className="text-slate-800">
+                              Fc Diana:
+                          </label>
+                          <input
+                              type="number"
+                              id="fcdianaNumber"
+                              step="0.01"
+                              className="mt-2 w-full p-3 bg-gray-50"
+                              name="fcdianaNumber"
+                              ref={fcdianaNumberRef}
+                          />
+                      </div>
                             <div className="mb-4">
                                 <label
                                     htmlFor="dpDiana"

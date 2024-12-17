@@ -18,6 +18,7 @@ export default function EditPaciente() {
         apellidoPat: '',
         apellidoMat: '',
         telefono: '',
+        email: '',
         fechaNacimiento: '',
         genero: '',
         estadoCivil: '',
@@ -179,6 +180,23 @@ export default function EditPaciente() {
                         placeholder="telefono"
                         value={paciente.telefono}
                         onChange={ev => setPaciente({...paciente,telefono: ev.target.value})}
+                    />
+                </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="email"
+                    className="text-slate-800"
+                    >
+                        Correo:
+                    </label>
+                    <input 
+                        type="email"
+                        id="email"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="email"
+                        placeholder="email"
+                        value={paciente.email}
+                        onChange={ev => setPaciente({...paciente,email: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -346,6 +364,9 @@ export default function EditPaciente() {
                 />
                 <Link className="bg-red-500 hover:bg-red-600 text-white m-5 text-center p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
             </form>
+            <div className='flex justify-end mt-2'>
+
+                </div>
         </div>
     </div>
     </>

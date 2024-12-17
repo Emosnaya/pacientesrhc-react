@@ -21,6 +21,9 @@ export default function Paciente() {
     const [estratificacion, setEstratificacion] = useState([])
     const [clinicos, setClinicos] = useState([])
     const [reportes, setReportes] = useState([])
+    const [nutricional, setNutricional] = useState([])
+    const [psicologico, setPsicologico] = useState([])
+    const [fisiologico,setFisiologico] = useState([])
     const [search, setSearch] = useState("")
     const [modal, setModal] = useState(false)
 
@@ -72,10 +75,49 @@ export default function Paciente() {
             setReportes(response.data.data)
         })
 
-        const expedientes = expedientesInt.concat(reportes);    
+        const expedientesRep = expedientesInt.concat(reportes);    
 
     const { dataerep, errorrep, isLoadingrep } = useSWR(`/api/reportes/${id}`, fetcherReporte)
 
+    const fetcherNutricional = () => clienteAxios.get(`/api/nutricional/${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(function (response) {
+            setNutricional(response.data.data)
+        })
+
+        const expedientesNutri = expedientesRep.concat(nutricional);    
+
+    const { datanutri, errornutri, isLoadingNutri} = useSWR(`/api/nutricional/${id}`, fetcherNutricional)
+
+
+    const fetcherPsico = () => clienteAxios.get(`/api/psicologico/${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(function (response) {
+            setPsicologico(response.data.data)
+        })
+
+        const expedientesPsico = expedientesNutri.concat(psicologico);    
+
+    const { dataPsico, errorPsico, isLoadingPsico} = useSWR(`/api/psicologico/${id}`, fetcherPsico)
+
+    const fetcherNotasFisiologicas = () => clienteAxios.get(`/api/fisio/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        console.log(response.data)
+        setFisiologico(response.data);
+    });
+
+    const expedientes = expedientesPsico.concat(fisiologico)
+    
+    const { dataNotas, errorNotas, isLoadingNotas } = useSWR(`/api/fisio/${id}`, fetcherNotasFisiologicas);
 
     const [paciente, setPaciente] = useState({
         id:null,
@@ -83,6 +125,7 @@ export default function Paciente() {
         apellidoPat: '',
         apellidoMat: '',
         telefono: '',
+        email: '',
         fechaNacimiento: '',
         genero: '',
         estadoCivil: '',
@@ -129,12 +172,21 @@ export default function Paciente() {
           cancelButtonText: "Cancelar"
         }).then((result) => {
           if (result.isConfirmed) {
-            const esfuerzo = `/api/esfuerzo/${expediente.id}`;
-            const estrati = `/api/estratificacion/${expediente.id}`;
-            const clinico = `/api/clinico/${expediente.id}`;
-            const reporte = `/api/reporte/${expediente.id}`;
+            const esfuerzo = `/api/esfu/${expediente.id}`;
+            const estrati = `/api/estra/${expediente.id}`;
+            const clinico = `/api/clini/${expediente.id}`;
+            const reporte = `/api/final/${expediente.id}`;
+            const psicologico = `/api/psicolo/${expediente.id}`;
+            const nutricional = `/api/nutriolo/${expediente.id}`;
+            const fisio = `/api/fisio/${expediente.id}`;
 
-            const url = expediente.tipo_exp === 1 ? esfuerzo : expediente.tipo_exp === 2 ? estrati : expediente.tipo_exp === 3? clinico: reporte;
+            const url = expediente.tipo_exp === 1 ? esfuerzo : 
+            expediente.tipo_exp === 2 ? estrati : 
+            expediente.tipo_exp === 3? clinico :  
+            expediente.tipo_exp === 5? psicologico:  
+            expediente.tipo_exp === 6? nutricional: 
+            expediente.tipo_exp === 7? fisio: reporte ;
+            
         try {
           clienteAxios.delete(url,
         {
@@ -143,8 +195,7 @@ export default function Paciente() {
           }
         }).then( function (response) {
           setTimeout(function() {
-            // Redireccionar a una página específica
-            window.location.href = '/dashboard';
+            window.location.reload();
           }, 1500);
           Swal.fire({
             title: "Elimnado!",
@@ -171,7 +222,9 @@ export default function Paciente() {
         const estrati = `/api/estratificacion/imprimir/${expediente.id}`;
         const clinico = `/api/clinico/imprimir/${expediente.id}`;
         const reporte = `/api/reporte/imprimir/${expediente.id}`;
-        const url = expediente.tipo_exp === 1 ? esfuerzo : expediente.tipo_exp === 2 ? estrati : expediente.tipo_exp === 3? clinico: reporte;
+        const nutricional = `/api/nutri/imprimir/${expediente.id}`;
+        const psicologico = `/api/psico/imprimir/${expediente.id}`;
+        const url = expediente.tipo_exp === 1 ? esfuerzo : expediente.tipo_exp === 2 ? estrati : expediente.tipo_exp === 3? clinico: expediente.tipo_exp === 5? psicologico: expediente.tipo_exp === 6? nutricional: reporte;
 
             try {
                 clienteAxios.get(url, { 
@@ -187,6 +240,24 @@ export default function Paciente() {
             } catch (error) {
                 setErrores(Object.values(error.response.data.errors) )
             }
+
+    }
+
+    const imprimirPdf = expediente => {
+        try {
+            clienteAxios.get(`/api/fisio/${expediente.id}/imprimir`, { 
+              responseType: 'arraybuffer' ,
+              headers:{
+              Authorization: `Bearer ${token}`
+          }}).then(function (response) {
+                
+                const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+                const url = URL.createObjectURL(pdfBlob);
+                window.open(url);
+              })
+        } catch (error) {
+            setErrores(Object.values(error.response.data.errors) )
+        }
 
     }
 
@@ -297,6 +368,22 @@ export default function Paciente() {
                         name="telefono"
                         placeholder="telefono"
                         value={paciente.telefono}
+                        disabled
+                    />
+                </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="email"
+                    className="text-slate-800"
+                    >
+                        Correo:
+                    </label>
+                    <input 
+                        type="email"
+                        id="email"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="email"
+                        value={paciente.email}
                         disabled
                     />
                 </div>
@@ -486,13 +573,39 @@ export default function Paciente() {
               <tbody className="">
                   {expedientes.map((expediente) => (
                       <tr key={expediente.id} className="text-center md:text-xl ">
-                          <td className="border-b-2 border-gray-200 py-4">{(expediente.numPrueba!=null)?expediente.numPrueba:expediente.id}</td>
-                          <td className="border-b-2 border-gray-200">{(() => {if (expediente.tipo_exp === 1) {return 'Prueba de esfuerzo';} else if(expediente.tipo_exp === 2) {return 'Estratificación';}else if(expediente.tipo_exp === 3) {return'Expediente Clínico'} else {return 'Reporte Final'}})()}</td>
-                          <td className="border-b-2 border-gray-200">{(expediente.tipo_exp===1 || expediente.tipo_exp===3)?expediente.fecha:(expediente.tipo_exp===2)?expediente.estrati_fecha:(expediente.tipo_exp===4)?" ": ""}</td>
+                          <td className="border-b-2 border-gray-200 py-4">{(expediente.id)}</td>
+                          <td className="border-b-2 border-gray-200">{(() => {
+                            if (expediente.tipo_exp === 1) {return 'Prueba de esfuerzo';} 
+                            else if(expediente.tipo_exp === 2) {return 'Estratificación';}
+                            else if(expediente.tipo_exp === 3) {return'Expediente Clínico'}
+                            else if(expediente.tipo_exp === 5) {return'Nota Psicológica'}
+                            else if(expediente.tipo_exp === 6) {return'Nota Nutricional'}
+                            else if(expediente.tipo_exp === 7) {return'Nota Fisiológica'}
+                            else {return 'Reporte Final'}})()}</td>
+                          <td className="border-b-2 border-gray-200">{(expediente.tipo_exp===1 || expediente.tipo_exp===3)?expediente.fecha:(expediente.tipo_exp===2)?expediente.estrati_fecha: new Date(expediente.created_at).toISOString().split("T")[0]}</td>
                           <td className="flex items-center justify-between border-b-2 border-gray-200 py-5">
-                          {(() => {if (expediente.tipo_exp === 1) {return <Link to={'/prueba/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;} else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;}else if(expediente.tipo_exp === 3) {return <Link to={'/clinico/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>}})()}
-                          <FaEye className="action-icon info hover:text-[#165CDF]" onClick={ev => imprimirExpediente(expediente)}/>
-                          {(() => {if (expediente.tipo_exp === 1) {return <Link to={'/prueba/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>;} else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>;}else if(expediente.tipo_exp === 3) {return <Link to={'/clinico/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-yellow-400" /></Link>} })()}
+                          {(() => {
+                            if (expediente.tipo_exp === 1) {return <Link to={'/prueba/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;} 
+                            else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>;}
+                            else if(expediente.tipo_exp === 3) {return <Link to={'/clinico/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>} 
+                            else if(expediente.tipo_exp === 4) {return <FaEdit className="text-white" /> }
+                            else if(expediente.tipo_exp === 5) {return <Link to={'/psico/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>}
+                            else if(expediente.tipo_exp === 6) {return <Link to={'/nutri/'+ expediente.id}> <FaEdit className="action-icon edit hover:text-yellow-400" /></Link>}
+                            else if(expediente.tipo_exp === 7) {return <FaEdit className="text-white" /> }
+                            })()}
+                            {(() => {
+                            if (expediente.tipo_exp === 7) {return <FaEye className='hover:text-purple-400' onClick={ev => imprimirPdf(expediente)}/>} 
+                            else {return  <FaEye className='hover:text-purple-400' onClick={ev => imprimirExpediente(expediente)}/>}
+                            })()}
+                          {(() => {
+                            if (expediente.tipo_exp === 1) {return <Link to={'/prueba/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-blue-400" /></Link>;} 
+                            else if(expediente.tipo_exp === 2) {return <Link to={'/estrati/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-blue-400" /></Link>;}
+                            else if(expediente.tipo_exp === 3) {return <Link to={'/clinico/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-blue-400" /></Link>}
+                            else if(expediente.tipo_exp === 4) {return <FaPrint className="action-icon edit hover:text-blue-400" onClick={ev => imprimirExpediente(expediente)} /> }
+                            else if(expediente.tipo_exp === 5) {return <Link to={'/psico/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-blue-400" /></Link>}
+                            else if(expediente.tipo_exp === 6) {return <Link to={'/nutri/imprimir/'+ expediente.id}> <FaPrint className="action-icon edit hover:text-blue-400" /></Link>}
+                            else if(expediente.tipo_exp === 7) {return <FaPrint className="action-icon edit hover:text-blue-400" onClick={ev => imprimirPdf(expediente)} />}
+                            })()}
                             <a onClick={ev => onDelete(expediente)} > <FaRegTrashCan className="action-icon delete hover:text-red-700" /> </a>
                           </td>
                       </tr>
@@ -505,7 +618,7 @@ export default function Paciente() {
     {modal && 
     (
         <Modal open={modal} onClose={handleClickModal}>
-            <ModalExpediente/>
+            <ModalExpediente paciente={paciente}/>
         </Modal>
     )}
     </>

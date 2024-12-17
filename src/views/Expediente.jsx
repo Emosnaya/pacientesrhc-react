@@ -39,7 +39,7 @@ export default function Expediente() {
                     // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
-                        window.location.href = '/dashboard';
+                        window.location.reload()
                     }, 2000);
                     Swal.fire({
                         position: "center",

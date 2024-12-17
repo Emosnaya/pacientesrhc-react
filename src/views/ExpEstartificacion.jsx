@@ -38,7 +38,7 @@ export default function ExpEstartificacion() {
                     // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
-                        window.location.href = '/dashboard';
+                        window.location.reload()
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -1022,7 +1022,7 @@ export default function ExpEstartificacion() {
                                     <option value="a">A</option>
                                     <option value="b">B</option>
                                     <option value="c">C</option>
-                                    <option value="d">C</option>
+                                    <option value="d">D</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1117,9 +1117,6 @@ export default function ExpEstartificacion() {
                                     onChange={ev => setExpediente({...expediente,comentarios: ev.target.value})}
                                 />
                             </div>
-                            
-
-
                         </div>
                         <div className='flex justify-end'>
                             <input

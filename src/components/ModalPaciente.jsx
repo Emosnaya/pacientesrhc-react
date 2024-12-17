@@ -28,6 +28,7 @@ export default function ModalPaciente() {
     const diagnosticoRef = useRef();
     const medicamentosRef = useRef();
     const envioRef = useRef();
+    const emailRef = useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -48,7 +49,8 @@ export default function ModalPaciente() {
             registro: registroRef.current.value,
             diagnostico : diagnosticoRef.current.value,
             medicamentos: medicamentosRef.current.value,
-            envio : envioRef.current.value
+            envio : envioRef.current.value,
+            email : emailRef.current.value
 
         }
         try {
@@ -172,6 +174,23 @@ export default function ModalPaciente() {
                         name="telefono"
                         placeholder="telefono"
                         ref={telefonoRef}
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label 
+                    htmlFor="email"
+                    className="text-slate-800"
+                    >
+                        Correo:
+                    </label>
+                    <input 
+                        type="email"
+                        id="email"
+                        className="mt-2 w-full p-3 bg-gray-50" 
+                        name="email"
+                        placeholder="email"
+                        ref={emailRef}
                         required
                     />
                 </div>
