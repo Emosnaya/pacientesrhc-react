@@ -111,7 +111,6 @@ export default function Paciente() {
             Authorization: `Bearer ${token}`
         }
     }).then(response => {
-        console.log(response.data)
         setFisiologico(response.data);
     });
 

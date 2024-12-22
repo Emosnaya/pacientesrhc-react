@@ -30,10 +30,9 @@ export default function Fisiologico() {
             formData.append('paciente_id', id); // Agregar ID como parte de los datos
 
             // Realizar la solicitud POST al backend
-            const response = clienteAxios.post('/api/fisio/', formData, {
+            const response = clienteAxios.post('/api/fis', formData, {
                 headers: {
                      Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
                 },
             });
         } catch (error) {

@@ -32,6 +32,9 @@ export default function Nutricional({paciente}) {
   const diagnostico = useRef();
   const nutriologoRef = useRef();
   const cedulanutriologoRef = useRef();
+  const observacionesRef = useRef();
+  const recomendacionRef = useRef();
+  const controlPresion = useRef();
 
   const recomendaciones = [
     "Evitar el consumo de azucares (azúcar de mesa, mascabado, mieles, mermeladas, cajeta, lechera) así como productos con azucares simples (jugos, refrescos, yogurt con frutas, postres, etc). Los azúcares pueden estar incluidos en otros alimentos como azúcares añadidos, por ejemplo en el pan dulce, postres, almibares, garapiñados, etc. ",
@@ -71,13 +74,15 @@ export default function Nutricional({paciente}) {
       controlPeso : controlPeso.current.value,
       otro : otro.current.value,
       diastolica : diastolica.current.value,
-      mmHg :  mmHg.current.value,
       estado : estado.current.value,
       glucosa : glucosa.current.value,
       diagnostico : diagnostico.current.value,
       recomendaciones : recomendacionesRefs.current.map((ref) => ref.current.checked),
       nutriologo : nutriologoRef.current.value,
-      cedula_nutriologo : cedulanutriologoRef.current.value
+      cedula_nutriologo : cedulanutriologoRef.current.value,
+      observaciones : observacionesRef.current.value,
+      recomendacion : recomendacionRef.current.value,
+      controlPresion : controlPresion.current.value
     };
 
     try {
@@ -203,21 +208,6 @@ export default function Nutricional({paciente}) {
                                     name="diastolica"
                                     ref={diastolica}
                                     
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="mmHg"
-                                    className="text-slate-800"
-                                >
-                                    mmHG:
-                                </label>
-                                <input
-                                    type="number"
-                                    id="mmHg"
-                                    className="mt-2 w-full p-3 bg-gray-50 border-2"
-                                    name="mmHg"
-                                    ref={mmHg}
                                 />
                             </div>
                             <h3 className="text-xl font-bold  col-start-1">Cintura</h3>
@@ -381,8 +371,37 @@ export default function Nutricional({paciente}) {
                                     ref={ldl}
                                 />
                             </div>
+                            <div className="mb-4 col-start-1 col-end-5">
+                                <label
+                                    htmlFor="otro"
+                                    className="text-slate-800"
+                                >
+                                   Otro:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="otro"
+                                    className="mt-2 w-full p-3 bg-gray-50 border-2 "
+                                    name="otro"
+                                    ref={ otro }
+                                />
+                            </div>
                             <h2 className="text-2xl font-bold  col-start-1 col-end-4">Referencias Alimenticias</h2>
                             <h3 className="text-xl font-bold  col-start-1">Líquidos</h3>
+                            <div className="mb-4 col-start-1 lg:col-end-5">
+                                <label
+                                    htmlFor="recomendacion"
+                                    className="text-slate-800"
+                                >
+                                    Recordatorio de 24 hrs:
+                                </label>
+                                <textarea
+                                    id="recomendacion"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="recomendacion"
+                                    ref={recomendacionRef}
+                                />
+                            </div>
                             <div className="mb-4 col-start-1 col-end-3 lg:col-end-2">
                                 <label
                                     htmlFor="aguaSimple"
@@ -566,21 +585,18 @@ export default function Nutricional({paciente}) {
                                     <option value="false">No</option>
                                 </select>
                             </div>
-                            <div className="mb-4 col-start-1 col-end-3">
+                            <div className="mb-4">
                                 <label
-                                    htmlFor="otro"
+                                    htmlFor="controlPresion"
                                     className="text-slate-800"
                                 >
-                                   Otro:
+                                   Control de Presión:
                                 </label>
-                                <input
-                                    type="text"
-                                    id="otro"
-                                    className="mt-2 w-full p-3 bg-gray-50 border-2 "
-                                    name="otro"
-                                    ref={ otro }
-                                    value={paciente?.medicamentos}
-                                />
+                                <select name="controlPresion" id="controlPresion" className="mt-2 w-full p-3 bg-gray-50 border-2" ref={controlPresion}>
+                                    <option value=""></option>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <h2 className="text-2xl font-bold col-start-1">Diagnóstico</h2>
                             <div className="mb-4 col-start-1 col-end-5 lg:col-end-5">
@@ -652,6 +668,20 @@ export default function Nutricional({paciente}) {
                                     className="mt-2 w-full p-3 bg-gray-50 border-2 "
                                     name="cedula_nutriologo"
                                     ref={ cedulanutriologoRef }
+                                />
+                            </div>
+                            <div className="mb-4 col-start-1 lg:col-end-5">
+                                <label
+                                    htmlFor="observaciones"
+                                    className="text-slate-800 font-bold"
+                                >
+                                    Observaciones:
+                                </label>
+                                <textarea
+                                    id="observaciones"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="observaciones"
+                                    ref={observacionesRef}
                                 />
                             </div>
                         </div>

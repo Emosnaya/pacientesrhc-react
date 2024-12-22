@@ -262,22 +262,6 @@ const handleRecomendacionChange = (index, value) => {
                                     value={expediente.diastolica}
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="mmHg"
-                                    className="text-slate-800"
-                                >
-                                    mmHG:
-                                </label>
-                                <input
-                                    type="number"
-                                    id="mmHg"
-                                    className="mt-2 w-full p-3 bg-gray-50 border-2"
-                                    name="mmHg"
-                                    onChange={ev => setExpediente({...expediente,mmHg: ev.target.value})}
-                                    value={expediente.mmHg}
-                                />
-                            </div>
                             <h3 className="text-xl font-bold  col-start-1">Cintura</h3>
                             <div className="mb-4 col-start-1 lg:col-end-3">
                                 <label
@@ -440,8 +424,39 @@ const handleRecomendacionChange = (index, value) => {
                                     value={expediente.ldl}
                                 />
                             </div>
+                            <div className="mb-4 col-start-1 col-end-5">
+                                <label
+                                    htmlFor="otro"
+                                    className="text-slate-800"
+                                >
+                                   Otro:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="otro"
+                                    className="mt-2 w-full p-3 bg-gray-50 border-2 "
+                                    name="otro"
+                                    onChange={ev => setExpediente({...expediente,otro: ev.target.value})}
+                                    value={expediente?.otro}
+                                />
+                            </div>
                             <h2 className="text-2xl font-bold  col-start-1 col-end-4">Referencias Alimenticias</h2>
                             <h3 className="text-xl font-bold  col-start-1">Líquidos</h3>
+                            <div className="mb-4 col-start-1 lg:col-end-5">
+                                <label
+                                    htmlFor="recomendacion"
+                                    className="text-slate-800"
+                                >
+                                    Recordatorio de 24 hrs:
+                                </label>
+                                <textarea
+                                    id="recomendacion"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="recomendacion"
+                                    onChange={ev => setExpediente({...expediente,recomendacion: ev.target.value})}
+                                    value={expediente?.recomendacion}
+                                />
+                            </div>
                             <div className="mb-4 col-start-1 col-end-3 lg:col-end-2">
                                 <label
                                     htmlFor="aguaSimple"
@@ -630,20 +645,18 @@ const handleRecomendacionChange = (index, value) => {
                                     <option value="false">No</option>
                                 </select>
                             </div>
-                            <div className="mb-4 col-start-1 col-end-3">
+                            <div className="mb-4">
                                 <label
-                                    htmlFor="otro"
+                                    htmlFor="controlPresion"
                                     className="text-slate-800"
                                 >
-                                   Otro:
+                                   Control de Presión:
                                 </label>
-                                <input
-                                    type="text"
-                                    id="otro"
-                                    className="mt-2 w-full p-3 bg-gray-50 border-2 "
-                                    name="otro"
-                                    value={paciente?.medicamentos}
-                                />
+                                <select name="controlPresion" id="controlPresion" className="mt-2 w-full p-3 bg-gray-50 border-2" onChange={ev => setExpediente({...expediente,controlPresion: ev.target.value})} value={expediente.controlPresion==="1" || expediente.controlPresion==="true"?"true":"false"} >
+                                    <option value=""></option>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <h2 className="text-2xl font-bold col-start-1">Diagnostico</h2>
                             <div className="mb-4 col-start-1 col-end-5 lg:col-end-5">
@@ -729,6 +742,20 @@ const handleRecomendacionChange = (index, value) => {
                                     name="cedula_nutriologo"
                                     onChange={ev => setExpediente({...expediente,cedula_nutriologo: ev.target.value})}
                                     value={expediente.cedula_nutriologo}
+                                />
+                            </div>
+                            <div className="mb-4 col-start-1 lg:col-end-5">
+                                <label
+                                    htmlFor="observaciones"
+                                    className="text-slate-800 font-bold"
+                                >
+                                    Observaciones:
+                                </label>
+                                <textarea
+                                    id="observaciones"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    onChange={ev => setExpediente({...expediente,observaciones: ev.target.value})}
+                                    value={expediente?.observaciones}
                                 />
                             </div>
                         </div>
