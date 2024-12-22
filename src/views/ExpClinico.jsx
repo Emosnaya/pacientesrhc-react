@@ -39,7 +39,7 @@ export default function ExpClinico() {
                     // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
-                        window.location.href = '/expedientes';
+                        window.location.reload()
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -289,9 +289,11 @@ export default function ExpClinico() {
                                 >
                                     Clase F CCS:
                                 </label>
-                                <select id="clase_ccs" name="clase_ccs" className='mt-2 w-full p-3'  value={expediente.clase_f_ccs===1 ||expediente.clase_f_ccs ==="true"?"true":"false"} onChange={ev => setExpediente({...expediente,clase_f_ccs: ev.target.value})} >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="clase_ccs" name="clase_ccs" className='mt-2 w-full p-3' value={expediente.clase_f_ccs}   onChange={ev => setExpediente({...expediente,clase_f_ccs: ev.target.value})}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -331,15 +333,17 @@ export default function ExpClinico() {
                                 </select>
                             </div>
                             <div className="mb-4">
-                                <label
+                            <label
                                     htmlFor="cf_nyha"
                                     className="text-slate-800"
                                 >
                                     CF NYHA:
                                 </label>
-                                <select id="cf_nyha" name="cf_nyha" className='mt-2 w-full p-3' value={expediente.cf_nyha===1 ||expediente.cf_nyha ==="true"?"true":"false"} onChange={ev => setExpediente({...expediente,cf_nyha: ev.target.value})} >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="cf_nyha" name="cf_nyha" className='mt-2 w-full p-3' value={expediente.cf_nyha} onChange={ev => setExpediente({...expediente,cf_nyha: ev.target.value})} >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1335,15 +1339,15 @@ export default function ExpClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    Fc Ecog:
                                 </label>
                                 <input
                                     type="number"
                                     id="r_r_mm"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="r_r_mm"
-                                    value={expediente.r_r_mm}
-                                    onChange={ev => setExpediente({...expediente,r_r_mm: ev.target.value})}   
+                                    value={expediente.fc_ecog}
+                                    onChange={ev => setExpediente({...expediente,fc_ecog: ev.target.value})}   
                                 />
                             </div>
                             <div className="mb-4">
@@ -1587,7 +1591,7 @@ export default function ExpClinico() {
                                     htmlFor="dd_por"
                                     className="text-slate-800"
                                 >
-                                    DD(mm):
+                                    SGL:
                                 </label>
                                 <input
                                     type="number"
@@ -1603,7 +1607,7 @@ export default function ExpClinico() {
                                     htmlFor="ds_por"
                                     className="text-slate-800"
                                 >
-                                    DS(mm):
+                                    PSAP:
                                 </label>
                                 <input
                                     type="number"
@@ -1616,16 +1620,16 @@ export default function ExpClinico() {
                             </div>
                             <div className="mb-4">
                                 <label
-                                    htmlFor="trivi_por"
+                                    htmlFor="movilidad"
                                     className="text-slate-800"
                                 >
-                                    TRIVI(ms):
+                                    Movilidad:
                                 </label>
                                 <input
-                                    type="number"
-                                    id="trivi_por"
+                                    type="text"
+                                    id="movilidad"
                                     className="mt-2 w-full p-3 bg-gray-50"
-                                    name="trivi_por"
+                                    name="movilidad"
                                     value={expediente.trivi_por}
                                     onChange={ev => setExpediente({...expediente,trivi_por: ev.target.value})} 
                                 />
@@ -1635,7 +1639,7 @@ export default function ExpClinico() {
                                     htmlFor="rel_e_a"
                                     className="text-slate-800"
                                 >
-                                    Rel e-A:
+                                    Tapse:
                                 </label>
                                 <input
                                     type="number"
@@ -1645,6 +1649,19 @@ export default function ExpClinico() {
                                     value={expediente.rel_e_a}
                                     onChange={ev => setExpediente({...expediente,rel_e_a: ev.target.value})} 
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="valvulopatia"
+                                    className="text-slate-800"
+                                >
+                                    Valvulopatía:
+                                </label>
+                                <select id="valvulopatia" name="valvulopatia" className='mt-2 w-full p-3' value={expediente.valvulopatia===1 ||expediente.valvulopatia ==="true"?"true":"false"}
+                                    onChange={ev => setExpediente({...expediente,valvulopatia: ev.target.value})}  >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -2761,7 +2778,7 @@ export default function ExpClinico() {
                                 value="Guardar"
                                 className="bg-green-500 hover:bg-green-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

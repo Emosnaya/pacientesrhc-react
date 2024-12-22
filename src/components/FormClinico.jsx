@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import clienteAxios from '../axios-client'
+import { useNavigate, useParams } from 'react-router-dom';
 import useSWR from 'swr'
 import Swal from "sweetalert2";
 
@@ -7,7 +8,7 @@ export default function FormClinico() {
     const token = localStorage.getItem('AUTH_TOKEN')
     const [pacientes, setPacientes] = useState([])
     const [paciente, setPaciente] = useState({})
-    const [id, setId] = useState({})
+    const { id } = useParams()
 
     const [respuesta, setRespuesta] = useState('');
   const [inputBloqueado, setInputBloqueado] = useState('');
@@ -314,6 +315,20 @@ export default function FormClinico() {
         setInputBloqueadoCa(false);
       }
     };
+    const [respuestaVal, setrespuestaVal] = useState('');
+    const [inputBloqueadoVal, setInputBloqueadoVal] = useState('');
+  
+    const handleRespuestaChangeValvulo = (e) => {
+      const valorRespuesta = e.target.value.toLowerCase().trim();
+      setrespuestaVal(valorRespuesta);
+  
+      // Lógica para bloquear el segundo input
+      if (valorRespuesta === 'false') {
+        setInputBloqueadoVal(true);
+      } else {
+        setInputBloqueadoVal(false);
+      }
+    };
 
   
     const fetcher = () => clienteAxios('/api/pacientes',
@@ -513,6 +528,7 @@ export default function FormClinico() {
     const diagnosticoGeneralRef= useRef();
     const planRef= useRef();
     const congenitosRef= useRef();
+    const valvulopatiaRef= useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -699,7 +715,8 @@ export default function FormClinico() {
             exploracionFisica: exploracionFisicaRef.current.value,
             estudios: estudiosRef.current.value,
             diagnosticoGeneral: diagnosticoGeneralRef.current.value,
-            plan: planRef.current.value
+            plan: planRef.current.value,
+            valvulopatia: valvulopatiaRef.current.value,
         }
         try {
             clienteAxios.post('/api/clinico', {
@@ -714,7 +731,7 @@ export default function FormClinico() {
                 
                     
                     setTimeout(function () {
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -736,20 +753,6 @@ export default function FormClinico() {
   return (
     <>
     <div className="">
-            <div className="mb-4">
-                  <label
-                      htmlFor="paciente"
-                      className="text-slate-800 text-xl"
-                  >
-                      Selecciona el paciente:
-                  </label>
-                  <select className='mt-2 w-full p-3' id="paciente" value={paciente} onChange={handleInputChange} >
-                  <option value="">Seleccione una opción</option>
-                  {pacientes.map((paciente) => (
-                      <option key={paciente.id} value={paciente.id} >{paciente.nombre} {paciente.apellidoPat}</option>
-                  ))}
-                  </select>
-              </div>
             <form action="" onSubmit={onSubmit}>
             <h1 className="text-4xl font-bold">Expediente Clínico</h1>
                         <div className='grid lg:grid-cols-4 grid-cols-1 mt-5 px-5 py-10 gap-2'>
@@ -1872,6 +1875,7 @@ export default function FormClinico() {
                                     name="hb"
                                     ref={hbRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -1888,6 +1892,7 @@ export default function FormClinico() {
                                     name="leucos"
                                     ref={leucosRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -1904,6 +1909,7 @@ export default function FormClinico() {
                                     name="plaquetas"
                                     ref={plaquetasRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -1949,6 +1955,7 @@ export default function FormClinico() {
                                     name="glucosa"
                                     ref={glucosaRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -1965,6 +1972,7 @@ export default function FormClinico() {
                                     name="creatinina"
                                     ref={creatininaRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -1981,6 +1989,7 @@ export default function FormClinico() {
                                     name="ac_urico"
                                     ref={acUricoRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -1997,6 +2006,7 @@ export default function FormClinico() {
                                     name="colesterol"
                                     ref={colesterolRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2013,6 +2023,7 @@ export default function FormClinico() {
                                     name="ldl"
                                     ref={ldlRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2029,6 +2040,7 @@ export default function FormClinico() {
                                     name="hdl"
                                     ref={hdlRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2045,6 +2057,7 @@ export default function FormClinico() {
                                     name="trigliceridos"
                                     ref={trigliceridosRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2061,6 +2074,7 @@ export default function FormClinico() {
                                     name="tp"
                                     ref={tpRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2077,6 +2091,7 @@ export default function FormClinico() {
                                     name="inr"
                                     ref={inrRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2093,6 +2108,7 @@ export default function FormClinico() {
                                     name="tpt"
                                     ref={tptRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2109,6 +2125,7 @@ export default function FormClinico() {
                                     name="tppcrast"
                                     ref={pcrasRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2125,6 +2142,7 @@ export default function FormClinico() {
                                     name="otro_lab"
                                     ref={otroLabRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2177,7 +2195,7 @@ export default function FormClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    FC Ecog:
                                 </label>
                                 <input
                                     type="number"
@@ -2442,7 +2460,7 @@ export default function FormClinico() {
                                     htmlFor="dd_por"
                                     className="text-slate-800"
                                 >
-                                    DD(mm):
+                                    SGL:
                                 </label>
                                 <input
                                     type="number"
@@ -2451,6 +2469,7 @@ export default function FormClinico() {
                                     name="dd_por"
                                     ref={ddPorRef}
                                     disabled={inputBloqueadoEco}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2458,7 +2477,7 @@ export default function FormClinico() {
                                     htmlFor="ds_por"
                                     className="text-slate-800"
                                 >
-                                    DS(mm):
+                                    PSAP:
                                 </label>
                                 <input
                                     type="number"
@@ -2474,10 +2493,10 @@ export default function FormClinico() {
                                     htmlFor="trivi_por"
                                     className="text-slate-800"
                                 >
-                                    TRIVI(ms):
+                                    Movilidad:
                                 </label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="trivi_por"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="trivi_por"
@@ -2490,7 +2509,7 @@ export default function FormClinico() {
                                     htmlFor="rel_e_a"
                                     className="text-slate-800"
                                 >
-                                    Rel e-A:
+                                    Tapse:
                                 </label>
                                 <input
                                     type="number"
@@ -2500,6 +2519,18 @@ export default function FormClinico() {
                                     ref={relEARef}
                                     disabled={inputBloqueadoEco}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="valvulopatia"
+                                    className="text-slate-800"
+                                >
+                                    Valvulopatía:
+                                </label>
+                                <select id="valvulopatia" name="valvulopatia" className='mt-2 w-full p-3' ref={valvulopatiaRef} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -2898,7 +2929,7 @@ export default function FormClinico() {
                                     htmlFor="cateterismo"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo:
+                                    Cateterismo / Angiotac:
                                 </label>
                                 <select id="cateterismo" name="cateterismo" className='mt-2 w-full p-3' ref={cateterismoRef} onChange={handleRespuestaChangeCa}>
                                     <option value="true">Si</option>
@@ -2910,7 +2941,7 @@ export default function FormClinico() {
                                     htmlFor="catet_fecha"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo Fecha:
+                                    Cateterismo / Angiotac Fecha:
                                 </label>
                                 <input
                                     type="date"

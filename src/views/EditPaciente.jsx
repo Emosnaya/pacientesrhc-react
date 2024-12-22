@@ -1,96 +1,100 @@
+import React, { useEffect } from 'react'
+import Header from '../components/Header'
 import { useRef, useState } from 'react'
-import axiosClient from '../axios-client';
-import { useStateContext } from '../contexts/contextProvider';
 import clienteAxios from '../axios-client';
-import { Navigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useSWR from 'swr';
 
-export default function ModalPaciente() {
-
+export default function EditPaciente() {
     const token = localStorage.getItem('AUTH_TOKEN')
-
+    const {id} = useParams()
     const [errores, setErrores] = useState(null)
+    
+    const [paciente, setPaciente] = useState({
+        id:null,
+        nombre: '',
+        apellidoPat: '',
+        apellidoMat: '',
+        telefono: '',
+        email: '',
+        fechaNacimiento: '',
+        genero: '',
+        estadoCivil: '',
+        profesion: '',
+        registro: '',
+        domicilio: '',
+        talla: '',
+        peso: '',
+        cintura: '',
+        diagnostico: '',
+        medicamentos: ''
+    })
 
-    const registroRef = useRef();
-    const nombreRef = useRef();
-    const apellidoPatRef = useRef();
-    const apellidoMatRef = useRef();
-    const telefonoRef = useRef();
-    const fechaNacimientoRef = useRef();
-    const generoRef = useRef();
-    const estadoCivilRef = useRef();
-    const profesionRef = useRef();
-    const domicilioRef = useRef();
 
-    const tallaRef = useRef();
-    const pesoRef = useRef();
-    const cinturaRef = useRef();
-    const diagnosticoRef = useRef();
-    const medicamentosRef = useRef();
-    const envioRef = useRef();
-    const emailRef = useRef();
+    if(id) {
+        useEffect(() => {
+            clienteAxios.get(`/api/pacientes/${id}`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(({data}) => {
+                setPaciente(data)
+            })
+            .catch(error => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ocurrió un error!",
+              });
+            });
+        }, [])
+    }
 
     const onSubmit = (e) => {
         e.preventDefault()
-
-        const datos = {
-            nombre: nombreRef.current.value,
-            apellidoPat: apellidoPatRef.current.value,
-            apellidoMat: apellidoMatRef.current.value,
-            telefono: telefonoRef.current.value,
-            fechaNacimiento: fechaNacimientoRef.current.value,
-            genero: generoRef.current.value,
-            estadoCivil: estadoCivilRef.current.value,
-            profesion: profesionRef.current.value,
-            domicilio: domicilioRef.current.value,
-            talla: tallaRef.current.value,
-            peso: pesoRef.current.value,
-            cintura: cinturaRef.current.value,
-            registro: registroRef.current.value,
-            diagnostico : diagnosticoRef.current.value,
-            medicamentos: medicamentosRef.current.value,
-            envio : envioRef.current.value,
-            email : emailRef.current.value
-
-        }
-        try {
-            clienteAxios.post('/api/pacientes',datos,
-        {
-            headers:{
-                Authorization: `Bearer ${token}`
+        Swal.fire({
+            title: "¿Quieres Actualizar?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Actualizar",
+            cancelButtonText: "Cancelar"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    clienteAxios.put(`/api/pacientes/${paciente.id}`, paciente,{
+                        headers:{
+                            Authorization: `Bearer ${token}`
+                        }
+                    }).then(({data}) => {
+                        setTimeout(function() {
+                            // Redireccionar a una página específica
+                            window.location.href = '/dashboard';
+                        }, 2000);
+                        Swal.fire({
+                            title: "Actualizado!",
+                            text: "El paciente fue actualizado",
+                            icon: "success",
+                            timer: 1500
+                          });
+                    })
+                } catch (error) {
+                    setErrores(Object.values(error.response.data.errors) )
+                }
             }
-        }).then(function (response) {
-            // Redireccionar a una página específica
-            setTimeout(function() {
-                // Redireccionar a una página específica
-                window.location.href = '/dashboard';
-            }, 2000);
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Guardado Correctamente",
-                showConfirmButton: false,
-                timer: 1500
-              }); // 3000 milisegundos = 3 segundos
-        })
-        
-            
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-              });
-        }
+          });
     }
   return (
     <>
-    <div className=''>
-    <h1 className="text-4xl font-bold">Nuevo Paciente</h1>
-        <p>Completa la informacion para guardar un Paciente</p>
-
+    <Header titulo ={`Paciente : ${paciente.nombre} ${paciente.apellidoPat}`}/>
+    <div>
+        <h1 className='text-2xl md:text-xl font-bold mt-4'>Información General</h1>      
         <div className=" mt-5 px-5 py-10">
-            <form action="" className='grid lg:grid-cols-3' onSubmit={onSubmit}>
+            <form action="" className='grid lg:grid-cols-3 grid-cols-1 gap-2' onSubmit={onSubmit}>
             {errores ? errores.map((error, i) => <Alerta key={i}>{error}</Alerta>)  : null }
             <div className="mb-4">
                     <label 
@@ -100,13 +104,14 @@ export default function ModalPaciente() {
                         Registro*:
                     </label>
                     <input 
+                        
                         type="text"
                         id="registro"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="registro"
                         placeholder="Registro*"
-                        ref={registroRef}
-                        required
+                        value={paciente.registro}
+                        onChange={ev => setPaciente({...paciente,registro: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -122,8 +127,8 @@ export default function ModalPaciente() {
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="nombre"
                         placeholder="Nombre*"
-                        ref={nombreRef}
-                        required
+                        value={paciente.nombre}
+                        onChange={ev => setPaciente({...paciente,nombre: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -139,8 +144,8 @@ export default function ModalPaciente() {
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="apellidoPat"
                         placeholder="Apellido Paterno*"
-                        ref={apellidoPatRef}
-                        required
+                        value={paciente.apellidoPat}
+                        onChange={ev => setPaciente({...paciente,apellidoPat: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -156,8 +161,8 @@ export default function ModalPaciente() {
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="apellidoMat"
                         placeholder="Apellido Materno"
-                        ref={apellidoMatRef}
-                        required
+                        value={paciente.apellidoMat}
+                        onChange={ev => setPaciente({...paciente,apellidoMat: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -173,8 +178,8 @@ export default function ModalPaciente() {
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="telefono"
                         placeholder="telefono"
-                        ref={telefonoRef}
-                        required
+                        value={paciente.telefono}
+                        onChange={ev => setPaciente({...paciente,telefono: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -190,8 +195,8 @@ export default function ModalPaciente() {
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="email"
                         placeholder="email"
-                        ref={emailRef}
-                        required
+                        value={paciente.email}
+                        onChange={ev => setPaciente({...paciente,email: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -206,8 +211,8 @@ export default function ModalPaciente() {
                         id="fechaNacimiento"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="fechaNacimiento"
-                        ref={fechaNacimientoRef}
-                        required
+                        value={paciente.fechaNacimiento}
+                        onChange={ev => setPaciente({...paciente,genero: ev.target.value})}
                     />
                 </div>
 
@@ -218,10 +223,9 @@ export default function ModalPaciente() {
                     >
                         Género:
                     </label>
-                    <select id="genero" name="genero" className='mt-2 w-full p-3' ref={generoRef}>
+                    <select id="genero" name="genero" className='mt-2 w-full p-3' value={paciente.genero} onChange={ev => setPaciente({...paciente,genero: ev.target.value})}>
                         <option value="masculino">Hombre</option>
                         <option value="femenino">Mujer</option>
-                        <option value="otro">Otro</option>
                     </select>
                 </div>
 
@@ -232,7 +236,7 @@ export default function ModalPaciente() {
                     >
                         Estado Civil:
                     </label>
-                    <select id="estadoCivil" name="estadoCivil" className='mt-2 w-full p-3' ref={estadoCivilRef} required>
+                    <select id="estadoCivil" name="estadoCivil" className='mt-2 w-full p-3' value={paciente.estadoCivil} onChange={ev => setPaciente({...paciente,estadoCivil: ev.target.value})}>
                         <option value="soltero">Soltero/a</option>
                         <option value="casado">Casado/a</option>
                         <option value="viudo">Viudo/a</option>
@@ -252,8 +256,8 @@ export default function ModalPaciente() {
                         id="profesion"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="profesion"
-                        ref={profesionRef}
-                        required
+                        value={paciente.profesion}
+                        onChange={ev => setPaciente({...paciente,profesion: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -268,8 +272,8 @@ export default function ModalPaciente() {
                         id="domicilio"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="domicilio"
-                        ref={domicilioRef}
-                        required
+                        value={paciente.domicilio}
+                        onChange={ev => setPaciente({...paciente,domicilio: ev.target.value})}
                     />
                 </div>
     
@@ -285,8 +289,8 @@ export default function ModalPaciente() {
                         id="talla"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="talla"
-                        ref={tallaRef}
-                        required
+                        value={paciente.talla}
+                        onChange={ev => setPaciente({...paciente,talla: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -301,8 +305,8 @@ export default function ModalPaciente() {
                         id="peso"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="peso"
-                        ref={pesoRef}
-                        required
+                        value={paciente.peso}
+                        onChange={ev => setPaciente({...paciente,peso: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -317,8 +321,8 @@ export default function ModalPaciente() {
                         id="cintura"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="cintura"
-                        ref={cinturaRef}
-                        required
+                        value={paciente.cintura}
+                        onChange={ev => setPaciente({...paciente,cintura: ev.target.value})}
                     />
                 </div>
                 <div className="mb-4">
@@ -326,17 +330,18 @@ export default function ModalPaciente() {
                     htmlFor="diagnostico"
                     className="text-slate-800"
                     >
-                        Diagnóstico:
+                        Diagnostico:
                     </label>
                     <input 
                         type="text"
                         id="diagnostico"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="diagnostico"
-                        ref={diagnosticoRef}
-                        required
+                        value={paciente.diagnostico}
+                        onChange={ev => setPaciente({...paciente,diagnostico: ev.target.value})}
                     />
-                </div><div className="mb-4">
+                </div>
+                <div className="mb-4">
                     <label 
                     htmlFor="medicamentos"
                     className="text-slate-800"
@@ -348,36 +353,22 @@ export default function ModalPaciente() {
                         id="medicamentos"
                         className="mt-2 w-full p-3 bg-gray-50" 
                         name="medicamentos"
-                        ref={medicamentosRef}
-                        required
+                        value={paciente.medicamentos}
+                        onChange={ev => setPaciente({...paciente,medicamentos: ev.target.value})}
                     />
                 </div>
-                <div className="mb-4">
-                            <label
-                                htmlFor="envio"
-                                className="text-slate-800"
-                            >
-                                Envió:
-                            </label>
-                            <input
-                                type="text"
-                                id="envio"
-                                className="mt-2 w-full p-3 bg-gray-50"
-                                name="envio"
-                                ref={envioRef}
-                                required
-                            />
-                </div>
-                
                 <input 
                     type="submit" 
                     value="Guardar"
-                    className="bg-green-500 hover:bg-green-600 col-start-3 text-white  m-5 p-3 uppercase font-bold cursor-pointer"
+                    className="bg-green-500 hover:bg-green-600 lg:col-start-2 text-white  m-5 p-3 uppercase font-bold cursor-pointer"
                 />
+                <Link className="bg-red-500 hover:bg-red-600 text-white m-5 text-center p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
             </form>
+            <div className='flex justify-end mt-2'>
+
+                </div>
         </div>
     </div>
     </>
-
   )
 }

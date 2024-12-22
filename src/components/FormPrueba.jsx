@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import useSWR from "swr";
 import clienteAxios from "../axios-client";
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 
@@ -8,7 +9,7 @@ export default function FormPrueba() {
     const token = localStorage.getItem('AUTH_TOKEN')
   const [pacientes, setPacientes] = useState([])
   const [paciente, setPaciente] = useState({})
-  const [id, setId] = useState({})
+  const { id } = useParams()
 
   const [respuesta, setRespuesta] = useState('');
   const [inputBloqueado, setInputBloqueado] = useState('');
@@ -25,20 +26,6 @@ export default function FormPrueba() {
     }
   };
 
-  const fetcher = () => clienteAxios('/api/pacientes',
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }).then(function (response) {
-    setPacientes(response.data.data)
-  })
-  const {data, error, isLoading} = useSWR('/api/pacientes', fetcher)
-
-  const handleInputChange = (event) => {
-    setId(event.target.value);
-    setPaciente(event.target.value);
-  };
 
 
 
@@ -142,6 +129,7 @@ export default function FormPrueba() {
     const poTeoricoRef = useRef();
     const comentariosRef = useRef();
     const fechaRef = useRef();
+    const ectopiaVenRef= useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -169,6 +157,7 @@ export default function FormPrueba() {
             confusor: confusorRef.current.value,
             especificidad: especificidadRef.current.value,
             pruebaIngreso: pruebaIngresoRef.current.value,
+            ectopia : ectopiaVenRef.current.value,
 
             pruebaFin2: pruebaFin2Ref.current.value,
             pruebaFin3: pruebaFin3Ref.current.value,
@@ -257,7 +246,7 @@ export default function FormPrueba() {
                 }).then(function (response) {
                     
                     setTimeout(function () {
-                        window.location.href = '/expedientes';
+                        window.location.href = '/dashboard';
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -282,20 +271,6 @@ export default function FormPrueba() {
   return (
     <>
      <div className="">
-              <div className="mb-4">
-                  <label
-                      htmlFor="paciente"
-                      className="text-slate-800 text-xl"
-                  >
-                      Selecciona el paciente:
-                  </label>
-                  <select className='mt-2 w-full p-3' id="paciente" value={paciente} onChange={handleInputChange} >
-                  <option value="">Seleccione una opción</option>
-                  {pacientes.map((paciente) => (
-                      <option key={paciente.id} value={paciente.id} >{paciente.nombre} {paciente.apellidoPat}</option>
-                  ))}
-                  </select>
-              </div>
             <form action="" onSubmit={onSubmit}>
             <h1 className="text-4xl font-bold">Prueba de Esfuerzo</h1>
                         <div className='grid lg:grid-cols-4 grid-cols-1 mt-5 px-5 py-10 gap-2'>
@@ -373,6 +348,7 @@ export default function FormPrueba() {
                                     <option value="ecott">ECOTT</option>
                                     <option value="irm">IRM</option>
                                     <option value="nv">NV</option>
+                                    <option value="mn">MN</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -976,7 +952,7 @@ export default function FormPrueba() {
                                     htmlFor="fc_mayor_85"
                                     className="text-slate-800"
                                 >
-                                    FC >85%:
+                                    FC  &gt;85%:
                                 </label>
                                 <select id="fc_mayor_85" name="fc_mayor_85" className='mt-2 w-full p-3' ref={fcMayor85Ref} required>
                                     <option value="true">Si</option>
@@ -1374,6 +1350,18 @@ export default function FormPrueba() {
                                     ref={riesgoRef}
                                     required
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="ectopiaVen"
+                                    className="text-slate-800"
+                                >
+                                    Ectopia ventricular frecuente:
+                                </label>
+                                <select id="ectopiaVen" name="ectopiaVen" className='mt-2 w-full p-3' ref={ectopiaVenRef} required>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label

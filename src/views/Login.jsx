@@ -4,6 +4,8 @@ import axiosClient from '../axios-client';
 import { useStateContext } from '../contexts/contextProvider';
 import { useAuth } from '../hooks/useAuth';
 import Alerta from '../components/Alerta';
+import { FaRegEye,FaRegEyeSlash  } from "react-icons/fa";
+
 
 export default function Login() {
 
@@ -23,60 +25,77 @@ export default function Login() {
         }
         login(datos, setErrores)
     }
-  return (
+const [showPassword, setShowPassword] = useState(false);
+
+const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+};
+
+return (
     <>
-    <h1 className="text-4xl font-bold">Iniciar Sesión</h1>
+        <h1 className="text-4xl font-bold">Iniciar Sesión</h1>
         <p>Administra tus pacientes accediendo a tu cuenta</p>
 
         <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
             <form action="" onSubmit={onSubmit}>
-            { errores ? Object.entries(errores).map(([key, arreglo]) => (<div key={key}>{arreglo.map((error, index) => (<Alerta key={index}>{error}</Alerta>))}</div>)): null}
+                {errores
+                    ? Object.entries(errores).map(([key, arreglo]) => (
+                            <div key={key}>
+                                {arreglo.map((error, index) => (
+                                    <Alerta key={index}>{error}</Alerta>
+                                ))}
+                            </div>
+                        ))
+                    : null}
                 <div className="mb-4">
-                    <label 
-                    htmlFor="cedula"
-                    className="text-slate-800"
-                    >
+                    <label htmlFor="cedula" className="text-slate-800">
                         Cédula*:
                     </label>
-                    <input 
+                    <input
                         type="text"
                         id="cedula"
-                        className="mt-2 w-full p-3 bg-gray-50" 
+                        className="mt-2 w-full p-3 bg-gray-50"
                         name="cedula"
                         placeholder="Cédula"
                         ref={cedulaRef}
                     />
                 </div>
                 <div className="mb-4">
-                    <label 
-                    htmlFor="password"
-                    className="text-slate-800"
-                    >
+                    <label htmlFor="password" className="text-slate-800">
                         Password*:
                     </label>
-                    <input 
-                        type="password"
-                        id="password"
-                        className="mt-2 w-full p-3 bg-gray-50" 
-                        name="password"
-                        placeholder="password"
-                        ref={passwordRef}
-                    />
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            id="password"
+                            className="mt-2 w-full p-3 bg-gray-50"
+                            name="password"
+                            placeholder="password"
+                            ref={passwordRef}
+                        />
+                        <button
+                            type="button"
+                            onClick={togglePasswordVisibility}
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-[#007bff]"
+                        >
+                            {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                        </button>
+                    </div>
                 </div>
 
-                <input 
-                    type="submit" 
+                <input
+                    type="submit"
                     value="Iniciar Sesión"
                     className="bg-[#007bff] hover:bg-blue-600 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer"
                 />
             </form>
         </div>
 
-        <nav className="mt-5 flex gap-3 "> 
-            <Link to="/crear-cuenta" className='hover:text-blue-400'>
+        <nav className="mt-5 flex gap-3 ">
+            <Link to="/crear-cuenta" className="hover:text-blue-400">
                 ¿No tienes cuenta? Crea una
             </Link>
         </nav>
     </>
-  )
+);
 }

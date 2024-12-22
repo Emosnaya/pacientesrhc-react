@@ -136,6 +136,7 @@ export default function PacientePrueba() {
     const poTeoricoRef = useRef();
     const registroRef = useRef();
     const comentariosRef = useRef();
+    const ectopiaVenRef= useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -160,6 +161,7 @@ export default function PacientePrueba() {
 
         const datos = {
             numPrueba: numPruebaRef.current.value,
+            ectopia : ectopiaVenRef.current.value,
             icc: iccRef.current.value,
             fevi: feviRef.current.value,
             metodo: metodoRef.current.value,
@@ -621,6 +623,7 @@ export default function PacientePrueba() {
                                     <option value="ecott">ECOTT</option>
                                     <option value="irm">IRM</option>
                                     <option value="nv">NV</option>
+                                    <option value="mn">MN</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1219,7 +1222,7 @@ export default function PacientePrueba() {
                                     htmlFor="fc_mayor_85"
                                     className="text-slate-800"
                                 >
-                                    FC >85%:
+                                    FC &gt;85%:
                                 </label>
                                 <select id="fc_mayor_85" name="fc_mayor_85" className='mt-2 w-full p-3' ref={fcMayor85Ref} required>
                                     <option value="true">Si</option>
@@ -1617,6 +1620,18 @@ export default function PacientePrueba() {
                                     ref={riesgoRef}
                                     required
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="ectopiaVen"
+                                    className="text-slate-800"
+                                >
+                                    Ectopia ventricular frecuente:
+                                </label>
+                                <select id="ectopiaVen" name="ectopiaVen" className='mt-2 w-full p-3' ref={ectopiaVenRef} required>
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label

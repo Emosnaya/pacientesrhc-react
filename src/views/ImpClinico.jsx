@@ -39,6 +39,7 @@ export default function ImpClinico() {
     }
     const onSubmit = (e) => {
         e.preventDefault()
+
             try {
                 clienteAxios.get(`/api/clinico/imprimir/${expediente.id}`, { 
                   responseType: 'arraybuffer' ,
@@ -508,9 +509,11 @@ export default function ImpClinico() {
                                 >
                                     Clase F CCS:
                                 </label>
-                                <select id="clase_ccs" name="clase_ccs" className='mt-2 w-full p-3'  value={expediente.clase_f_ccs===1 ||expediente.clase_f_ccs ==="true"?"true":"false"} onChange={ev => setExpediente({...expediente,clase_f_ccs: ev.target.value})} >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="clase_ccs" name="clase_ccs" className='mt-2 w-full p-3' value={expediente.clase_f_ccs}   onChange={ev => setExpediente({...expediente,clase_f_ccs: ev.target.value})}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -550,15 +553,17 @@ export default function ImpClinico() {
                                 </select>
                             </div>
                             <div className="mb-4">
-                                <label
+                            <label
                                     htmlFor="cf_nyha"
                                     className="text-slate-800"
                                 >
                                     CF NYHA:
                                 </label>
-                                <select id="cf_nyha" name="cf_nyha" className='mt-2 w-full p-3' value={expediente.cf_nyha===1 ||expediente.cf_nyha ==="true"?"true":"false"} onChange={ev => setExpediente({...expediente,cf_nyha: ev.target.value})} >
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
+                                <select id="cf_nyha" name="cf_nyha" className='mt-2 w-full p-3' value={expediente.cf_nyha} onChange={ev => setExpediente({...expediente,cf_nyha: ev.target.value})} >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1554,7 +1559,7 @@ export default function ImpClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    Fc Ecog:
                                 </label>
                                 <input
                                     type="number"
@@ -2980,7 +2985,7 @@ export default function ImpClinico() {
                                 value="Imprimir"
                                 className="bg-blue-500 hover:bg-blue-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

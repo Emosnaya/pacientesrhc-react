@@ -29,10 +29,6 @@ export default function Sidebar() {
                 <a href="/dashboard" className="flex items-center gap-4 py-2 px-4 rounded-xl hover:bg-[#071F4A] transition-colors cursor-pointer">
                     <FaClinicMedical  /> Mis Pacientes
                 </a>
-
-                <a href="/expedientes" className="flex items-center gap-4 py-2 px-4 rounded-xl hover:bg-[#071F4A] transition-colors cursor-pointer">
-                    <FaBookMedical  /> Mis Expedientes
-                </a>
                 <Link to={'/perfil/'+ user?.id} className="flex items-center gap-4 py-2 px-4 rounded-xl hover:bg-[#071F4A] transition-colors cursor-pointer">
                     <FaHome /> Mi perfil
                 </Link>

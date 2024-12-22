@@ -1020,7 +1020,7 @@ export default function Imprimiresfuerzo() {
                                     htmlFor="fc_mayor_85"
                                     className="text-slate-800"
                                 >
-                                    FC >85%:
+                                    FC &gt;85%:
                                 </label>
                                 <select id="fc_mayor_85" name="fc_mayor_85" className='mt-2 w-full p-3' value={(expediente.fc_mayor_50 === 1?"true":"false")} disabled>
                                     <option value="true">Si</option>
@@ -1697,7 +1697,7 @@ export default function Imprimiresfuerzo() {
                                 value="Imprimir"
                                 className="bg-blue-500 hover:bg-blue-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

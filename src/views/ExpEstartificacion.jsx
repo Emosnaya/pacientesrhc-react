@@ -38,7 +38,7 @@ export default function ExpEstartificacion() {
                     // Redireccionar a una página específica
                     setTimeout(function() {
                         // Redireccionar a una página específica
-                        window.location.href = '/expedientes';
+                        window.location.reload()
                     }, 2000);
                     Swal.fire({
                         position: "center",
@@ -280,6 +280,7 @@ export default function ExpEstartificacion() {
                                     <option value="tric_l">Tric(I)</option>
                                     <option value="tric_est">Tric(Est)</option>
                                     <option value="otro">Otro</option>
+                                    <option value="no">No</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1021,6 +1022,7 @@ export default function ExpEstartificacion() {
                                     <option value="a">A</option>
                                     <option value="b">B</option>
                                     <option value="c">C</option>
+                                    <option value="d">D</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1036,6 +1038,23 @@ export default function ExpEstartificacion() {
                                     <option value="4">4</option>
                                     <option value="6">6</option>
                                 </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="sesiones"
+                                    className="text-slate-800"
+                                >
+                                    Sesiones:
+                                </label>
+                                <input
+                                    type="number"
+                                    id="sesiones"
+                                    step="0.01"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="sesiones"
+                                    value={expediente.sesiones} 
+                                    onChange={ev => setExpediente({...expediente,sesiones: ev.target.value})}
+                                />  
                             </div>
                             <div className="mb-4">
                                 <label
@@ -1098,9 +1117,6 @@ export default function ExpEstartificacion() {
                                     onChange={ev => setExpediente({...expediente,comentarios: ev.target.value})}
                                 />
                             </div>
-                            
-
-
                         </div>
                         <div className='flex justify-end'>
                             <input
@@ -1108,7 +1124,7 @@ export default function ExpEstartificacion() {
                                 value="Guardar"
                                 className="bg-green-500 hover:bg-green-600 text-white m-5 p-3 uppercase font-bold cursor-pointer"
                             />
-                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/expedientes"> Cancelar</Link>
+                              <Link className="bg-red-500 hover:bg-red-600 text-white m-5 p-3 uppercase font-bold cursor-pointer" to="/dashboard"> Cancelar</Link>
                     </div>
             </form>
         </div>

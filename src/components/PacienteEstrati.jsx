@@ -115,6 +115,7 @@ export default function PacienteEstrati() {
     const grupoRef= useRef();
 
     const semanasRef= useRef();
+    const sesionesRef = useRef();
     const borgRef= useRef();
     const fcDianaRef= useRef();
     const dpDianaRef= useRef();
@@ -176,6 +177,7 @@ export default function PacienteEstrati() {
 
             obesidad: obesidadRef.current.value,
             estres: estresRef.current.value,
+            sesiones: sesionesRef.current.value,
             
             sedentarismo: sedentarismoRef.current.value,
             otroFactor: otroFactorRef.current.value,
@@ -761,6 +763,7 @@ export default function PacienteEstrati() {
                                     <option value="tric_l">Tric(I)</option>
                                     <option value="tric_est">Tric(Est)</option>
                                     <option value="otro">Otro</option>
+                                    <option value="no">No</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1491,12 +1494,12 @@ export default function PacienteEstrati() {
                                     htmlFor="infra135"
                                     className="text-slate-800"
                                 >
-                                    InfraST  2mm:
+                                    InfraST  &gt; 2mm:
                                 </label>
-                                <select id="infra135" name="infra135" className='mt-2 w-full p-3' ref={infra135Ref} required>
+                                <select id="infra135" name="infra135" className='mt-2 w-full p-3' ref={infra135Ref}required >
                                     <option value="false">No</option>
-                                    <option value="m_135">mayor 135</option>
-                                    <option value="me_135">menor 135</option>
+                                    <option value="m_135">mayor 135 lpm</option>
+                                    <option value="me_135">menor 135 lpm</option>
                                 </select>
                             </div>
 
@@ -1505,12 +1508,12 @@ export default function PacienteEstrati() {
                                     htmlFor="infra5"
                                     className="text-slate-800"
                                 >
-                                    InfraST  2mm:
+                                    InfraST  &gt; 2mm:
                                 </label>
                                 <select id="infra5" name="infra5" className='mt-2 w-full p-3' ref={infra5Ref} required>
                                     <option value="false">No</option>
-                                    <option value="m_5">mayor 5</option>
-                                    <option value="me_5">menor 5</option>
+                                    <option value="m_5">mayor 5 mets</option>
+                                    <option value="me_5">menor 5 mets</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1537,6 +1540,7 @@ export default function PacienteEstrati() {
                                     <option value="a">A</option>
                                     <option value="b">B</option>
                                     <option value="c">C</option>
+                                    <option value="d">D</option>
                                 </select>
                             </div>
                             <div className="mb-4">
@@ -1552,6 +1556,23 @@ export default function PacienteEstrati() {
                                     <option value="4">4</option>
                                     <option value="6">6</option>
                                 </select>
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="sesiones"
+                                    className="text-slate-800"
+                                >
+                                    Sesiones:
+                                </label>
+                                <input
+                                    type="number"
+                                    id="sesiones"
+                                    step="0.01"
+                                    className="mt-2 w-full p-3 bg-gray-50 "
+                                    name="sesiones"
+                                    ref={sesionesRef}
+                                />
+                                
                             </div>
                             <div className="mb-4">
                                 <label

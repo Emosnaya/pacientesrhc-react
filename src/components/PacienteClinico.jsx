@@ -513,6 +513,7 @@ export default function PacienteClinico() {
     const diagnosticoGeneralRef= useRef();
     const planRef= useRef();
     const congenitosRef= useRef();
+    const valvulopatiaRef= useRef();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -716,10 +717,10 @@ export default function PacienteClinico() {
             exploracionFisica: exploracionFisicaRef.current.value,
             estudios: estudiosRef.current.value,
             diagnosticoGeneral: diagnosticoGeneralRef.current.value,
-            plan: planRef.current.value
+            plan: planRef.current.value,
+            valvulopatia: valvulopatiaRef.current.value
 
         }
-        console.log(datos)
         try {
             clienteAxios.post('/api/clinico', {
                 paciente,
@@ -2157,6 +2158,7 @@ export default function PacienteClinico() {
                                     name="hb"
                                     ref={hbRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2173,6 +2175,7 @@ export default function PacienteClinico() {
                                     name="leucos"
                                     ref={leucosRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2189,6 +2192,7 @@ export default function PacienteClinico() {
                                     name="plaquetas"
                                     ref={plaquetasRef}
                                     disabled={inputBloqueadobH}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2234,6 +2238,7 @@ export default function PacienteClinico() {
                                     name="glucosa"
                                     ref={glucosaRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2250,6 +2255,7 @@ export default function PacienteClinico() {
                                     name="creatinina"
                                     ref={creatininaRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2266,6 +2272,7 @@ export default function PacienteClinico() {
                                     name="ac_urico"
                                     ref={acUricoRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2282,6 +2289,7 @@ export default function PacienteClinico() {
                                     name="colesterol"
                                     ref={colesterolRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2298,6 +2306,7 @@ export default function PacienteClinico() {
                                     name="ldl"
                                     ref={ldlRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2314,6 +2323,7 @@ export default function PacienteClinico() {
                                     name="hdl"
                                     ref={hdlRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2330,6 +2340,7 @@ export default function PacienteClinico() {
                                     name="trigliceridos"
                                     ref={trigliceridosRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2346,6 +2357,7 @@ export default function PacienteClinico() {
                                     name="tp"
                                     ref={tpRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2362,6 +2374,7 @@ export default function PacienteClinico() {
                                     name="inr"
                                     ref={inrRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2378,6 +2391,7 @@ export default function PacienteClinico() {
                                     name="tpt"
                                     ref={tptRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2394,6 +2408,7 @@ export default function PacienteClinico() {
                                     name="tppcrast"
                                     ref={pcrasRef}
                                     disabled={inputBloqueadoQs}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2404,7 +2419,7 @@ export default function PacienteClinico() {
                                     Otro Lab:
                                 </label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="otro_lab"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="otro_lab"
@@ -2462,7 +2477,7 @@ export default function PacienteClinico() {
                                     htmlFor="r_r_mm"
                                     className="text-slate-800"
                                 >
-                                    R-R (mm):
+                                    Fc Ecog:
                                 </label>
                                 <input
                                     type="number"
@@ -2727,7 +2742,7 @@ export default function PacienteClinico() {
                                     htmlFor="dd_por"
                                     className="text-slate-800"
                                 >
-                                    DD(mm):
+                                    SGL:
                                 </label>
                                 <input
                                     type="number"
@@ -2736,6 +2751,7 @@ export default function PacienteClinico() {
                                     name="dd_por"
                                     ref={ddPorRef}
                                     disabled={inputBloqueadoEco}
+                                    step="0.01"
                                 />
                             </div>
                             <div className="mb-4">
@@ -2743,7 +2759,7 @@ export default function PacienteClinico() {
                                     htmlFor="ds_por"
                                     className="text-slate-800"
                                 >
-                                    DS(mm):
+                                    PSAP:
                                 </label>
                                 <input
                                     type="number"
@@ -2759,10 +2775,10 @@ export default function PacienteClinico() {
                                     htmlFor="trivi_por"
                                     className="text-slate-800"
                                 >
-                                    TRIVI(ms):
+                                    Movilidad:
                                 </label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="trivi_por"
                                     className="mt-2 w-full p-3 bg-gray-50"
                                     name="trivi_por"
@@ -2775,7 +2791,7 @@ export default function PacienteClinico() {
                                     htmlFor="rel_e_a"
                                     className="text-slate-800"
                                 >
-                                    Rel e-A:
+                                    Tapse:
                                 </label>
                                 <input
                                     type="number"
@@ -2785,6 +2801,18 @@ export default function PacienteClinico() {
                                     ref={relEARef}
                                     disabled={inputBloqueadoEco}
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="valvulopatia"
+                                    className="text-slate-800"
+                                >
+                                    Valvulopatía:
+                                </label>
+                                <select id="valvulopatia" name="valvulopatia" className='mt-2 w-full p-3' ref={valvulopatiaRef} >
+                                    <option value="true">Si</option>
+                                    <option value="false">No</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label
@@ -3183,7 +3211,7 @@ export default function PacienteClinico() {
                                     htmlFor="cateterismo"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo:
+                                    Cateterismo / Angiotac:
                                 </label>
                                 <select id="cateterismo" name="cateterismo" className='mt-2 w-full p-3' ref={cateterismoRef} onChange={handleRespuestaChangeCa}>
                                     <option value="true">Si</option>
@@ -3195,7 +3223,7 @@ export default function PacienteClinico() {
                                     htmlFor="catet_fecha"
                                     className="text-slate-800"
                                 >
-                                    Cateterismo Fecha:
+                                    Cateterismo / Angiotac Fecha:
                                 </label>
                                 <input
                                     type="date"
