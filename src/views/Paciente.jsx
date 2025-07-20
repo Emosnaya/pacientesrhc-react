@@ -411,8 +411,8 @@ export default function Paciente() {
                         Género:
                     </label>
                     <select id="genero" name="genero" className='mt-2 w-full p-3' value={paciente.genero}  disabled>
-                        <option value="masculino">Hombre</option>
-                        <option value="femenino">Mujer</option>
+                        <option value="1">Hombre</option>
+                        <option value="0">Mujer</option>
                     </select>
                 </div>
 
